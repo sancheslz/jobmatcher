@@ -18,6 +18,11 @@ class CompaniesController < ApplicationController
 
     def edit
         @company = Company.find(params[:id])
+        if @company.active?
+            render :edit
+        else
+            redirect_to root_path
+        end
     end
 
     def update
@@ -28,6 +33,13 @@ class CompaniesController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def change_state
+        @company = Company.find(params[:id])
+        @company.change_state!
+        @company.save
+        redirect_to @company
     end
 
     private 
