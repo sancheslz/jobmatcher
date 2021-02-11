@@ -21,6 +21,16 @@ feature('Visitor sees on homepage navbar') do
         expect(page).to have_content(I18n.t('views.home.description'))
     end
 
+    scenario('last opportunities') do 
+        # Arrange
+
+        # Act
+        visit root_path
+
+        # Assert
+        expect(page).to have_content(I18n.t('views.home.last_opportunities'))
+    end
+
     scenario('search field') do 
         # Arrange
 

@@ -1,2 +1,39 @@
-<%= t('views.home.title')%>
-<%= t('views.home.description')%>
+<div class="jumbotron">
+<h1 class="display-1">
+    <%= t('views.home.title')%>
+</h1>
+<div class="lead">
+    <%= t('views.home.description')%>
+</div>
+</div>
+<h1 class="h2 text-center"><%= t('views.home.last_opportunities') %></h1>
+<div class="d-flex flex-wrap">
+<% (1..8).each do |item| %>
+    <div class="card m-2">
+      <div class="card-body">
+        <h5 class="card-title">Job Title</h5>
+
+        <%= link_to 'nil', :class => 'card-subtitle text-muted' do %>
+                <i class="far fa-building"></i> Company Name
+        <% end %>
+
+        <div class="card-text mt-3 mb-3">
+            <div class="text">
+             With supporting text below as a natural lead-in to additional content.
+            </div>
+            <div class="skills">
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+            </div>
+
+
+        </div>
+
+        <%= link_to 'nil', :class => 'btn btn-sm btn-info' do %>
+                <i class="fas fa-plus"></i> Saiba mais
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+</div>
