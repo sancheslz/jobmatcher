@@ -9,4 +9,6 @@ pt-BR:
       sign_in: 'Entrar'
       sign_up: 'Cadastrar'
       last_opportunities: 'Últimas vagas'
+    companies:
+      new_title: Cadastrar Empresa
       
