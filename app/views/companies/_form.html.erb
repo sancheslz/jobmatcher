@@ -1,0 +1,73 @@
+<% if @company.errors.any? %>
+    <div class="alert alert-danger"><i class="fas fa-exclamation"></i> <%= t('views.forms.warning') %></div>
+<% end %>
+
+<%= form_with(model: @company, local: true, class: 'form-group') do |f| %>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :name  %>
+        <%= f.text_field :name , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:name].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :cnpj  %>
+        <%= f.text_field :cnpj , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:cnpj].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :founded %>
+        <%= f.text_field :founded , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:founded].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :address  %>
+        <%= f.text_field :address , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:address].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :number  %>
+        <%= f.text_field :number , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:number].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :complement  %>
+        <%= f.text_field :complement , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:complement].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :neighborhood  %>
+        <%= f.text_field :neighborhood , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:neighborhood].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :city  %>
+        <%= f.text_field :city , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:city].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :state  %>
+        <%= f.text_field :state , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:state].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :postal_code  %>
+        <%= f.text_field :postal_code , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:postal_code].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :website  %>
+        <%= f.text_field :website , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:website].join(' | ') %></div>
+    </div>
+</div>
+
+
+<%= f.submit t('views.companies.new_submit'), { class: 'mt-3 btn btn-primary' } %>
+<% end %>
+

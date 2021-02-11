@@ -1,17 +1,19 @@
 ---
-pt-Br:
+pt-BR:
   activerecord:
     models:
-      company: 'Empresa'
+      company:
+        one: 'Empresa'
     attributes:
-      name: Nome
-      address: Endereço
-      cnpj: CNPJ
-      number: Número
-      complement: Complemento
-      neighborhood: Bairro
-      city: Cidade
-      state: Estado
-      postal_code: 'CEP'
-      website: website
-      founded: Fundada em
+      company:
+        name: Nome
+        address: Endereço
+        cnpj: CNPJ
+        number: Número
+        complement: Complemento
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        postal_code: 'CEP'
+        website: Website
+        founded: Fundada em

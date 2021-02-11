@@ -20,16 +20,16 @@ feature('Admin create a new company') do
 
         # Assert
         within('form') do
-            expect(page).to have_content(I18n.t('models.company.name')) 
-            expect(page).to have_content(I18n.t('models.company.address')) 
-            expect(page).to have_content(I18n.t('models.company.number')) 
-            expect(page).to have_content(I18n.t('models.company.complement')) 
-            expect(page).to have_content(I18n.t('models.company.neighborhood')) 
-            expect(page).to have_content(I18n.t('models.company.city')) 
-            expect(page).to have_content(I18n.t('models.company.state')) 
-            expect(page).to have_content(I18n.t('models.company.postal_code')) 
-            expect(page).to have_content(I18n.t('models.company.website')) 
-            expect(page).to have_content(I18n.t('models.company.founded')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.name')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.address')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.number')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.complement')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.neighborhood')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.city')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.state')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.postal_code')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.website')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.founded')) 
         end
     end
     
@@ -38,18 +38,18 @@ feature('Admin create a new company') do
 
         # Act
         visit new_company_path
-        fill_in I18n.t('models.company.name'), with: ''
-        fill_in I18n.t('models.company.cnpj'), with: ''
-        fill_in I18n.t('models.company.address'), with: ''
-        fill_in I18n.t('models.company.number'), with: ''
-        fill_in I18n.t('models.company.complement'), with: ''
-        fill_in I18n.t('models.company.neighborhood'), with: ''
-        fill_in I18n.t('models.company.city'), with: ''
-        fill_in I18n.t('models.company.state'), with: ''
-        fill_in I18n.t('models.company.postal_code'), with: ''
-        fill_in I18n.t('models.company.website'), with: ''
-        fill_in I18n.t('models.company.founded'), with: ''
-        click_on I18n.t('helpers.submit')
+        fill_in I18n.t('activerecord.attributes.company.name'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.address'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.number'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.complement'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.neighborhood'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.city'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.state'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.postal_code'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.website'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.founded'), with: ''
+        click_on I18n.t('views.companies.new_submit')
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.blank'), count: 3) 
@@ -65,21 +65,21 @@ feature('Admin create a new company') do
 
         # Act
         visit new_company_path
-        fill_in I18n.t('models.company.name'), with: 'Ipsum name'
-        fill_in I18n.t('models.company.cnpj'), with: '123456789'
-        fill_in I18n.t('models.company.address'), with: ''
-        fill_in I18n.t('models.company.number'), with: ''
-        fill_in I18n.t('models.company.complement'), with: ''
-        fill_in I18n.t('models.company.neighborhood'), with: ''
-        fill_in I18n.t('models.company.city'), with: ''
-        fill_in I18n.t('models.company.state'), with: ''
-        fill_in I18n.t('models.company.postal_code'), with: ''
-        fill_in I18n.t('models.company.website'), with: 'www.ipsumname.com'
-        fill_in I18n.t('models.company.founded'), with: ''
-        click_on I18n.t('helpers.submit')
+        fill_in I18n.t('activerecord.attributes.company.name'), with: 'Ipsum name'
+        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '123456789'
+        fill_in I18n.t('activerecord.attributes.company.address'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.number'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.complement'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.neighborhood'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.city'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.state'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.postal_code'), with: ''
+        fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.ipsumname.com'
+        fill_in I18n.t('activerecord.attributes.company.founded'), with: ''
+        click_on I18n.t('views.companies.new_submit')
 
         # Assert
-        expect(page).to have_content(I18n.t('errors.messages.blank')) 
+        expect(page).to have_content(I18n.t('errors.messages.taken')) 
     end
     
     scenario('create with success') do
@@ -87,10 +87,10 @@ feature('Admin create a new company') do
 
         # Act
         visit new_company_path
-        fill_in I18n.t('models.company.name'), with: 'Ipsum name'
-        fill_in I18n.t('models.company.cnpj'), with: '123456789'
-        fill_in I18n.t('models.company.website'), with: 'www.ipsumname.com'
-        click_on I18n.t('helpers.submit')
+        fill_in I18n.t('activerecord.attributes.company.name'), with: 'Ipsum name'
+        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '123456789'
+        fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.ipsumname.com'
+        click_on I18n.t('views.companies.new_submit')
 
         # Assert
         company = Company.last

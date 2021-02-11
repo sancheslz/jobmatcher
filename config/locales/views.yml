@@ -1,6 +1,8 @@
 ---
 pt-BR:
   views:
+    forms:
+      warning: 'Por favor, verifique os erros abaixo'
     home:
       title: JobMatcher
       description: 'Conectando pessoas e oportunidades'
@@ -11,4 +13,5 @@ pt-BR:
       last_opportunities: 'Últimas vagas'
     companies:
       new_title: Cadastrar Empresa
+      new_submit: Cadastrar Empresa
       
