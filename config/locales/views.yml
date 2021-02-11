@@ -18,4 +18,6 @@ pt-BR:
       new_submit: Cadastrar Empresa
       edit_submit: Atualizar Empresa
       detail_title: Empresa Cadastrada
-      
+      inactivate: Desativar Empresa
+      reactive: Reativar Empresa
+      inactive_message: Inativada
