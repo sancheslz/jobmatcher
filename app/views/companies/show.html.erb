@@ -1,0 +1,104 @@
+<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.companies.detail_title')%></h2>
+<div class="row mb-3">
+    <div class="h3"><%= @company.name %></div>
+</div>
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.cnpj') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.cnpj %></div>
+    </div>
+</div>
+
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.founded') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.founded %></div>
+    </div>
+</div>  
+        
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.address') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.address %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.number') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.number %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.complement') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.complement %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.neighborhood') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.neighborhood %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.city') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.city %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.state') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.state %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.postal_code') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.postal_code %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.website') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @company.website %></div>
+    </div>
+</div>  
+
+<div id="view_control">
+
+<%= link_to edit_company_path(@company), :class => 'btn btn-warning' do %>
+    <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+<% end %>
+
+</div>
