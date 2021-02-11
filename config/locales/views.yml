@@ -1,6 +1,8 @@
 ---
 pt-BR:
   views:
+    main:
+      edit: Editar
     forms:
       warning: 'Por favor, verifique os erros abaixo'
     home:
@@ -14,4 +16,5 @@ pt-BR:
     companies:
       new_title: Cadastrar Empresa
       new_submit: Cadastrar Empresa
+      detail_title: Empresa Cadastrada
       
