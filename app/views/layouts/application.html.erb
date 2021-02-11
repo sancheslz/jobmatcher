@@ -12,6 +12,12 @@
   </head>
 
   <body>
+    <nav>
+      <%= text_field_tag :q, nil, {placeholder: t('views.home.search') }%>
+      <button><%= t('views.home.search_btn') %></button>
+      <button><%= t('views.home.sign_in') %></button>
+      <button><%= t('views.home.sign_up') %></button>
+    </nav>
     <%= yield %>
   </body>
 </html>

@@ -8,9 +8,7 @@ feature('Visitor sees on homepage navbar') do
         visit root_path
 
         # Assert
-        within('nav') do
-            expect(page).to have_content(t('views.home.title'))
-        end
+        expect(page).to have_content(I18n.t('views.home.title'))
     end
     
     scenario('short description') do 
@@ -20,9 +18,7 @@ feature('Visitor sees on homepage navbar') do
         visit root_path
 
         # Assert
-        within('nav') do
-            expect(page).to have_content(t('views.home.description'))
-        end
+        expect(page).to have_content(I18n.t('views.home.description'))
     end
 
     scenario('search field') do 
@@ -33,7 +29,7 @@ feature('Visitor sees on homepage navbar') do
 
         # Assert
         within('nav') do
-            expect(page).to have_content(t('views.home.search'))
+            expect(page).to have_field(placeholder: I18n.t('views.home.search')) 
         end
     end
 
@@ -45,7 +41,7 @@ feature('Visitor sees on homepage navbar') do
 
         # Assert
         within('nav') do
-            expect(page).to have_content(t('views.home.search_btn'))
+            expect(page).to have_content(I18n.t('views.home.search_btn'))
         end
     end
 
@@ -57,7 +53,7 @@ feature('Visitor sees on homepage navbar') do
 
         # Assert
         within('nav') do
-            expect(page).to have_content(t('views.home.sign_in'))
+            expect(page).to have_content(I18n.t('views.home.sign_in'))
         end
     end
 
@@ -69,7 +65,7 @@ feature('Visitor sees on homepage navbar') do
 
         # Assert
         within('nav') do
-            expect(page).to have_content(t('views.home.sign_up'))
+            expect(page).to have_content(I18n.t('views.home.sign_up'))
         end
     end
 end
