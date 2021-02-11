@@ -1,0 +1,10 @@
+---
+pt-BR:
+  home:
+    title: JobMatcher
+    description: 'Conectando pessoas e oportunidades'
+    search: 'Buscar por vagas e empresas'
+    search_btn: 'Buscar'
+    sign_in: 'Entrar'
+    sign_up: 'Cadastrar'
+    
