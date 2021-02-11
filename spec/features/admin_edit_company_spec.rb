@@ -98,7 +98,7 @@ feature('Admin edit company') do
         click_on I18n.t('views.companies.edit_submit')
 
         # Assert
-        expect(current_page).to eq(company_path(company))
+        expect(current_path).to eq(company_path(company))
     end
 
 end

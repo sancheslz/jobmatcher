@@ -16,6 +16,20 @@ class CompaniesController < ApplicationController
         end
     end
 
+    def edit
+        @company = Company.find(params[:id])
+    end
+
+    def update
+        @company = Company.find(params[:id])
+        @company.update(allowed_params)
+        if @company.save
+            redirect_to @company
+        else
+            render :edit
+        end
+    end
+
     private 
     def allowed_params 
         params.require(:company).permit(
