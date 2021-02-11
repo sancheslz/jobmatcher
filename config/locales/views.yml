@@ -16,5 +16,6 @@ pt-BR:
     companies:
       new_title: Cadastrar Empresa
       new_submit: Cadastrar Empresa
+      edit_submit: Atualizar Empresa
       detail_title: Empresa Cadastrada
       
