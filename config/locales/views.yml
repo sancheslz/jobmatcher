@@ -21,3 +21,5 @@ pt-BR:
       inactivate: Desativar Empresa
       reactivate: Reativar Empresa
       inactive_message: Inativada
+    profiles:
+      new_title: Cadastrar Perfil
