@@ -17,6 +17,20 @@ class ProfilesController < ApplicationController
         end
     end
 
+    def edit 
+        @profile = Profile.find(params[:id])
+    end
+
+    def update
+        @profile = Profile.find(params[:id])
+        @profile.update(allowed_params)
+        if @profile.save
+            redirect_to @profile 
+        else 
+            render :edit
+        end
+    end
+
     private 
     def allowed_params
         params.require(:profile).permit(

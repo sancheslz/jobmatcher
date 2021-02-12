@@ -89,6 +89,7 @@
 
 
 <div id="view_control">
-
-
+    <%= link_to edit_profile_path(@profile), :class => 'btn btn-warning' do %>
+        <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+    <% end %>
 </div>

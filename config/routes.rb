@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     get 'change_state', on: :member
   end
 
-  resources :profiles, only: %i[show new create]
+  resources :profiles, only: %i[show new create edit update]
 end
