@@ -4,8 +4,6 @@
         <%= render partial: 'list' %>
     </div>
     <div class="col-4">
-        <%= link_to new_technology_path, { class: 'btn btn-block btn-primary' } do %>
-            <i class="fas fa-plus"></i> <%= t('views.technologies.new_title') %>
-        <% end %>
+        <%= render partial: "form", locals: { title: t('views.technologies.new_title'), submit: t('views.technologies.new_submit') } %>
     </div>
 </div>

@@ -1,9 +1,9 @@
 <h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.technologies.title') %></h2>
-<%= form_with model: @tech, local: true, class: 'form-group' do |f| %>
-<%= f.label :name %>
-<%= f.text_field :name, { class: 'form-control' }%>
-<div class="text-danger"><%= @tech.errors[:name].join(' | ') %></div>
-<%= button_tag(:type => :submit, :class => "mt-3 btn btn-primary") do %>
-    <i class="far fa-save"></i> <%= t('views.technologies.edit_submit') %>
-<% end %>
-<% end %>
+<div class="row">
+    <div class="col-8">
+        <%= render partial: 'list' %>
+    </div>
+    <div class="col-4">
+        <%= render partial: "form", locals: { title: t('views.technologies.edit_title'), submit: t('views.technologies.edit_submit') } %>
+    </div>
+</div>

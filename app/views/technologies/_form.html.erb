@@ -1,12 +1,12 @@
-<%= form_tag  do %>
-<%= label_tag :name, t('activerecord.attributes.technology.name') %>
-<%= text_field_tag :name, @tech.name || nil,  class: 'form-control'  %>
-<div class="text-danger"><%= @tech.errors[:name].join(' | ') %></div>
-<%= button_tag(:type => :submit, :class => 'btn btn-primary mt-3') do %>
-        <i class="far fa-save"></i> <%= submit %>
+<h4><%= title %></h4>
+<div class="bg-light rounded p-3">
+    <%= form_with model: @tech, local: true, class: 'form-group' do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name, { class: 'form-control' }%>
+        <div class="text-danger"><%= @tech.errors[:name].join(' | ') %></div>
+
+        <%= button_tag(:type => :submit, :class => "mt-3 btn btn-primary") do %>
+            <i class="far fa-save"></i> <%= submit %>
+        <% end %>
     <% end %>
-<% end %>
-
-
-
-
+</div>

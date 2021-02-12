@@ -7,6 +7,7 @@ feature('Admin create a technologies') do
 
         # Act
         visit technologies_path
+        click_on I18n.t('views.technologies.new_title')
 
         # Assert
         expect(page).to have_field(I18n.t('activerecord.attributes.technology.name'))
@@ -17,6 +18,7 @@ feature('Admin create a technologies') do
 
         # Act
         visit technologies_path
+        click_on I18n.t('views.technologies.new_title')
         fill_in I18n.t('activerecord.attributes.technology.name'), with: ''
         click_on I18n.t('views.technologies.new_submit')
 
@@ -28,6 +30,7 @@ feature('Admin create a technologies') do
 
         # Act
         visit technologies_path
+        click_on I18n.t('views.technologies.new_title')
         fill_in I18n.t('activerecord.attributes.technology.name'), with: 'Ruby'
         click_on I18n.t('views.technologies.new_submit')
 

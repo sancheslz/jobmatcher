@@ -1,17 +1,32 @@
 class TechnologiesController < ApplicationController
     def index
+        @technologies = sorted_by_name
+    end
+    
+    def new 
         @tech = Technology.new
-        @technologies = Technology.all.sort_by { |tech| tech.name }
+        @technologies = sorted_by_name
+    end
+    
+    def create 
+        @technologies = sorted_by_name
+        @tech = Technology.new(allowed_params)
+        if @tech.save
+            redirect_to technologies_path
+        else 
+            render :new
+        end
     end
 
     def edit
         @tech = Technology.find(params[:id])
+        @technologies = sorted_by_name
     end
 
     def update
         @tech = Technology.find(params[:id])
-        data = params.require(:technology).permit(:name)
-        @tech.update(data)
+        @technologies = sorted_by_name
+        @tech.update(allowed_params)
         if @tech.save 
             redirect_to technologies_path
         else
@@ -19,14 +34,17 @@ class TechnologiesController < ApplicationController
         end
     end
 
-    def create 
-        @technologies = Technology.all.sort_by { |tech| tech.name }
-        @tech = Technology.new(name: params[:name])
-        if @tech.save
-            redirect_to technologies_path
-        else 
-            render :index
+    private
+    def sorted_by_name
+        Technology.all.sort_by do |tech|
+            tech.name.upcase
         end
+    end
+
+    def allowed_params
+        params.require(:technology).permit(
+            :name
+        )
     end
 
 end

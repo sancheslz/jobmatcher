@@ -30,5 +30,6 @@ pt-BR:
       empty: Nenhuma tecnologia registrada
       title: Tecnologias
       new_title: Cadastrar Tecnologia
+      edit_title: Editar Tecnologia
       new_submit: Nova Tecnologia
       edit_submit: Atualizar Tecnologia

@@ -8,5 +8,5 @@ Rails.application.routes.draw do
 
   resources :profiles, only: %i[show new create edit update]
 
-  resources :technologies, only: %i[index create edit update]
+  resources :technologies, only: %i[index new create edit update]
 end
