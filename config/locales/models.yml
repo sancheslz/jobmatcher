@@ -17,3 +17,15 @@ pt-BR:
         postal_code: 'CEP'
         website: Website
         founded: Fundada em
+      profile:
+        name: Nome
+        cpf: CPF
+        bio: Bio
+        address: Endereço
+        number: Número
+        complement: Complemento
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        postal_code: 'CEP'
+

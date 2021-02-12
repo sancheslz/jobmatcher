@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :companies, only: %i[show new create edit update] do
     get 'change_state', on: :member
   end
+
+  resources :profiles, only: %i[show new create]
 end
