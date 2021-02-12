@@ -25,3 +25,8 @@ pt-BR:
       new_title: Cadastrar Perfil
       new_submit: Cadastrar Perfil
       edit_submit: Atualizar Perfil
+      inactive_message: Inativada
+    technologies:
+      title: Tecnologias
+      new_submit: Nova Tecnologia
+      edit_submit: Atualizar Tecnologia
