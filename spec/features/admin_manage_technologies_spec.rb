@@ -9,16 +9,16 @@ feature('Admin create a technologies') do
         visit technologies_path
 
         # Assert
-        expect(page).to have_field(I18n.t('activerecord.attributes.technologies.name'))
-        expect(page).to have_button(I18n.t('views.technologiess.new_submit'))
+        expect(page).to have_field(I18n.t('activerecord.attributes.technology.name'))
+        expect(page).to have_button(I18n.t('views.technologies.new_submit'))
     end
     scenario('field is required') do
         # Arrange 
 
         # Act
         visit technologies_path
-        fill_in I18n.t('activerecord.attributes.technologies.name'), with: 'Ruby'
-        click_on I18n.t('views.technologiess.new_submit')
+        fill_in I18n.t('activerecord.attributes.technology.name'), with: ''
+        click_on I18n.t('views.technologies.new_submit')
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.blank'))
@@ -28,8 +28,8 @@ feature('Admin create a technologies') do
 
         # Act
         visit technologies_path
-        fill_in I18n.t('activerecord.attributes.technologies.name'), with: 'Ruby'
-        click_on I18n.t('views.technologiess.new_submit')
+        fill_in I18n.t('activerecord.attributes.technology.name'), with: 'Ruby'
+        click_on I18n.t('views.technologies.new_submit')
 
         technologies = Technology.last
 
@@ -47,7 +47,7 @@ feature('Admin see a technologies') do
         visit technologies_path
 
         # Assert
-        expect(page).to have_content(I18n.t('views.technologiess.empty'))
+        expect(page).to have_content(I18n.t('views.technologies.empty'))
     end
 
     scenario('see records') do
@@ -59,7 +59,7 @@ feature('Admin see a technologies') do
         visit technologies_path
 
         # Assert
-        expect(page).to have_content(I18n.t('views.technologiess.title'))
+        expect(page).to have_content(I18n.t('views.technologies.title'))
         expect(page).to have_content(technologies.name)
     end
 
@@ -91,7 +91,7 @@ feature('Admin edit a technologies') do
         click_on I18n.t('views.main.edit')
 
         # Assert
-        expect(current_page).to eq(edit_technologies_path(technologies))
+        expect(current_path).to eq(edit_technology_path(technologies))
     end
 
     scenario('field is required') do
@@ -103,8 +103,8 @@ feature('Admin edit a technologies') do
         # Act
         visit technologies_path
         click_on I18n.t('views.main.edit')
-        fill_in I18n.t('activerecord.attributes.technologies.name'), with: ''
-        click_on I18n.t('views.technologiess.edit_submit')
+        fill_in I18n.t('activerecord.attributes.technology.name'), with: ''
+        click_on I18n.t('views.technologies.edit_submit')
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.blank'))
@@ -119,8 +119,8 @@ feature('Admin edit a technologies') do
         # Act
         visit technologies_path
         click_on I18n.t('views.main.edit')
-        fill_in I18n.t('activerecord.attributes.technologies.name'), with: 'Ruby on Rails'
-        click_on I18n.t('views.technologiess.edit_submit')
+        fill_in I18n.t('activerecord.attributes.technology.name'), with: 'Ruby on Rails'
+        click_on I18n.t('views.technologies.edit_submit')
 
         technologies.reload
 

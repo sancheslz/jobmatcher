@@ -27,6 +27,8 @@ pt-BR:
       edit_submit: Atualizar Perfil
       inactive_message: Inativada
     technologies:
+      empty: Nenhuma tecnologia registrada
       title: Tecnologias
+      new_title: Cadastrar Tecnologia
       new_submit: Nova Tecnologia
       edit_submit: Atualizar Tecnologia

@@ -1,0 +1,28 @@
+<h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.technologies.title') %></h2>
+<div class="row">
+    <div class="col-8">
+        <% if @technologies.any? %>
+            <ul class="list-group">
+                <% @technologies.each do |technology| %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <%= technology.name %>
+                        <%# <span class="badge badge-primary badge-pill">14</span> %>
+                        <div>
+                            <%= link_to edit_technology_path(technology), :class => "btn btn-sm btn-warning" do%>
+                                <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+                            <% end %>
+                        </div>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            <%= t('views.technologies.empty') %>
+        <% end %>
+    </div>
+    <div class="col-4">
+        <h4><%= t('views.technologies.new_title') %></h4>
+        <div class="bg-light rounded p-3">
+            <%= render partial: 'form', locals: { submit: t('views.technologies.new_submit') } %>
+        </div>
+    </div>
+</div>

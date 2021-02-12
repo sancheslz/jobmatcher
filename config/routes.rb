@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   end
 
   resources :profiles, only: %i[show new create edit update]
+
+  resources :technologies, only: %i[index create edit update]
 end

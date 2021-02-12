@@ -1,0 +1,12 @@
+<%= form_tag  do %>
+<%= label_tag :name, t('activerecord.attributes.technology.name') %>
+<%= text_field_tag :name, @tech.name || nil,  class: 'form-control'  %>
+<div class="text-danger"><%= @tech.errors[:name].join(' | ') %></div>
+<%= button_tag(:type => :submit, :class => 'btn btn-primary mt-3') do %>
+        <i class="far fa-save"></i> <%= submit %>
+    <% end %>
+<% end %>
+
+
+
+
