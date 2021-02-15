@@ -4,7 +4,7 @@ class OpportunitiesController < ApplicationController
     end
 
     def new
-        @opportunity = Opportunity.new
+        @opportunity = Opportunity.new(company: Company.last)
     end
 
     def create
