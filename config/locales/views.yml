@@ -34,5 +34,11 @@ pt-BR:
       new_submit: Nova Tecnologia
       edit_submit: Atualizar Tecnologia
     opportunities:
+      show_title: Detalhes da Vaga
       new_title: Cadastrar Oportunidades
       new_submit: Criar Oportunidade
+      remote_yes: Sim
+      remote_no: Não
+      level_entry: Júnior
+      level_mid: Pleno
+      level_senior: Sênior

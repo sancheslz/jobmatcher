@@ -1,0 +1,82 @@
+<h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.opportunities.show_title')%></h2>
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark">Empresa</div>
+    </div>
+    <div class="col-10">
+        <div>Company</div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.title') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @opportunity.title %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.description') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @opportunity.description %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.requirement') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @opportunity.requirement %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.level') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= t("views.opportunities.level_#{@opportunity.level}") %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.remote') %></div>
+    </div>
+    <div class="col-10">
+        <div><%= t("views.opportunities.remote_#{@opportunity.remote}") %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.salary')  %></div>
+    </div>
+    <div class="col-10">
+        <div><%= number_to_currency @opportunity.salary %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.position_quantity')  %></div>
+    </div>
+    <div class="col-10">
+        <div><%= @opportunity.position_quantity %></div>
+    </div>
+</div>  
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.opportunity.expiration_date')  %></div>
+    </div>
+    <div class="col-10">
+        <div><%= l @opportunity.expiration_date, :format => :default %></div>
+    </div>
+</div>  
