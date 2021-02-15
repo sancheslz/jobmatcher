@@ -30,4 +30,13 @@ pt-BR:
         postal_code: 'CEP'
       technology:
         name: Nome
+      opportunity:
+        title: Título
+        description: Descrição
+        requirement: Requisitos
+        expiration_date: Validade
+        position_quantity: Número de Vagas
+        salary: Salário
+        remote: Aceita Remoto?
+        level: Nível
 

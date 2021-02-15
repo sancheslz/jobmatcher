@@ -33,3 +33,6 @@ pt-BR:
       edit_title: Editar Tecnologia
       new_submit: Nova Tecnologia
       edit_submit: Atualizar Tecnologia
+    opportunities:
+      new_title: Cadastrar Oportunidades
+      new_submit: Criar Oportunidade
