@@ -35,6 +35,16 @@ describe "Opportunity" do
 
       # Assert
       expect(opportunity.errors[:requirement]).to include(I18n.t('errors.messages.blank'))
+    end
+
+    it "hidden as default" do
+      # Arrange
+
+      # Act
+      opportunity = Opportunity.new
+
+      # Assert
+      expect(opportunity.is_visible).to eq(false)
 
     end
 
@@ -84,5 +94,73 @@ describe "Opportunity" do
 
   end
   
+  context "#change_visibility!" do
+
+    it "hide if visible" do
+      # Arrange
+      Company.create!(
+        name: 'Campus Code',
+        cnpj: '1233456',
+        address: 'Alameda Santos',
+        number: '1293',
+        complement: 'Conj 73',
+        neighborhood: 'Jardim Paulista',
+        city: 'São Paulo',
+        state: 'SP',
+        postal_code: '11345-111',
+        website: 'www.campuscode.com',
+        founded:  '2010',
+      )
+
+      opportunity = Opportunity.create!(
+        title: 'Desenvolvedor Rails',
+        description: 'Deverá desenvolver aplicações Rails com entrega e consumo de api',
+        requirement: 'Conhecimento em ruby e rails. Desejável conhecimento em React',
+        company: Company.last,
+        is_visible: true
+      )
+
+      # Act
+      opportunity.reload
+      changed = Opportunity.last
+      changed.change_visibility!
+
+      # Assert
+      expect(opportunity.is_visible).not_to eq(changed.is_visible)
+    end
+
+    it "show if hidden" do
+      # Arrange
+      Company.create!(
+        name: 'Campus Code',
+        cnpj: '1233456',
+        address: 'Alameda Santos',
+        number: '1293',
+        complement: 'Conj 73',
+        neighborhood: 'Jardim Paulista',
+        city: 'São Paulo',
+        state: 'SP',
+        postal_code: '11345-111',
+        website: 'www.campuscode.com',
+        founded:  '2010',
+      )
+      opportunity = Opportunity.create!(
+        title: 'Desenvolvedor Rails',
+        description: 'Deverá desenvolver aplicações Rails com entrega e consumo de api',
+        requirement: 'Conhecimento em ruby e rails. Desejável conhecimento em React',
+        company: Company.last,
+        is_visible: false
+      )
+
+      # Act
+      opportunity.reload
+      changed = Opportunity.last
+      changed.change_visibility!
+
+      # Assert
+      expect(opportunity.is_visible).not_to eq(changed.is_visible)
+    end
+    
+  end
   
 end
