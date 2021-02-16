@@ -4,11 +4,13 @@ class OpportunitiesController < ApplicationController
     end
 
     def new
-        @opportunity = Opportunity.new(company: Company.last)
+        @opportunity = Opportunity.new
     end
-
+    
     def create
+        # TODO: create according the user's company
         @opportunity = Opportunity.new(allowed_params)
+        @opportunity.company = Company.first
         if @opportunity.save 
             redirect_to @opportunity
         else
