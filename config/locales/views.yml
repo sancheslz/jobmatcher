@@ -40,6 +40,7 @@ pt-BR:
       show_title: Detalhes da Vaga
       new_title: Cadastrar Oportunidades
       new_submit: Criar Oportunidade
+      edit_submit: Atualizar Oportunidade
       remote_yes: Sim
       remote_no: Não
       level_entry: Júnior
