@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :technologies, only: %i[index new create edit update]
 
-  resources :opportunities, only: %i[show new create] do
+  resources :opportunities, only: %i[show new create edit update] do
     get 'change_visibility', on: :member
   end
 end

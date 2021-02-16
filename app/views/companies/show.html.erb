@@ -148,6 +148,9 @@
                 <%= link_to change_visibility_opportunity_path(opportunity), :class => 'btn btn-sm btn-danger' do %>
                         <i class="far fa-eye-slash"></i> <%= t('views.opportunities.hide') %>
                 <% end %>
+                <%= link_to edit_opportunity_path(opportunity), :class => 'btn btn-sm btn-warning' do %>
+                        <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+                <% end %>
             </div>
         </div>
     <% end %>

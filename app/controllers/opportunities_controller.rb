@@ -26,6 +26,20 @@ class OpportunitiesController < ApplicationController
         end
     end
 
+    def edit
+        @opportunity = Opportunity.find(params[:id])
+    end
+
+    def update
+        @opportunity = Opportunity.find(params[:id])
+        @opportunity.update(allowed_params)
+        if @opportunity.save 
+            redirect_to company_path(@opportunity.company)
+        else
+            render :edit 
+        end
+    end
+
     private 
     def allowed_params
         params.require(:opportunity).permit(
