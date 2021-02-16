@@ -1,5 +1,8 @@
 class Opportunity < ApplicationRecord
 
+    has_many :technology_opportunity
+    has_many :technologies, through: :technology_opportunity
+
     before_save :add_date_if_empty
 
     validates :title, :description, :requirement, presence: true

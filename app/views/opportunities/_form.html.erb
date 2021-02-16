@@ -51,6 +51,15 @@
         <%= f.collection_select :level, Opportunity.levels.map { |op| [op.first, t("views.opportunities.level_#{op.first}") ]}, :first, :second, {}, {class: 'form-control'}%>
         <div class="text-danger"><%= @opportunity.errors[:level].join(' | ') %></div>
     </div>
+    <div class="m-3">
+    <h3><%= t('views.technologies.title') %></h3>
+        <%= f.collection_check_boxes :technology_ids, Technology.all.sort_by { |tech| tech.name.upcase }, :id, :name, {} do |check| %>
+            <div class="form-check">
+                <%= check.check_box class: 'form-check-input' %>
+                <%= check.label class: 'form-check-label' %>
+            </div>
+        <% end %>
+    </div>
 
 <%= button_tag(:type => :submit, :class => "mt-3 btn btn-primary") do %>
     <i class="far fa-save"></i> <%= submit %>
