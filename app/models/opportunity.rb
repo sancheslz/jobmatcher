@@ -7,6 +7,10 @@ class Opportunity < ApplicationRecord
     enum level: { entry: 10, mid: 20, senior: 30 }
     belongs_to :company
 
+    def change_visibility!
+        self.is_visible = !self.is_visible
+    end
+
     private 
     def add_date_if_empty
         if self.expiration_date.nil?

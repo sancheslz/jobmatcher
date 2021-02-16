@@ -1,4 +1,12 @@
 class OpportunitiesController < ApplicationController
+
+    def change_visibility
+        @opportunity = Opportunity.find(params[:id])
+        @opportunity.change_visibility!
+        @opportunity.save
+        redirect_to @opportunity.company
+    end
+
     def show
         @opportunity = Opportunity.find(params[:id])
     end

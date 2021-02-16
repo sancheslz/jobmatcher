@@ -23,6 +23,7 @@ pt-BR:
       inactivate: Desativar Empresa
       reactivate: Reativar Empresa
       inactive_message: Inativada
+      active_opportunities: Oportunidades Abertas
     profiles:
       new_title: Cadastrar Perfil
       new_submit: Cadastrar Perfil
@@ -44,4 +45,4 @@ pt-BR:
       level_entry: Júnior
       level_mid: Pleno
       level_senior: Sênior
-      hide: Esconder Opportunidade
+      hide: Ocultar

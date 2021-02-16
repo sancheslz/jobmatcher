@@ -1,5 +1,10 @@
 class CompaniesController < ApplicationController
+
     def show 
+        @opportunities = Opportunity.where(
+            company_id: params[:id],
+            is_visible: true
+        )
         @company = Company.find(params[:id])
     end
 
