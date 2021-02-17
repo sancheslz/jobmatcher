@@ -19,11 +19,11 @@ class ProfilesController < ApplicationController
     end
 
     def edit 
-        @profile = Profile.find(current_user)
+        @profile = Profile.find_by(user: current_user)
     end
 
     def update
-        @profile = Profile.find(current_user)
+        @profile = Profile.find_by(user: current_user)
         @profile.update(allowed_params)
         if @profile.save
             redirect_to @profile 
