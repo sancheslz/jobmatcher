@@ -43,3 +43,14 @@ Opportunity.create!(
     remote: :true,
     level: :entry,
 )
+
+user = User.create!(
+    email: 'regular@gmail.com',
+    password: 'regular1234'
+)
+
+Profile.create!(
+    name: 'Regular User',
+    cpf: '1234',
+    user: user
+)

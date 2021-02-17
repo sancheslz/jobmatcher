@@ -11,8 +11,9 @@ class ProfilesController < ApplicationController
     def create
         @profile = Profile.new(allowed_params)
         @profile.user = current_user
+        @profile.set_role!(current_user)
         if @profile.save
-            redirect_to @profile 
+            redirect_to root_path
         else 
             render :new
         end
