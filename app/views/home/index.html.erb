@@ -7,30 +7,31 @@
     </div>
 </div>
 <h1 class="h2 text-center"><%= t('views.home.last_opportunities') %></h1>
-<% if @opportunity.any? %>
+<% if @opportunities.any? %>
     <div class="d-flex flex-wrap justify-content-between">
-        <% @opportunity.each do |item| %>
-            <div class="card m-2 " style="min-width: 20rem; max-width: 47%" id='opportunity_<%= item.id %>'>
+        <% @opportunities.each do |opportunity| %>
+            <div class="card m-2 " style="min-width: 20rem; max-width: 47%" id='opportunity_<%= opportunity.id %>'>
             <div class="card-body">
-                <h5 class="card-title"><%= item.title %></h5>
+                <h5 class="card-title"><%= opportunity.title %></h5>
 
-                <%= link_to item.company, :class => 'card-subtitle text-muted' do %>
-                        <i class="far fa-building"></i> <%= item.company.name %>
+                <%= link_to opportunity.company, :class => 'card-subtitle text-muted' do %>
+                        <i class="far fa-building"></i> <%= opportunity.company.name %>
                 <% end %>
 
                 <div class="card-text mt-3 mb-3 text-wrap">
                     <div class="text">
-                    <%= item.description %>
+                    <%= opportunity.description %>
                     </div>
                     <div class="skills">
-                        <span class="badge badge-primary">Primary</span>
-                        <span class="badge badge-secondary">Secondary</span>
+                    <% opportunity.technologies.each do |tech| %>
+                        <span class="badge badge-secondary"><%= tech.name %></span>
+                    <% end %>
                     </div>
 
 
                 </div>
 
-                <%= link_to item, :class => 'btn btn-sm btn-info' do %>
+                <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
                         <i class="fas fa-plus"></i> <%= t('views.home.more') %>
                 <% end %>
             </div>
