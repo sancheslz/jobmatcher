@@ -12,6 +12,7 @@ pt-BR:
       search_btn: 'Buscar'
       sign_in: 'Entrar'
       sign_up: 'Cadastrar'
+      logout: 'Sair'
       last_opportunities: 'Últimas vagas'
       empty: Nenhuma vaga aberta no momento
       more: Saiba mais
