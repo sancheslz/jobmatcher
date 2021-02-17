@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
     def show
-        @profile = Profile.find(params[:id])
+        @profile = Profile.find_by(user: current_user)
     end
 
     def new
@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
 
     def create
         @profile = Profile.new(allowed_params)
+        @profile.user = current_user
         if @profile.save
             redirect_to @profile 
         else 
@@ -18,11 +19,11 @@ class ProfilesController < ApplicationController
     end
 
     def edit 
-        @profile = Profile.find(params[:id])
+        @profile = Profile.find(current_user)
     end
 
     def update
-        @profile = Profile.find(params[:id])
+        @profile = Profile.find(current_user)
         @profile.update(allowed_params)
         if @profile.save
             redirect_to @profile 
