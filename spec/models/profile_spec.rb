@@ -28,9 +28,15 @@ describe Profile do
 
     it "cpf is unique" do
       # Arrange
+      user = User.create!(
+        email: 'user@gmail.com',
+        password: '123456'
+      )
+
       Profile.create!(
         name: 'Bob Smith',
-        cpf: '123'
+        cpf: '123',
+        user: user
       )
 
       # Act
@@ -45,11 +51,16 @@ describe Profile do
 
     it "active as default" do
       # Arrange
+      user = User.create!(
+        email: 'user@gmail.com',
+        password: '123456'
+      )
       
       # Act
       profile = Profile.create!(
         name: 'Bob Smith',
-        cpf: '123'
+        cpf: '123',
+        user: user
       )
 
       # Assert
@@ -62,11 +73,15 @@ describe Profile do
 
     it "returns is_active attribute" do
       # Arrange
-
+      user = User.create!(
+        email: 'user@gmail.com',
+        password: '123456'
+      )
       # Act
       profile = Profile.create!(
         name: 'Bob Smith',
-        cpf: '123'
+        cpf: '123',
+        user: user
       )
 
       # Assert

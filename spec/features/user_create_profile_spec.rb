@@ -55,6 +55,11 @@ feature('User create a profile') do
 
     scenario('cpf must be unique') do
         # Arrange
+        user = User.create!(
+            email: 'user@gmail.com',
+            password: '123456'
+        )
+
         Profile.create!(
             name: 'John Smith',
             cpf: '12345678910',
@@ -66,6 +71,7 @@ feature('User create a profile') do
             city: 'Neverland',
             state: 'SP',
             postal_code: '1233345',
+            user: user,
         )
 
         # Act
@@ -79,6 +85,11 @@ feature('User create a profile') do
 
     scenario('create with success') do
         # Arrange
+        user = User.create!(
+            email: 'user@gmail.com',
+            password: '123456'
+        )
+        login_as user
 
         # Act
         visit new_profile_path
