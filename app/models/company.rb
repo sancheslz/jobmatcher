@@ -1,6 +1,8 @@
 class Company < ApplicationRecord
     validates :name, :cnpj, :website, presence: true
     validates :cnpj, uniqueness: true  
+    has_many :company_profiles
+    has_many :profiles, through: :company_profiles
 
     def change_state! 
         self.is_active = !self.is_active

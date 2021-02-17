@@ -19,7 +19,6 @@ feature('New business user belongs to a company') do
 
         # Assert
         expect(current_path).to eq(root_path)
-        expect(page).not_to have_content(I18n.t('views.opportunities.new_title'))
         expect(Profile.last.role).to eq('regular')
 
     end
@@ -41,8 +40,7 @@ feature('New business user belongs to a company') do
 
         # Assert
         expect(current_path).to eq(new_company_path)
-        expect(page).to have_content(I18n.t('views.opportunities.new_title'))
-        expect(profile.role).to eq(:admin)
+        expect(Profile.last.role).to eq('admin')
     end
 
 
@@ -73,7 +71,6 @@ feature('New business user belongs to a company') do
 
         # Assert
         expect(current_path).to eq(root_path)
-        expect(page).to have_content(I18n.t('views.opportunities.new_title'))
-        expect(profile.role).to eq(:business)
+        expect(Profile.last.role).to eq('business')
     end
 end

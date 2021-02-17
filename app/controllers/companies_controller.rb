@@ -15,6 +15,10 @@ class CompaniesController < ApplicationController
     def create
         @company = Company.new(allowed_params)
         if @company.save
+            CompanyProfile.create!(
+                profile: current_user.profile,
+                company: @company
+            )
             redirect_to @company
         else
             render :new

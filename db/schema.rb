@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_17_202258) do
+ActiveRecord::Schema.define(version: 2021_02_17_225818) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 2021_02_17_202258) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_active", default: true
     t.string "logo"
+  end
+
+  create_table "company_profiles", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "profile_id", null: false
+    t.string "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_profiles_on_company_id"
+    t.index ["profile_id"], name: "index_company_profiles_on_profile_id"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -114,6 +124,7 @@ ActiveRecord::Schema.define(version: 2021_02_17_202258) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "company_profiles", "profiles"
   add_foreign_key "opportunities", "companies"
   add_foreign_key "profiles", "users"
   add_foreign_key "technology_opportunities", "opportunities"
