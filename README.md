@@ -97,8 +97,39 @@ rspec spec/features/<testname>:<linenumber>
 
 This project is in development. You can access its evolution on [Trello](https://trello.com/b/2wIVzkaE/jobmatcher) website.
 
-## Routes
+## Helper Definitions
 
-Verb | Path                     | URL
----  | ---                      | ---
-get  | `root`                   | `/`
+### Personas
+
+ id | 1 | 2 | 3 | 4
+ --- | --- | --- | --- | ---
+Name | Wade Caldwell | Felismino da Conceição| Miriã das Neves| Graciliana Novaes
+Photo | <img src="https://randomuser.me/api/portraits/med/men/87.jpg"> | <img src="https://randomuser.me/api/portraits/med/men/7.jpg"> | <img src="https://randomuser.me/api/portraits/med/women/50.jpg"> | <img src="https://randomuser.me/api/portraits/med/women/64.jpg"> 
+Behavior | Visitor | New User | Company Member | Company Admin
+Goal | Know the website | Find a new job opportunity | Have a helpful platform to hire people | Get best talents
+Quote | _I like to surf on the internet and discover new websites_ | _I've studied a lot, now it's time to get a new job_ | _I'd love to have an easy-to-use platform to find new employees_ | _The remote job changed the world. Now I can hire professionals around the world_
+About | Wade is 69. He is single and has a little dog. He is retired now, but during the night, he likes to visit job websites to see how the economy is going on. | Felismino is 34. He is married and has a son. He is in a career transition and wants to find a new job. | Miriã is 43. She is married and has 2 children. She works in the human resources of a big technology company. She wants to do the hiring process faster and easier. | Graciliana is 70. She is a widow. She is the CTO of a big technology company. The company is expanding its activity and need to hire new professionals quickly
+### Actions and Permissions
+
+&nbsp;| Wade Caldwell <br> (Visitor) | Felismino da Conceição <br> (New User) | Miriã das Neves <br> (Company Member) | Graciliana Novaes <br> (Company Admin)
+--- | --- | --- | --- | ---
+visit home page | x | x | x | x
+register on the site | - | x | x | x
+login | - | x | x | x
+logout | - | x | x | x
+register profile | - | x | x | x
+edit profile | - | x | x | x
+register company | - | - | - |  x
+edit company | - | - | - |  x
+register company's social media | - | - | - |  x
+edit company's social media | - | - | - |  x
+register technology | - | - | x | x
+create job opportunities | - | - | x | x
+edit job opportunities | - | - | x | x
+finish job opportunity | - | - | x | x
+apply opportunity | - | x | x | x
+accept application | - | - | x | x
+deny application | - | - | x | x
+do proposal | - | - | x | x
+accept proposal | - | x | - | -
+deny proposal | - | x | - | -
