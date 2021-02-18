@@ -84,6 +84,19 @@ feature('Admin create a new company') do
     
     scenario('create with success') do
         # Arrange
+        user = User.create!(
+            email: 'user@campuscode.com',
+            password: 'user123'
+        )
+        profile = Profile.create!(
+            name: 'Simple User',
+            cpf: '123',
+            user: user
+        )
+        
+        profile.set_role!(user)
+        profile.save
+        login_as user
 
         # Act
         visit new_company_path
