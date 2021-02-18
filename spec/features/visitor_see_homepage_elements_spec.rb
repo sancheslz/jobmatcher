@@ -142,11 +142,9 @@ feature('Visitor sees on home') do
         # Assert
         expect(page).to have_content(opportunity_active.title)
         expect(page).to have_content(opportunity_active.description)
-        expect(page).to have_content(opportunity_active.company.name)
 
         expect(page).not_to have_content(opportunity_inactive.title)
         expect(page).not_to have_content(opportunity_inactive.description)
-        expect(page).not_to have_content(opportunity_inactive.company.name)
     end
 
     scenario('opportunity info') do

@@ -30,7 +30,7 @@ feature('User can logout') do
 
                 # Assert
                 within('nav') do
-                    expect(page).to have_link('Menu')
+                    expect(page).to have_button('Menu')
                 end
             end
         
