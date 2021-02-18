@@ -9,7 +9,7 @@ feature('Admin edit technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -24,6 +24,21 @@ feature('Admin edit technologies') do
 
         technology = Technology.create!( name: 'Ruby' )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -46,7 +61,7 @@ feature('Admin edit technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -61,6 +76,21 @@ feature('Admin edit technologies') do
 
         technology = Technology.create!( name: 'Ruby' )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -75,7 +105,7 @@ feature('Admin edit technologies') do
         end
 
         # Assert
-        expect(current_path).to eq(edit_technology_path(technologies))
+        expect(current_path).to eq(edit_technology_path(technology))
     end
 
     scenario('field is required') do
@@ -85,7 +115,7 @@ feature('Admin edit technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -100,6 +130,21 @@ feature('Admin edit technologies') do
 
         technology = Technology.create!( name: 'Ruby' )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -127,7 +172,7 @@ feature('Admin edit technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -144,6 +189,21 @@ feature('Admin edit technologies') do
 
         technology = Technology.create!( name: 'Ruby' )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -171,7 +231,7 @@ feature('Admin edit technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -186,6 +246,21 @@ feature('Admin edit technologies') do
 
         technology = Technology.create!( name: 'Ruby' )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act

@@ -1,7 +1,7 @@
 <% if @technologies.any? %>
     <ul class="list-group">
         <% @technologies.each do |technology| %>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li id="technology_<%= technology.id %>" class="list-group-item d-flex justify-content-between align-items-center">
                 <%= technology.name %>
                 <div>
                     <%= link_to edit_technology_path(technology), :class => "btn btn-sm btn-warning" do%>

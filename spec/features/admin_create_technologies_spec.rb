@@ -9,7 +9,7 @@ feature('Admin create technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -21,6 +21,21 @@ feature('Admin create technologies') do
             role: 'admin',
             user: user
         )
+    
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -32,7 +47,7 @@ feature('Admin create technologies') do
         
         # Assert
         within('nav') do
-            expect(page).to have_field(I18n.t('views.technologies.title'))
+            expect(page).to have_link(I18n.t('views.technologies.title'))
         end
     end
 
@@ -43,7 +58,7 @@ feature('Admin create technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -55,6 +70,21 @@ feature('Admin create technologies') do
             role: 'admin',
             user: user
         )
+    
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -76,7 +106,7 @@ feature('Admin create technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -88,6 +118,21 @@ feature('Admin create technologies') do
             role: 'admin',
             user: user
         )
+    
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -96,8 +141,8 @@ feature('Admin create technologies') do
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.technologies.title')
-            click_on I18n.t('views.technologies.new_title')
         end
+        click_on I18n.t('views.technologies.new_title')
         
         # Assert
         expect(current_path).to eq(new_technology_path)
@@ -110,7 +155,7 @@ feature('Admin create technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -122,6 +167,21 @@ feature('Admin create technologies') do
             role: 'admin',
             user: user
         )
+    
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -130,8 +190,8 @@ feature('Admin create technologies') do
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.technologies.title')
-            click_on I18n.t('views.technologies.new_title')
         end
+        click_on I18n.t('views.technologies.new_title')
         
         fill_in I18n.t('activerecord.attributes.technology.name'), with: ''
         click_on I18n.t('views.technologies.new_submit')
@@ -147,7 +207,7 @@ feature('Admin create technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -159,6 +219,21 @@ feature('Admin create technologies') do
             role: 'admin',
             user: user
         )
+    
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -167,8 +242,8 @@ feature('Admin create technologies') do
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.technologies.title')
-            click_on I18n.t('views.technologies.new_title')
         end
+        click_on I18n.t('views.technologies.new_title')
         
         fill_in I18n.t('activerecord.attributes.technology.name'), with: ''
         click_on I18n.t('views.technologies.new_submit')

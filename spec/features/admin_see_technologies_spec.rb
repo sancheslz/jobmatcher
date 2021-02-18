@@ -9,7 +9,7 @@ feature('Admin see technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -22,6 +22,21 @@ feature('Admin see technologies') do
             user: user
         )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -43,7 +58,7 @@ feature('Admin see technologies') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -60,6 +75,21 @@ feature('Admin see technologies') do
             name: 'Ruby'
         )
 
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+        
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
