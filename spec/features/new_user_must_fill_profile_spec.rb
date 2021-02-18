@@ -11,9 +11,9 @@ feature('New user must fill a profile') do
             click_on I18n.t('views.home.sign_up')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '654321'
-            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: '654321'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -31,9 +31,9 @@ feature('New user must fill a profile') do
         end
 
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '654321'
-            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: '654321'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -46,7 +46,7 @@ feature('New user must fill a profile') do
         
     end
 
-    scenario('can\'t access other paths until finish') do
+    scenario("can't access other paths") do
         # Arrange
 
         # Act
@@ -56,15 +56,12 @@ feature('New user must fill a profile') do
         end
 
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '654321'
-            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: '654321'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 
-        fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: ''
-        click_on I18n.t('views.profiles.new_submit')
         visit root_path
 
         # Assert

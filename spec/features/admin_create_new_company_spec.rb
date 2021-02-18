@@ -1,12 +1,30 @@
 require 'rails_helper'
 
-# TODO: implement access from root_path
 feature('Admin create a new company') do
+
     scenario('see section title') do
         # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        login_as user 
 
         # Act
-        visit new_company_path
+        visit root_path
 
         # Assert
         expect(page).to have_content(I18n.t('views.companies.new_title')) 
@@ -14,9 +32,27 @@ feature('Admin create a new company') do
     
     scenario('available fields') do
         # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        login_as user 
 
         # Act
-        visit new_company_path
+        visit root_path
 
         # Assert
         within('form') do
@@ -35,20 +71,30 @@ feature('Admin create a new company') do
     
     scenario('some are required') do
         # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        login_as user 
 
         # Act
-        visit new_company_path
+        visit root_path
         fill_in I18n.t('activerecord.attributes.company.name'), with: ''
         fill_in I18n.t('activerecord.attributes.company.cnpj'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.address'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.number'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.complement'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.neighborhood'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.city'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.state'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.postal_code'), with: ''
         fill_in I18n.t('activerecord.attributes.company.website'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.founded'), with: ''
         click_on I18n.t('views.companies.new_submit')
 
         # Assert
@@ -57,25 +103,41 @@ feature('Admin create a new company') do
     
     scenario('cnpj must be unique') do
         # Arrange
-        Company.create!(
-            name: 'Lorem Name',
-            cnpj: '123456789',
-            website: 'www.loremname.com'
+        other_company = Company.create!(
+            name: 'MoemaSoft',
+            cnpj: '815.916.474/1594-96',
+            address: 'Rua São Sebastiao',
+            number: '8',
+            complement: 'Park',
+            city: 'Caxias',
+            state: 'Alagoas',
+            postal_code: '56170',
+            website: 'www.moemasoft.com',
+            founded:'1983',
         )
 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        login_as user 
+
         # Act
-        visit new_company_path
-        fill_in I18n.t('activerecord.attributes.company.name'), with: 'Ipsum name'
-        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '123456789'
-        fill_in I18n.t('activerecord.attributes.company.address'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.number'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.complement'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.neighborhood'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.city'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.state'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.postal_code'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.ipsumname.com'
-        fill_in I18n.t('activerecord.attributes.company.founded'), with: ''
+        visit root_path
+        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '815.916.474/1594-96'
         click_on I18n.t('views.companies.new_submit')
 
         # Assert
@@ -85,24 +147,29 @@ feature('Admin create a new company') do
     scenario('create with success') do
         # Arrange
         user = User.create!(
-            email: 'user@campuscode.com',
-            password: 'user123'
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
         )
-        profile = Profile.create!(
-            name: 'Simple User',
-            cpf: '123',
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
             user: user
         )
-        
-        profile.set_role!(user)
-        profile.save
-        login_as user
+
+        login_as user 
 
         # Act
-        visit new_company_path
-        fill_in I18n.t('activerecord.attributes.company.name'), with: 'Ipsum name'
-        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '123456789'
-        fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.ipsumname.com'
+        visit root_path
+        fill_in I18n.t('activerecord.attributes.company.name'), with: 'Continuous Development'
+        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '832.538.794/9328-87'
+        fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.cdev.com'
         click_on I18n.t('views.companies.new_submit')
 
         # Assert

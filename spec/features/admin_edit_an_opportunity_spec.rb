@@ -1,27 +1,61 @@
 require 'rails_helper'
 
-# TODO: implement access from root path
 feature('Admin edit an opportunity') do
 
     scenario('has the edit button') do
-        # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1234',
-            website: 'www.campuscode.com.br'
+        # Arrange 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+    
+        profile = Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
         )
 
-        opportunity = Opportunity.create!(
-            company: company.reload,
-            title: 'Desenvolvedor Rails',
-            description: 'Conhecimento de Rails e Angular',
-            requirement: 'Experiência com Rails 6',
-            expiration_date: Time.now.strftime('%d/%m/%Y'),
-            is_visible: true
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
+    
+        opportunity = Opportunity.create!(
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
+        )
+
+        login_as user
 
         # Act
-        visit company_path(company)
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
 
         # Assert
         within("div#opportunity_#{opportunity.reload.id}") do
@@ -30,26 +64,62 @@ feature('Admin edit an opportunity') do
     end
 
     scenario('access the edit form') do
-        # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1234',
-            website: 'www.campuscode.com.br'
+        # Arrange 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+    
+        profile = Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
         )
 
-        opportunity = Opportunity.create!(
-            company: company.reload,
-            title: 'Desenvolvedor Rails',
-            description: 'Conhecimento de Rails e Angular',
-            requirement: 'Experiência com Rails 6',
-            expiration_date: Time.now.strftime('%d/%m/%Y'),
-            is_visible: true
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
+    
+        opportunity = Opportunity.create!(
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
+        )
+
+        login_as user
 
         # Act
-        visit company_path(company)
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
+        
         within("div#opportunity_#{opportunity.reload.id}") do
-            click_on I18n.t('views.main.edit')
+            expect(page).to have_link(I18n.t('views.main.edit'))
         end
 
         # Assert
@@ -57,27 +127,64 @@ feature('Admin edit an opportunity') do
     end
 
     scenario('required fields can\'t be blank') do
-        # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1234',
-            website: 'www.campuscode.com.br'
+        # Arrange 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+    
+        profile = Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
         )
 
-        opportunity = Opportunity.create!(
-            company: company.reload,
-            title: 'Desenvolvedor Rails',
-            description: 'Conhecimento de Rails e Angular',
-            requirement: 'Experiência com Rails 6',
-            expiration_date: Time.now.strftime('%d/%m/%Y'),
-            is_visible: true
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
+    
+        opportunity = Opportunity.create!(
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
+        )
+
+        login_as user
 
         # Act
-        visit company_path(company)
-        within("div#opportunity_#{opportunity.reload.id}") do
-            click_on I18n.t('views.main.edit')
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
         end
+        
+        within("div#opportunity_#{opportunity.reload.id}") do
+            expect(page).to have_link(I18n.t('views.main.edit'))
+        end
+
         fill_in I18n.t('activerecord.attributes.opportunity.title'), with: ''
         fill_in I18n.t('activerecord.attributes.opportunity.description'), with: ''
         fill_in I18n.t('activerecord.attributes.opportunity.requirement'), with: ''
@@ -88,33 +195,72 @@ feature('Admin edit an opportunity') do
     end
 
     scenario('update with success') do
-        # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1234',
-            website: 'www.campuscode.com.br'
+        # Arrange 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+    
+        profile = Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
         )
 
-        opportunity = Opportunity.create!(
-            company: company.reload,
-            title: 'Desenvolvedor Rails',
-            description: 'Conhecimento de Rails e Angular',
-            requirement: 'Experiência com Rails 6',
-            expiration_date: Time.now.strftime('%d/%m/%Y'),
-            is_visible: true
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
+    
+        opportunity = Opportunity.create!(
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
+        )
+
+        login_as user
 
         # Act
-        visit company_path(company)
-        within("div#opportunity_#{opportunity.reload.id}") do
-            click_on I18n.t('views.main.edit')
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
         end
-        fill_in I18n.t('activerecord.attributes.opportunity.title'), with: 'Desenvolvedor Ruby on Rails'
+        
+        within("div#opportunity_#{opportunity.reload.id}") do
+            expect(page).to have_link(I18n.t('views.main.edit'))
+        end
+
+        fill_in I18n.t('activerecord.attributes.opportunity.title'), with: 'Desenvolvedor React'
         click_on I18n.t('views.opportunities.edit_submit')
 
         # Assert
-        expect(page).not_to have_content(opportunity.title)
-        expect(page).to have_content(opportunity.reload.title)
+        within("div#opportunity_#{opportunity.id}") do
+            expect(page).not_to have_content(opportunity.title)
+            expect(page).to have_content(opportunity.reload.title)
+        end
     end
 
 end

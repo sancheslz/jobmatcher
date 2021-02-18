@@ -20,6 +20,7 @@ pt-BR:
       new_title: Cadastrar Empresa
       new_submit: Cadastrar Empresa
       edit_submit: Atualizar Empresa
+      mine: Minha Empresa
       detail_title: Empresa Cadastrada
       inactivate: Desativar Empresa
       reactivate: Reativar Empresa

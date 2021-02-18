@@ -1,26 +1,94 @@
 require 'rails_helper'
 
-# TODO: implement access from root_path
 feature('Admin see company details') do
+
+
+    scenario('have the company button on menu') do
+        # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+        end
+
+        # Assert
+        expect(page).to have_link(I18n.t('views.companies.mine')) 
+    end
 
     scenario('there is a title') do
         # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010',
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
         )
 
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
         # Act
-        visit company_path(company)
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+        end
+        click_on I18n.t('views.companies.mine')
 
         # Assert
         expect(page).to have_content(I18n.t('views.companies.detail_title'))
@@ -28,22 +96,45 @@ feature('Admin see company details') do
 
     scenario('all fields are displayed') do
         # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010',
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
         )
 
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
         # Act
-        visit company_path(company)
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+        end
+        click_on I18n.t('views.companies.mine')
 
         # Assert
         expect(page).to have_content(company.name)
@@ -57,29 +148,6 @@ feature('Admin see company details') do
         expect(page).to have_content(company.postal_code)
         expect(page).to have_content(company.website)
         expect(page).to have_content(company.founded)
-    end
-
-    scenario('it\'s possible to edit it') do
-        # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010', 
-        )
-
-        # Act
-        visit company_path(company)
-
-        # Assert
-        expect(page).to have_link(I18n.t('views.main.edit'))
     end
 
 end

@@ -2,12 +2,8 @@ require 'rails_helper'
 
 feature('User can login') do
 
-    scenario('see option on homepage') do
+    scenario('see button on navbar') do
         # Arrange
-        user = User.create!(
-            email: 'user@gmail.com',
-            password: 'user1234'
-        )
 
         # Act
         visit root_path
@@ -18,11 +14,11 @@ feature('User can login') do
         end
     end
 
-    scenario('see the form') do
+    scenario('see the login form') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: 'user1234'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
 
         # Act
@@ -38,8 +34,8 @@ feature('User can login') do
     scenario('fields are required') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: 'user1234'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
 
         # Act
@@ -58,8 +54,8 @@ feature('User can login') do
     scenario('with success') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: 'user1234'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
 
         # Act
@@ -68,8 +64,8 @@ feature('User can login') do
             click_on I18n.t('views.home.sign_in')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: 'user1234'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'felismino.daconceicao@gmail.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'yellowtiger502'
             click_button I18n.t('views.home.sign_in')
         end
 
@@ -82,12 +78,20 @@ feature('User can login') do
     scenario('returns to homepage') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: 'user1234'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
+
         profile = Profile.create!(
-            name: 'Simple User',
-            cpf: '1234',
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
             user: user
         )
 
@@ -97,8 +101,8 @@ feature('User can login') do
             click_on I18n.t('views.home.sign_in')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: 'user1234'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'felismino.daconceicao@gmail.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'yellowtiger502'
             click_button I18n.t('views.home.sign_in')
         end
 

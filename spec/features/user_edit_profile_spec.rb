@@ -1,68 +1,73 @@
 require 'rails_helper'
 
-# TODO: Implement access from home page
 feature('User edit profile') do
 
-    scenario('see the button') do
+    scenario('see the button on navbar') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
 
         profile = Profile.create!(
-            name: 'John Smith',
-            cpf: '12345678910',
-            bio: 'John Smith rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
             user: user
         )
 
         login_as user
 
         # Act
-        visit profile_path(profile)
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+        end
         
         # Assert
-        expect(page).to have_link(I18n.t('views.main.edit')) 
+        expect(page).to have_link(I18n.t('views.profiles.edit_submit')) 
     end
 
     scenario('some fields are required') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
 
         profile = Profile.create!(
-            name: 'John Smith',
-            cpf: '12345678910',
-            bio: 'John Smith rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
             user: user
         )
 
         login_as user
 
         # Act
-        visit profile_path(profile)
-        click_on I18n.t('views.main.edit')
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.profiles.edit_submit')
+        end
         
-        fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: ''
-        click_on I18n.t('views.profiles.edit_submit')
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
+            fill_in I18n.t('activerecord.attributes.profile.cpf'), with: ''
+            click_on I18n.t('views.profiles.edit_submit')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.blank'), count: 2) 
@@ -70,50 +75,54 @@ feature('User edit profile') do
 
     scenario('cpf must be unique') do
         # Arrange
-        other = User.create!(
-            email: 'otherr@gmail.com',
-            password: '123456'
+        other_user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
         )
-        user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+        other_profile = Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: other_user
         )
 
-        Profile.create!(
-            name: 'John Snow',
-            cpf: '02345678910',
-            bio: 'John Snow rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
-            user: other
+        user = User.create!(
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
+
         profile = Profile.create!(
-            name: 'John Smith',
-            cpf: '12345678910',
-            bio: 'John Smith rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
             user: user
         )
 
         login_as user
 
         # Act
-        visit profile_path(profile)
-        click_on I18n.t('views.main.edit')
-
-        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '02345678910'
-        click_on I18n.t('views.profiles.edit_submit')
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.profiles.edit_submit')
+        end
+        
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '388.586.242-26'
+            click_on I18n.t('views.profiles.edit_submit')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.taken'), count: 1)
@@ -122,31 +131,36 @@ feature('User edit profile') do
     scenario('with success') do
         # Arrange
         user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
         )
+
         profile = Profile.create!(
-            name: 'John Smith',
-            cpf: '12345678910',
-            bio: 'John Smith rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
             user: user
         )
 
         login_as user
 
         # Act
-        visit profile_path(profile)
-        click_on I18n.t('views.main.edit')
-
-        fill_in I18n.t('activerecord.attributes.profile.name'), with: 'John Knife'
-        click_on I18n.t('views.profiles.edit_submit')
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.profiles.edit_submit')
+        end
+        
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.profile.number'), with: '7971B'
+            click_on I18n.t('views.profiles.edit_submit')
+        end
 
         # Assert
         expect(current_path).to eq(profile_path(profile))

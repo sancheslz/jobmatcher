@@ -1,38 +1,146 @@
 require 'rails_helper'
 
-# TODO: implement access from root_path
 feature('Admin edit company') do
+
+    scenario('have the edition button') do
+        # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
+
+        # Assert
+        expect(page).to have_link(I18n.t('views.companies.edit_submit'))
+    end
+
+    scenario('access the edit form') do
+        # Arrange
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+        
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
+        click_on I18n.t('views.companies.edit_submit')
+
+        # Assert
+        expect(current_path).to eq(edit_company_path)
+    end
 
     scenario('some fields are required') do
         # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010',
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
         )
 
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
         # Act
-        visit edit_company_path(company)
-        fill_in I18n.t('activerecord.attributes.company.name'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.address'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.number'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.complement'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.neighborhood'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.city'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.state'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.postal_code'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.website'), with: ''
-        fill_in I18n.t('activerecord.attributes.company.founded'), with: ''
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
         click_on I18n.t('views.companies.edit_submit')
+
+        within('form') do
+            click_on I18n.t('views.companies.edit_submit')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.blank'), count: 3) 
@@ -40,37 +148,64 @@ feature('Admin edit company') do
 
     scenario('cnpj must be unique') do
         # Arrange
-        Company.create!(
-            name: 'Rails Brasil',
-            cnpj: '2233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010',
-        )
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010',
+        other_company = Company.create!(
+            name: 'MoemaSoft',
+            cnpj: '815.916.474/1594-96',
+            address: 'Rua São Sebastiao',
+            number: '8',
+            complement: 'Park',
+            city: 'Caxias',
+            state: 'Alagoas',
+            postal_code: '56170',
+            website: 'www.moemasoft.com',
+            founded:'1983',
         )
 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+
         # Act
-        visit edit_company_path(company)
-        fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '2233456'
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
         click_on I18n.t('views.companies.edit_submit')
+        
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '815.916.474/1594-96'
+            click_on I18n.t('views.companies.edit_submit')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('errors.messages.taken')) 
@@ -78,24 +213,64 @@ feature('Admin edit company') do
 
     scenario('update with success') do
         # Arrange
-        company = Company.create!(
-            name: 'Campus Code',
-            cnpj: '1233456',
-            address: 'My address',
-            number: '1234',
-            complement: 'BLC B',
-            neighborhood: 'Paulista',
-            city: 'São Paulo',
-            state: 'SP',
-            postal_code: '11345-345',
-            website: 'www.campuscode.com',
-            founded:  '2010', 
+        other_company = Company.create!(
+            name: 'MoemaSoft',
+            cnpj: '815.916.474/1594-96',
+            address: 'Rua São Sebastiao',
+            number: '8',
+            complement: 'Park',
+            city: 'Caxias',
+            state: 'Alagoas',
+            postal_code: '56170',
+            website: 'www.moemasoft.com',
+            founded:'1983',
         )
 
+        user = User.create!(
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird755'
+        )
+
+        Profile.create!(
+            name: 'Graciliana Novaes',
+            cpf: '388.586.242-26',
+            address: 'Rua Quatro',
+            number: '8229',
+            complement: '-', 
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '75674',
+            role: 'admin',
+            user: user
+        )
+
+        company = Company.create!(
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
+        )
+
+        login_as user
+        
         # Act
-        visit edit_company_path(company)
-        fill_in I18n.t('activerecord.attributes.company.website'), with: 'https://www.campuscode.com'
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.companies.mine')
+        end
         click_on I18n.t('views.companies.edit_submit')
+        
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.company.founded'), with: '2010'
+            click_on I18n.t('views.companies.edit_submit')
+        end
 
         # Assert
         expect(current_path).to eq(company_path(company))

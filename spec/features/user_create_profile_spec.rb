@@ -1,13 +1,21 @@
 require 'rails_helper'
 
-# TODO: Implement access from home page
 feature('User create a profile') do
 
     scenario('see page\'s title') do
         # Arrange
 
         # Act
-        visit new_profile_path
+        visit root_path
+        within('nav') do
+            click_on I18n.t('views.home.sign_up')
+        end
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
+            click_on I18n.t('views.home.sign_up')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('views.profiles.new_title'))
@@ -17,7 +25,16 @@ feature('User create a profile') do
         # Arrange
 
         # Act
-        visit new_profile_path
+        visit root_path
+        within('nav') do
+            click_on I18n.t('views.home.sign_up')
+        end
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
+            click_on I18n.t('views.home.sign_up')
+        end
 
         # Assert
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.name')) 
@@ -34,25 +51,21 @@ feature('User create a profile') do
 
     scenario('some are required') do
         # Arrange
-        user = User.create!(
-            email: 'user@campuscode.com',
-            password: 'user123'
-        )
-
-        login_as user
 
         # Act
-        visit new_profile_path
+        visit root_path
+        within('nav') do
+            click_on I18n.t('views.home.sign_up')
+        end
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
+            click_on I18n.t('views.home.sign_up')
+        end
+
         fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
         fill_in I18n.t('activerecord.attributes.profile.cpf'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.bio'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.address'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.number'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.complement'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.neighborhood'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.city'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.state'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.postal_code'), with: ''
         click_on I18n.t('views.profiles.new_submit')
 
         # Assert
@@ -61,35 +74,38 @@ feature('User create a profile') do
 
     scenario('cpf must be unique') do
         # Arrange
-        user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+        registered_user = User.create!(
+            email: 'miria.dasneves@cdev.com',
+            password: 'smallwolf333'
         )
 
         Profile.create!(
-            name: 'John Smith',
-            cpf: '12345678910',
-            bio: 'John Smith rocks',
-            address: 'Avenue Saint Joseph',
-            number: '123',
-            complement: '',
-            neighborhood: 'Amazing Landscape',
-            city: 'Neverland',
-            state: 'SP',
-            postal_code: '1233345',
-            user: user,
+            name: 'Miriã das Neves',
+            cpf: '788.163.279-21',
+            address: 'Rua Tiradentes',
+            number: '7654',
+            complement: 'Fundos', 
+            city: 'Toledo',
+            state: 'Maranhão', 
+            postal_code: '27244',
+            role: 'business',
+            user: registered_user
         )
-
-        new_user = User.create!(
-            email: 'user@campuscode.com',
-            password: 'user123'
-        )
-
-        login_as new_user
 
         # Act
-        visit new_profile_path
-        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '12345678910'
+        visit root_path
+        within('nav') do
+            click_on I18n.t('views.home.sign_up')
+        end
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
+            click_on I18n.t('views.home.sign_up')
+        end
+
+        fill_in I18n.t('activerecord.attributes.profile.name'), with: 'Graciliana Novaes'
+        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '788.163.279-21'
         click_on I18n.t('views.profiles.new_submit')
 
         # Assert
@@ -98,30 +114,33 @@ feature('User create a profile') do
 
     scenario('create with success') do
         # Arrange
-        user = User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
-        )
-        login_as user
 
         # Act
-        visit new_profile_path
-        fill_in I18n.t('activerecord.attributes.profile.name'), with: 'John Smith'
-        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '12345678910'
-        fill_in I18n.t('activerecord.attributes.profile.bio'), with: 'John Smith rocks'
-        fill_in I18n.t('activerecord.attributes.profile.address'), with: 'Avenue Saint Joseph'
-        fill_in I18n.t('activerecord.attributes.profile.number'), with: '123'
+        visit root_path
+        within('nav') do
+            click_on I18n.t('views.home.sign_up')
+        end
+        within('form') do
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
+            click_on I18n.t('views.home.sign_up')
+        end
+        
+        fill_in I18n.t('activerecord.attributes.profile.name'), with: 'Graciliana Novaes'
+        fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '388.586.242-26'
+        fill_in I18n.t('activerecord.attributes.profile.bio'), with: ''
+        fill_in I18n.t('activerecord.attributes.profile.address'), with: 'Rua Quatro'
+        fill_in I18n.t('activerecord.attributes.profile.number'), with: '8229'
         fill_in I18n.t('activerecord.attributes.profile.complement'), with: ''
-        fill_in I18n.t('activerecord.attributes.profile.neighborhood'), with: 'Amazing Landscape'
-        fill_in I18n.t('activerecord.attributes.profile.city'), with: 'Neverland'
-        fill_in I18n.t('activerecord.attributes.profile.state'), with: 'SP'
-        fill_in I18n.t('activerecord.attributes.profile.postal_code'), with: '1233345'
+        fill_in I18n.t('activerecord.attributes.profile.neighborhood'), with: ''
+        fill_in I18n.t('activerecord.attributes.profile.city'), with: 'Resende'
+        fill_in I18n.t('activerecord.attributes.profile.state'), with: 'Roraima'
+        fill_in I18n.t('activerecord.attributes.profile.postal_code'), with: '75674'
         click_on I18n.t('views.profiles.new_submit')
 
-        profile = Profile.last
-
         # Assert
-        expect(current_path).to eq(root_path)
+        expect(current_path).not_to eq(new_user_registration_path)
     end
 
 end

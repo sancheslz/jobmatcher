@@ -14,7 +14,7 @@ feature('New user can register') do
         end
     end
 
-    scenario('see the form') do
+    scenario('is redirect to the right path') do
         # Arrange
 
         # Act
@@ -52,8 +52,8 @@ feature('New user can register') do
             click_on I18n.t('views.home.sign_up')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '123'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brown'
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -70,8 +70,9 @@ feature('New user can register') do
             click_on I18n.t('views.home.sign_up')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '123456'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'vrownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -82,8 +83,8 @@ feature('New user can register') do
     scenario('email must be unique') do
         # Arrange
         User.create!(
-            email: 'user@gmail.com',
-            password: '123456'
+            email: 'graciliana.novaes@cdev.com',
+            password: 'brownbird655'
         )
 
         # Act
@@ -92,8 +93,9 @@ feature('New user can register') do
             click_on I18n.t('views.home.sign_up')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '654321'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -110,9 +112,9 @@ feature('New user can register') do
             click_on I18n.t('views.home.sign_up')
         end
         within('form') do
-            fill_in I18n.t('activerecord.attributes.user.email'), with: 'user@gmail.com'
-            fill_in I18n.t('activerecord.attributes.user.password'), with: '654321'
-            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: '654321'
+            fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
+            fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
+            fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
             click_on I18n.t('views.home.sign_up')
         end
 

@@ -5,17 +5,29 @@ feature('Visitor see details from home page') do
     scenario('have company access link') do
         # Arrange
         company = Company.create!(
-            name: 'Campus Code',
-            website: 'www.campuscode.com.br',
-            cnpj: '1234'
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
 
         opportunity = Opportunity.create!(
-            title: 'Desenvolvedor Rails',
-            description: 'Criar fantásticas aplicações web',
-            requirement: 'Conhecimento em Rails e React',
-            expiration_date: 10.days.from_now.strftime('%d/%m/%Y'),
-            company: company.reload
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
         )
 
         # Act
@@ -31,17 +43,29 @@ feature('Visitor see details from home page') do
     scenario('access company details') do
         # Arrange
         company = Company.create!(
-            name: 'Campus Code',
-            website: 'www.campuscode.com.br',
-            cnpj: '1234'
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
 
         opportunity = Opportunity.create!(
-            title: 'Desenvolvedor Rails',
-            description: 'Criar fantásticas aplicações web',
-            requirement: 'Conhecimento em Rails e React',
-            expiration_date: 10.days.from_now.strftime('%d/%m/%Y'),
-            company: company.reload
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
         )
 
         # Act
@@ -58,17 +82,29 @@ feature('Visitor see details from home page') do
     scenario('have opportunity access link') do
         # Arrange
         company = Company.create!(
-            name: 'Campus Code',
-            website: 'www.campuscode.com.br',
-            cnpj: '1234'
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
 
         opportunity = Opportunity.create!(
-            title: 'Desenvolvedor Rails',
-            description: 'Criar fantásticas aplicações web',
-            requirement: 'Conhecimento em Rails e React',
-            expiration_date: 10.days.from_now.strftime('%d/%m/%Y'),
-            company: company.reload
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
         )
 
         # Act
@@ -84,17 +120,29 @@ feature('Visitor see details from home page') do
     scenario('access company details') do
         # Arrange
         company = Company.create!(
-            name: 'Campus Code',
-            website: 'www.campuscode.com.br',
-            cnpj: '1234'
+            name: 'Continuous Development',
+            cnpj: '832.538.794/9328-87',
+            address: 'Rio Grande do Sul',
+            number: '347',
+            complement: 'Center',
+            city: 'Resende',
+            state: 'Roraima', 
+            postal_code: '85390',
+            website: 'www.cdev.com',
+            founded:'2009',
         )
 
         opportunity = Opportunity.create!(
-            title: 'Desenvolvedor Rails',
-            description: 'Criar fantásticas aplicações web',
-            requirement: 'Conhecimento em Rails e React',
-            expiration_date: 10.days.from_now.strftime('%d/%m/%Y'),
-            company: company.reload
+            title: "Desenvolvedor(a) Front End",
+            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 8000,
+            remote: true,
+            level: :mid,
+            company: company,
+            is_visible: true,
         )
 
         # Act
