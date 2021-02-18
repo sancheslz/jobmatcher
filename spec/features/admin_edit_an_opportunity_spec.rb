@@ -48,6 +48,8 @@ feature('Admin edit an opportunity') do
             is_visible: true,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -109,6 +111,8 @@ feature('Admin edit an opportunity') do
             is_visible: true,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -119,7 +123,7 @@ feature('Admin edit an opportunity') do
         end
         
         within("div#opportunity_#{opportunity.reload.id}") do
-            expect(page).to have_link(I18n.t('views.main.edit'))
+            click_on I18n.t('views.main.edit')
         end
 
         # Assert
@@ -172,6 +176,8 @@ feature('Admin edit an opportunity') do
             is_visible: true,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -182,7 +188,7 @@ feature('Admin edit an opportunity') do
         end
         
         within("div#opportunity_#{opportunity.reload.id}") do
-            expect(page).to have_link(I18n.t('views.main.edit'))
+            click_on I18n.t('views.main.edit')
         end
 
         fill_in I18n.t('activerecord.attributes.opportunity.title'), with: ''
@@ -240,6 +246,8 @@ feature('Admin edit an opportunity') do
             is_visible: true,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -250,7 +258,7 @@ feature('Admin edit an opportunity') do
         end
         
         within("div#opportunity_#{opportunity.reload.id}") do
-            expect(page).to have_link(I18n.t('views.main.edit'))
+            click_on I18n.t('views.main.edit')
         end
 
         fill_in I18n.t('activerecord.attributes.opportunity.title'), with: 'Desenvolvedor React'

@@ -48,6 +48,8 @@ feature('Admin hide a job opportunity') do
             is_visible: true,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user 
 
         # Act
@@ -130,9 +132,11 @@ feature('Admin hide a job opportunity') do
             salary: 2000,
             remote: false,
             level: :entry,
-            company: company_2,
+            company: other_company,
             is_visible: true,
         )
+
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user 
 
@@ -207,6 +211,8 @@ feature('Admin hide a job opportunity') do
             is_visible: false,
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user 
 
         # Act
@@ -266,6 +272,8 @@ feature('Admin hide a job opportunity') do
             company: company,
             is_visible: true,
         )
+
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user 
 
@@ -327,6 +335,8 @@ feature('Admin hide a job opportunity') do
             company: company,
             is_visible: true,
         )
+
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user 
 

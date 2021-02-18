@@ -17,7 +17,7 @@ class OpportunitiesController < ApplicationController
     
     def create
         @opportunity = Opportunity.new(allowed_params)
-        @opportunity.company = curent_user.profile.company
+        @opportunity.company = current_user.profile.company.first
         if @opportunity.save 
             redirect_to @opportunity
         else

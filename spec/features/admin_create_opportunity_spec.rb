@@ -38,6 +38,8 @@ feature('Admin create opportunity') do
         technology_1 = Technology.create!( name: 'JavaScript' )
         technology_2 = Technology.create!( name: 'TypeScript' )
 
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user
 
         # Act
@@ -84,6 +86,8 @@ feature('Admin create opportunity') do
 
         technology_1 = Technology.create!( name: 'JavaScript' )
         technology_2 = Technology.create!( name: 'TypeScript' )
+
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -132,6 +136,8 @@ feature('Admin create opportunity') do
 
         technology_1 = Technology.create!( name: 'JavaScript' )
         technology_2 = Technology.create!( name: 'TypeScript' )
+
+        CompanyProfile.create!( profile: profile, company: company )
 
         login_as user
 
@@ -188,6 +194,8 @@ feature('Admin create opportunity') do
         technology_1 = Technology.create!( name: 'JavaScript' )
         technology_2 = Technology.create!( name: 'TypeScript' )
 
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user
 
         # Act
@@ -242,6 +250,8 @@ feature('Admin create opportunity') do
         technology_1 = Technology.create!( name: 'JavaScript' )
         technology_2 = Technology.create!( name: 'TypeScript' )
 
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user
 
         # Act
@@ -259,8 +269,8 @@ feature('Admin create opportunity') do
         fill_in I18n.t('activerecord.attributes.opportunity.salary'), with: '8000,00'
         select I18n.t('views.opportunities.level_entry'), from: I18n.t('activerecord.attributes.opportunity.level')
         select I18n.t('views.opportunities.remote_yes'), from: I18n.t('activerecord.attributes.opportunity.remote')
-        check technology_1
-        check technology_2
+        check technology_1.name
+        check technology_2.name
         click_on I18n.t('views.opportunities.new_submit')
 
         # Assert

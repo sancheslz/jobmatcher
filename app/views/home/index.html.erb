@@ -7,7 +7,7 @@
     </div>
     <% if user_signed_in? && !current_user.profile.is_regular?%>
         <div class="text-center mt-3">
-            <%= link_to t('views.opportunities.new_title'), nil, class: 'btn btn-lg btn-outline-primary' %>
+            <%= link_to t('views.opportunities.new_title'), new_opportunity_path, class: 'btn btn-lg btn-outline-primary' %>
         </div>
     <% end %>
 </div>

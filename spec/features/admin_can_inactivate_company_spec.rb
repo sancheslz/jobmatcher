@@ -8,7 +8,7 @@ feature('Admin can inactivate a company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -34,8 +34,12 @@ feature('Admin can inactivate a company') do
             founded:'2009',
         )
 
-        # Act
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user
+        
+        # Act
+        visit root_path
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
@@ -52,7 +56,7 @@ feature('Admin can inactivate a company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -78,13 +82,17 @@ feature('Admin can inactivate a company') do
             founded:'2009',
         )
 
-        # Act
+        CompanyProfile.create!( profile: profile, company: company )
+
         login_as user
+
+        # Act
+        visit root_path
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
-            click_on I18n.t('views.companies.inactivate')
         end
+        click_on I18n.t('views.companies.inactivate')
 
         # Assert
         expect(page).to have_content(I18n.t('views.companies.inactive_message'))
@@ -97,7 +105,7 @@ feature('Admin can inactivate a company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -123,13 +131,17 @@ feature('Admin can inactivate a company') do
             founded:'2009',
         )
 
-        # Act
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
+
+        # Act
+        visit root_path
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
-            click_on I18n.t('views.companies.inactivate')
         end
+        click_on I18n.t('views.companies.inactivate')
 
         # Assert
         expect(page).to have_link(I18n.t('views.companies.reactivate'))
@@ -142,7 +154,7 @@ feature('Admin can inactivate a company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -168,14 +180,18 @@ feature('Admin can inactivate a company') do
             founded:'2009',
         )
 
-        # Act
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
+
+        # Act
+        visit root_path
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
-            click_on I18n.t('views.companies.inactivate')
-            click_on I18n.t('views.companies.reactive')
         end
+        click_on I18n.t('views.companies.inactivate')
+        click_on I18n.t('views.companies.reactivate')
 
         # Assert
         expect(page).not_to have_link(I18n.t('views.companies.inactive_message'))
@@ -188,7 +204,7 @@ feature('Admin can inactivate a company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -214,13 +230,17 @@ feature('Admin can inactivate a company') do
             founded:'2009',
         )
 
-        # Act
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
+
+        # Act
+        visit root_path
         within('nav') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
-            click_on I18n.t('views.companies.inactivate')
         end
+        click_on I18n.t('views.companies.inactivate')
 
         # Assert
         expect(page).not_to have_link(I18n.t('views.main.edit'))
