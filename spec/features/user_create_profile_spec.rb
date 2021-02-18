@@ -34,6 +34,12 @@ feature('User create a profile') do
 
     scenario('some are required') do
         # Arrange
+        user = User.create!(
+            email: 'user@campuscode.com',
+            password: 'user123'
+        )
+
+        login_as user
 
         # Act
         visit new_profile_path
@@ -74,6 +80,13 @@ feature('User create a profile') do
             user: user,
         )
 
+        new_user = User.create!(
+            email: 'user@campuscode.com',
+            password: 'user123'
+        )
+
+        login_as new_user
+
         # Act
         visit new_profile_path
         fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '12345678910'
@@ -108,7 +121,7 @@ feature('User create a profile') do
         profile = Profile.last
 
         # Assert
-        expect(current_path).to eq(profile_path(profile))
+        expect(current_path).to eq(root_path)
     end
 
 end
