@@ -27,6 +27,7 @@ pt-BR:
       inactive_message: Inativada
       active_opportunities: Oportunidades Abertas
     profiles:
+      mine: Meu Perfil
       new_title: Cadastrar Perfil
       new_submit: Cadastrar Perfil
       edit_submit: Atualizar Perfil

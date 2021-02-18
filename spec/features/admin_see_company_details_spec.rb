@@ -10,7 +10,7 @@ feature('Admin see company details') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -36,6 +36,8 @@ feature('Admin see company details') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -55,7 +57,7 @@ feature('Admin see company details') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -81,6 +83,8 @@ feature('Admin see company details') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -101,7 +105,7 @@ feature('Admin see company details') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -120,6 +124,7 @@ feature('Admin see company details') do
             address: 'Rio Grande do Sul',
             number: '347',
             complement: 'Center',
+            neighborhood: '',
             city: 'Resende',
             state: 'Roraima', 
             postal_code: '85390',
@@ -127,6 +132,8 @@ feature('Admin see company details') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act

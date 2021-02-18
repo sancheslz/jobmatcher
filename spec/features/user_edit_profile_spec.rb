@@ -31,7 +31,41 @@ feature('User edit profile') do
         end
         
         # Assert
-        expect(page).to have_link(I18n.t('views.profiles.edit_submit')) 
+        expect(page).to have_link(I18n.t('views.profiles.mine')) 
+    end
+
+    scenario('see the form') do
+        # Arrange
+        user = User.create!(
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
+        )
+
+        profile = Profile.create!(
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
+            user: user
+        )
+
+        login_as user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.profiles.mine')
+        end
+        click_on I18n.t('views.main.edit')
+        
+        # Assert
+        expect(current_path).to eq(edit_profile_path(profile.reload))
     end
 
     scenario('some fields are required') do
@@ -60,8 +94,9 @@ feature('User edit profile') do
         visit root_path
         within('nav') do
             click_on 'Menu'
-            click_on I18n.t('views.profiles.edit_submit')
+            click_on I18n.t('views.profiles.mine')
         end
+        click_on I18n.t('views.main.edit')
         
         within('form') do
             fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
@@ -116,8 +151,9 @@ feature('User edit profile') do
         visit root_path
         within('nav') do
             click_on 'Menu'
-            click_on I18n.t('views.profiles.edit_submit')
+            click_on I18n.t('views.profiles.mine')
         end
+        click_on I18n.t('views.main.edit')
         
         within('form') do
             fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '388.586.242-26'
@@ -154,8 +190,9 @@ feature('User edit profile') do
         visit root_path
         within('nav') do
             click_on 'Menu'
-            click_on I18n.t('views.profiles.edit_submit')
+            click_on I18n.t('views.profiles.mine')
         end
+        click_on I18n.t('views.main.edit')
         
         within('form') do
             fill_in I18n.t('activerecord.attributes.profile.number'), with: '7971B'

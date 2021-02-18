@@ -29,14 +29,17 @@
 
         <% if user_signed_in? %>
 
-          <% if !current_user.profile.nil? %>
+          <% if !current_user.profile.nil? && !current_user.profile.role.nil? %>
             <div class="btn-group">
               <button type="button" style="min-width: 8rem" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menu
               </button>
               <div class="dropdown-menu">
-                <%= link_to t('views.companies.mine'), company_path(current_user.profile.company.first), { class: 'dropdown-item' } %>
-                <%= link_to t('views.technologies.title'), technologies_path, { class: 'dropdown-item' } %>
+                <%= link_to t('views.profiles.mine'), profile_path(current_user), { class: 'dropdown-item' } %>
+                <% if current_user.profile.role != 'regular' && !current_user.profile.company.first.nil? %>
+                  <%= link_to t('views.companies.mine'), current_user.profile.company.first , { class: 'dropdown-item' } %>
+                  <%= link_to t('views.technologies.title'), technologies_path, { class: 'dropdown-item' } %>
+                <% end %>
                 <div class="dropdown-divider"></div>
                 <%= link_to t('views.home.logout'), destroy_user_session_path, { class: 'dropdown-item', method: :delete } %>
               </div>
@@ -52,7 +55,7 @@
 
       </div>
     </nav>
-    
+
     <div class="container mt-4 mb-4">
       <%= yield %>
     </div>

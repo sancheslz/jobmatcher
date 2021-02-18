@@ -9,7 +9,7 @@ feature('Admin edit company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -35,6 +35,8 @@ feature('Admin edit company') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -45,7 +47,7 @@ feature('Admin edit company') do
         end
 
         # Assert
-        expect(page).to have_link(I18n.t('views.companies.edit_submit'))
+        expect(page).to have_link(I18n.t('views.main.edit'))
     end
 
     scenario('access the edit form') do
@@ -55,7 +57,7 @@ feature('Admin edit company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -81,6 +83,8 @@ feature('Admin edit company') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
         
         # Act
@@ -89,10 +93,10 @@ feature('Admin edit company') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
         end
-        click_on I18n.t('views.companies.edit_submit')
+        click_on I18n.t('views.main.edit')
 
         # Assert
-        expect(current_path).to eq(edit_company_path)
+        expect(current_path).to eq(edit_company_path(company))
     end
 
     scenario('some fields are required') do
@@ -102,7 +106,7 @@ feature('Admin edit company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -128,6 +132,8 @@ feature('Admin edit company') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -136,9 +142,12 @@ feature('Admin edit company') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
         end
-        click_on I18n.t('views.companies.edit_submit')
+        click_on I18n.t('views.main.edit')
 
         within('form') do
+            fill_in I18n.t('activerecord.attributes.company.name'), with: ''
+            fill_in I18n.t('activerecord.attributes.company.cnpj'), with: ''
+            fill_in I18n.t('activerecord.attributes.company.website'), with: ''
             click_on I18n.t('views.companies.edit_submit')
         end
 
@@ -166,7 +175,7 @@ feature('Admin edit company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -192,6 +201,8 @@ feature('Admin edit company') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
 
         # Act
@@ -200,7 +211,7 @@ feature('Admin edit company') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
         end
-        click_on I18n.t('views.companies.edit_submit')
+        click_on I18n.t('views.main.edit')
         
         within('form') do
             fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '815.916.474/1594-96'
@@ -231,7 +242,7 @@ feature('Admin edit company') do
             password: 'brownbird755'
         )
 
-        Profile.create!(
+        profile = Profile.create!(
             name: 'Graciliana Novaes',
             cpf: '388.586.242-26',
             address: 'Rua Quatro',
@@ -257,6 +268,8 @@ feature('Admin edit company') do
             founded:'2009',
         )
 
+        CompanyProfile.create!( profile: profile, company: company )
+        
         login_as user
         
         # Act
@@ -265,7 +278,7 @@ feature('Admin edit company') do
             click_on 'Menu'
             click_on I18n.t('views.companies.mine')
         end
-        click_on I18n.t('views.companies.edit_submit')
+        click_on I18n.t('views.main.edit')
         
         within('form') do
             fill_in I18n.t('activerecord.attributes.company.founded'), with: '2010'
