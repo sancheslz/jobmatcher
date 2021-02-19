@@ -66,6 +66,7 @@ feature('Admin create a new company') do
             expect(page).to have_content(I18n.t('activerecord.attributes.company.postal_code')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.website')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.founded')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.logo')) 
         end
     end
     
@@ -170,6 +171,7 @@ feature('Admin create a new company') do
         fill_in I18n.t('activerecord.attributes.company.name'), with: 'Continuous Development'
         fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '832.538.794/9328-87'
         fill_in I18n.t('activerecord.attributes.company.website'), with: 'www.cdev.com'
+        attach_file I18n.t('activerecord.attributes.company.logo'), Rails.root.join('spec', 'support', 'cd_logo.png')
         click_on I18n.t('views.companies.new_submit')
 
         # Assert

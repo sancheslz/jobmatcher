@@ -131,6 +131,7 @@ feature('Admin see company details') do
             website: 'www.cdev.com',
             founded:'2009',
         )
+        company.logo.attach(io: File.open(Rails.root.join( 'spec', 'support', 'cd_logo.png')), filename: "cd_logo.png")
 
         CompanyProfile.create!( profile: profile, company: company )
         
@@ -155,6 +156,7 @@ feature('Admin see company details') do
         expect(page).to have_content(company.postal_code)
         expect(page).to have_content(company.website)
         expect(page).to have_content(company.founded)
+        expect(page).to have_css('img[@src*="cd_logo.png"]')
     end
 
 end
