@@ -427,3 +427,21 @@ TechnologyOpportunity.create!(
     technology: technology_9,
     opportunity: opportunity_8
 )
+
+submissison_01 = Submission.create!(
+    profile: profile_1,
+    opportunity: opportunity_1,
+    wage_claim: 7900,
+    note: '',
+    presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+    status: :removed
+)
+
+submissison_02 = Submission.create!(
+    profile: profile_1,
+    opportunity: opportunity_2,
+    wage_claim: 2500,
+    note: '',
+    presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+    status: :applied
+)
