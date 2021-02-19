@@ -30,6 +30,7 @@ gem 'devise'
 gem 'bootsnap', '>= 1.4.2', require: false
 group :test do
   gem 'capybara'
+  gem 'simplecov'
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
