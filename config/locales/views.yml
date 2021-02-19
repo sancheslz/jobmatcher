@@ -3,6 +3,8 @@ pt-BR:
   views:
     main:
       edit: Editar
+      confirm: Confirmar
+      cancel: Cancelar
     forms:
       warning: 'Por favor, verifique os erros abaixo'
     home:
@@ -54,5 +56,7 @@ pt-BR:
     submissions:
       remote: Remoto
       apply: Candidatar
+      unapply: Remover Candidatura
       title: Meus Dados
       applied: Você se candidatou para essa vaga
+      warning: Você está prestes a excluir sua candidatura a esta vaga. Deseja continuar?
