@@ -51,6 +51,8 @@ pt-BR:
       level_mid: Pleno
       level_senior: Sênior
       hide: Ocultar
-    applications:
+    submissions:
+      remote: Remoto
       apply: Candidatar
+      title: Meus Dados
       applied: Você se candidatou a essa vaga

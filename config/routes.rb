@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :opportunities, only: %i[show new create edit update] do
     get 'change_visibility', on: :member
   end
+
+  resources :submissions, only: %i[new create]
 end
