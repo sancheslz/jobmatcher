@@ -28,6 +28,7 @@
                         <div class="badge badge-success p-1">
                             <i class="fas fa-check-circle"></i> <%= t('views.submissions.applied') %>
                         </div>
+
                     <% end %>
                     <div class="text">
                     <%= opportunity.description %>
@@ -38,14 +39,21 @@
                     <% end %>
                     </div>
 
-
                 </div>
 
                 <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
                         <i class="fas fa-plus"></i> <%= t('views.home.more') %>
                 <% end %>
-                <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
-                        <i class="fas fa-plus"></i> <%= t('views.submissions.apply') %>
+                <% if user_signed_in? && opportunity.applied?(current_user) %>
+                    <% if opportunity.get_status(current_user).status == 'applied' %>
+                        <%= link_to remove_submission_path(opportunity.get_submission(current_user)), :class => 'btn btn-sm btn-outline-danger' do %>
+                                <i class="fas fa-times-circle"></i> <%= t('views.submissions.unapply') %>
+                        <% end %>
+                    <% end %>
+                <% else %>
+                    <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
+                            <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
+                    <% end %>
                 <% end %>
             </div>
         </div>
