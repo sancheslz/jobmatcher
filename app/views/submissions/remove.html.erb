@@ -1,0 +1,9 @@
+<div class="alert alert-danger">
+    <%= t('views.submissions.warning') %>
+    <div class="mt-5 mb-5">
+        <div class="lead"><strong><%= @submission.opportunity.title %></strong></div>
+        <div><%= t('activerecord.models.company.one') %>: <%= @submission.opportunity.company.name %></div>
+    </div>
+</div>
+
+<%= link_to  t('views.main.confirm'), submission_path(@submission), method: :delete, class: 'btn btn-danger' %>

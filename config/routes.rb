@@ -15,5 +15,8 @@ Rails.application.routes.draw do
     get 'change_visibility', on: :member
   end
 
-  resources :submissions, only: %i[new create]
+  resources :submissions, only: %i[new create destroy] do 
+    get 'remove', on: :member
+  end
+  
 end

@@ -18,10 +18,24 @@ class Opportunity < ApplicationRecord
     end
 
     def applied?(current_user)
-        !Submission.where(
+        !!Submission.find_by(
             opportunity: self,
             profile: current_user.profile
-        ).blank?
+        )
+    end
+
+    def get_submission(current_user)
+        Submission.find_by(
+            opportunity: self,
+            profile: current_user.profile
+        )
+    end
+
+    def get_status(current_user)
+        Submission.find_by(
+            opportunity: self,
+            profile: current_user.profile
+        )
     end
 
     private 

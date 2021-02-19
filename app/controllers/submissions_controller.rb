@@ -20,6 +20,17 @@ class SubmissionsController < ApplicationController
         end
     end
 
+    def remove 
+        @submission = Submission.find(params[:id])
+    end
+
+    def destroy
+        @submission = Submission.find(params[:id])
+        @submission.status = :removed
+        @submission.save
+        redirect_to root_path
+    end
+
     private
     def allowed_params 
         params.require(:submission).permit(
