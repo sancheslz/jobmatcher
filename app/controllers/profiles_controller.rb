@@ -46,6 +46,7 @@ class ProfilesController < ApplicationController
             :city,
             :state,
             :postal_code,
+            :photo,
         )
     end
 end

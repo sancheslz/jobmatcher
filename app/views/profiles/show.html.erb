@@ -1,8 +1,19 @@
-<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.companies.detail_title')%></h2>
+<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.profiles.mine')%></h2>
 <div class="row mb-3">
     <div class="h3"><%= @profile.name %></div> 
 </div>
 
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.profile.photo') %></div>
+    </div>
+    <div class="col-10">
+        <% if @profile.photo.attached? %>
+            <%= image_tag(@profile.photo, size: '100x100') %>
+        <% end %>
+    </div>
+</div>
 
 <div class="row mb-1 border-bottom pb-2">
     <div class="col-2">

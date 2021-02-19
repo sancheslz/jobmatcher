@@ -28,6 +28,7 @@ pt-BR:
         city: Cidade
         state: Estado
         postal_code: 'CEP'
+        photo: Foto
       technology:
         name: Nome
       opportunity:

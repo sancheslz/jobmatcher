@@ -4,6 +4,7 @@ class Profile < ApplicationRecord
     belongs_to :user
     has_many :company_profiles
     has_many :company, through: :company_profiles
+    has_one_attached :photo
     
     enum role: { regular: 10, business: 20, admin: 30 }
     

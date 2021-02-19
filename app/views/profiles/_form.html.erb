@@ -61,6 +61,13 @@
         <div class="text-danger"><%= @profile.errors[:postal_code].join(' | ') %></div>
     </div>
 </div>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :photo  %>
+        <%= f.file_field :photo , { class: 'form-control' } %>
+        <div class="text-danger"><%= @profile.errors[:photo].join(' | ') %></div>
+    </div>
+</div>
 
 
 
