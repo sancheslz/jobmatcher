@@ -47,6 +47,7 @@ feature('User create a profile') do
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.city')) 
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.state')) 
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.postal_code')) 
+        expect(page).to have_content(I18n.t('activerecord.attributes.profile.photo')) 
     end
 
     scenario('some are required') do
@@ -137,6 +138,7 @@ feature('User create a profile') do
         fill_in I18n.t('activerecord.attributes.profile.city'), with: 'Resende'
         fill_in I18n.t('activerecord.attributes.profile.state'), with: 'Roraima'
         fill_in I18n.t('activerecord.attributes.profile.postal_code'), with: '75674'
+        attach_file I18n.t('activerecord.attributes.profile.photo'), Rails.root.join('spec', 'support', 'graciliana_novaes.jpg')
         click_on I18n.t('views.profiles.new_submit')
 
         # Assert

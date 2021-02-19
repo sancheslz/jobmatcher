@@ -164,6 +164,46 @@ feature('User edit profile') do
         expect(page).to have_content(I18n.t('errors.messages.taken'), count: 1)
     end
 
+    scenario('can set a photo') do
+        # Arrange
+        user = User.create!(
+            email: 'felismino.daconceicao@gmail.com',
+            password: 'yellowtiger502'
+        )
+
+        profile = Profile.create!(
+            name: 'Felismino da Conceição',
+            cpf: '175.113.263-01',
+            address: 'Rua Treze de Maio',
+            number: '7971',
+            complement: 'C12', 
+            city: 'Nossa Senhora do Socorro',
+            state: 'Espírito Santo', 
+            postal_code: '84373',
+            role: 'regular',
+            user: user
+        )
+
+        login_as user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.profiles.mine')
+        end
+        click_on I18n.t('views.main.edit')
+        
+        within('form') do
+            attach_file I18n.t('activerecord.attributes.profile.photo'), Rails.root.join('spec', 'support', 'felismino_conceicao.jpg')
+            click_on I18n.t('views.profiles.edit_submit')
+        end
+
+        # Assert
+        expect(current_path).to eq(profile_path(profile))
+        expect(page).to have_css('img[@src*="felismino_conceicao.jpg"]')
+    end
+
     scenario('with success') do
         # Arrange
         user = User.create!(
