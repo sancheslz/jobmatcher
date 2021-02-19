@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_131328) do
+ActiveRecord::Schema.define(version: 2021_02_19_182249) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +95,18 @@ ActiveRecord::Schema.define(version: 2021_02_19_131328) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "submissions", force: :cascade do |t|
+    t.text "presentation"
+    t.decimal "wage_claim"
+    t.text "note"
+    t.integer "opportunity_id", null: false
+    t.integer "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["opportunity_id"], name: "index_submissions_on_opportunity_id"
+    t.index ["profile_id"], name: "index_submissions_on_profile_id"
+  end
+
   create_table "technologies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -126,6 +138,8 @@ ActiveRecord::Schema.define(version: 2021_02_19_131328) do
   add_foreign_key "company_profiles", "profiles"
   add_foreign_key "opportunities", "companies"
   add_foreign_key "profiles", "users"
+  add_foreign_key "submissions", "opportunities"
+  add_foreign_key "submissions", "profiles"
   add_foreign_key "technology_opportunities", "opportunities"
   add_foreign_key "technology_opportunities", "technologies"
 end

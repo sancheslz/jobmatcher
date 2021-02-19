@@ -1,0 +1,74 @@
+<h2 class="h2 mb-3 mt-3"><%= t('views.home.title')%> | <%= t('views.submissions.apply')%></h2>
+
+<div class="row">
+    
+    <div class="col-5">
+        <div class="card border-secondary mt-3 mr-3">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <%= @submission.opportunity.title %>
+                </h5>
+                <h6 class="card-subtitle text-muted">
+                    <span><%= @submission.opportunity.company.name %></span> | 
+                    <% if @submission.opportunity.remote %>
+                        <span><%= t('views.submissions.remote') %></span>
+                    <% else %>
+                        <span><%= @submission.opportunity.company.city %><%= "/#{@submission.opportunity.company.state}" if @submission.opportunity.company.state %></span>
+                    <% end%>
+                </h6>
+                <p class="card-subtitle text-muted mt-1">
+                    <%= t('activerecord.attributes.opportunity.salary') %>
+                    <%= number_to_currency @submission.opportunity.salary %> | <%= t('activerecord.attributes.opportunity.level') %>: <%= t("views.opportunities.level_#{@submission.opportunity.level}") %>
+                </p>
+                <p class="card-subtitle text-muted mt-1">
+                    <%= t('activerecord.attributes.opportunity.position_quantity') %>
+                    <%= @submission.opportunity.position_quantity %>
+                </p>
+
+                <div>
+                    <span class="badge badge-sm badge-dark mt-2"><%= t('activerecord.attributes.opportunity.description') %></span>
+                    <p class="card-text">
+                        <%= @submission.opportunity.description %>
+                    </p>
+                </div>
+                <div>
+                    <span class="badge badge-sm badge-dark mt-2"><%= t('activerecord.attributes.opportunity.requirement') %></span>
+                    <p class="card-text">
+                        <%= @submission.opportunity.requirement %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-7">
+        <%= form_with(model: @submission, local: true, class: 'form-group') do |f| %>
+            <p class="text-center font-weight-bold"><h5><%= t('views.submissions.title') %></h5></p>
+            <%= f.hidden_field :opportunity, value: @submission.opportunity.id %>
+
+            <div>
+                <%= f.label      :presentation  %>
+                <%= f.text_area  :presentation , { class: 'form-control', rows: 5 } %>
+            </div>
+
+            <div class="text-danger"><%= @submission.errors[:presentation].join(' | ') %></div>
+            <div>
+                <%= f.label         :wage_claim  %>
+                <%= f.number_field  :wage_claim , { class: 'form-control', step: 0.01 } %>
+            </div>
+            <div class="text-danger"><%= @submission.errors[:wage_claim].join(' | ') %></div>
+            <div>
+                <%= f.label      :note  %>
+                <%= f.text_area  :note , { class: 'form-control', rows: 5 } %>
+            </div>
+            <div class="text-danger"><%= @submission.errors[:note].join(' | ') %></div>
+
+            <%= button_tag(:type => :submit, :class => "mt-3 btn btn-primary") do %>
+                <i class="fas fa-paper-plane"></i> <%= t('views.submissions.apply') %>
+            <% end %>
+        <% end %>
+    </div>
+
+    
+
+</div>

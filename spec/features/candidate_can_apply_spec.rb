@@ -67,7 +67,7 @@ feature('Candidate can apply to an opportunity') do
         # Assert
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            expect(page).to have_link(I18n.t('views.applications.apply'))
+            expect(page).to have_link(I18n.t('views.submissions.apply'))
         end
     end
 
@@ -98,11 +98,11 @@ feature('Candidate can apply to an opportunity') do
         
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
         
         # Assert
-        expect(current_path).to eq(new_application_path)
+        expect(current_path).to eq(new_submission_path)
     end
 
     scenario('see opportunity details') do
@@ -132,7 +132,7 @@ feature('Candidate can apply to an opportunity') do
 
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
         
         # Assert
@@ -140,10 +140,6 @@ feature('Candidate can apply to an opportunity') do
         expect(page).to have_content(@opportunity.description)
         expect(page).to have_content(@opportunity.requirement)
         expect(page).to have_content(@opportunity.position_quantity)
-        expect(page).to have_content(@opportunity.expiration_date)
-        expect(page).to have_content(@opportunity.salary)
-        expect(page).to have_content(@opportunity.remote)
-        expect(page).to have_content(@opportunity.level)
         expect(page).to have_content(@opportunity.company.name)
     end
 
@@ -174,14 +170,14 @@ feature('Candidate can apply to an opportunity') do
 
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
 
         # Assert
         within('form') do
-            expect(page).to have_field(I18n.t('activerecord.attributes.applications.presentation')) 
-            expect(page).to have_field(I18n.t('activerecord.attributes.applications.wage_claim')) 
-            expect(page).to have_field(I18n.t('activerecord.attributes.applications.note')) 
+            expect(page).to have_field(I18n.t('activerecord.attributes.submission.presentation')) 
+            expect(page).to have_field(I18n.t('activerecord.attributes.submission.wage_claim')) 
+            expect(page).to have_field(I18n.t('activerecord.attributes.submission.note')) 
         end
     end
 
@@ -212,15 +208,15 @@ feature('Candidate can apply to an opportunity') do
 
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
         
         within('form') do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
 
         # Assert
-        expect(page).to have_field(I18n.t('errors.messages.blank'), count: 2)
+        expect(page).to have_content(I18n.t('errors.messages.blank'), count: 2)
     end
 
     scenario('create with success') do
@@ -250,18 +246,18 @@ feature('Candidate can apply to an opportunity') do
 
         @opportunity.reload
         within("div#opportunity_#{@opportunity.id}") do
-            click_on I18n.t('views.applications.apply')
+            click_on I18n.t('views.submissions.apply')
         end
         
         within('form') do
-            fill_in I18n.t('activerecord.attributes.applications.presentation'), with: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP}
-            fill_in I18n.t('activerecord.attributes.applications.wage_claim'), with: 7000
-            click_on I18n.t('views.applications.apply')
+            fill_in I18n.t('activerecord.attributes.submission.presentation'), with: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP}
+            fill_in I18n.t('activerecord.attributes.submission.wage_claim'), with: 7000
+            click_on I18n.t('views.submissions.apply')
         end
 
         # Assert
         expect(current_path).to eq(opportunity_path(@opportunity))
-        expect(page).to have_content(I18n.t('views.applications.applied'))
+        expect(page).to have_content(I18n.t('views.submissions.applied'))
     end
 
 end

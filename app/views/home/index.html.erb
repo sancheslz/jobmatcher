@@ -24,6 +24,11 @@
                 <% end %>
 
                 <div class="card-text mt-3 mb-3 text-wrap">
+                    <% if user_signed_in? && opportunity.applied?(current_user) %>
+                        <div class="badge badge-success p-1">
+                            <i class="fas fa-check-circle"></i> <%= t('views.submissions.applied') %>
+                        </div>
+                    <% end %>
                     <div class="text">
                     <%= opportunity.description %>
                     </div>
@@ -38,6 +43,9 @@
 
                 <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
                         <i class="fas fa-plus"></i> <%= t('views.home.more') %>
+                <% end %>
+                <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
+                        <i class="fas fa-plus"></i> <%= t('views.submissions.apply') %>
                 <% end %>
             </div>
         </div>
