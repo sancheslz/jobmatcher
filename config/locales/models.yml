@@ -17,6 +17,7 @@ pt-BR:
         postal_code: 'CEP'
         website: Website
         founded: Fundada em
+        logo: Logotipo
       profile:
         name: Nome
         cpf: CPF

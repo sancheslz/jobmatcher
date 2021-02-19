@@ -65,6 +65,7 @@ class CompaniesController < ApplicationController
             :postal_code,
             :website,
             :founded,
+            :logo
         )
     end
 end

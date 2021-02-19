@@ -3,6 +3,7 @@ class Company < ApplicationRecord
     validates :cnpj, uniqueness: true  
     has_many :company_profiles
     has_many :profiles, through: :company_profiles
+    has_one_attached :logo
 
     def change_state! 
         self.is_active = !self.is_active

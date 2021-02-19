@@ -10,6 +10,17 @@
 
 <div class="row mb-1 border-bottom pb-2">
     <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.company.logo') %></div>
+    </div>
+    <div class="col-10">
+    <% if @company.logo.attached? %>
+        <div><%= image_tag(@company.logo, size: '100x100') %></div>
+    <% end %>
+    </div>
+</div>
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
         <div class="badge badge-dark"><%= t('activerecord.attributes.company.cnpj') %></div>
     </div>
     <div class="col-10">
