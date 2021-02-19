@@ -41,3 +41,7 @@ pt-BR:
         salary: Salário
         level: Nível
         remote: Aceita Remoto?
+      applications:
+        presentation: Apresentação Pessoal
+        wage_claim: Pretensão Salarial
+        note: Obvervação

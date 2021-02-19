@@ -51,3 +51,6 @@ pt-BR:
       level_mid: Pleno
       level_senior: Sênior
       hide: Ocultar
+    applications:
+      apply: Candidatar
+      applied: Você se candidatou a essa vaga
