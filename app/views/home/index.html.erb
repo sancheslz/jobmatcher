@@ -15,7 +15,7 @@
 <% if @opportunities.any? %>
     <div class="d-flex flex-wrap justify-content-between">
         <% @opportunities.each do |opportunity| %>
-            <div class="card m-2 " style="min-width: 20rem; max-width: 47%" id='opportunity_<%= opportunity.id %>'>
+            <div class="card m-2 " style="width: 47%" id='opportunity_<%= opportunity.id %>'>
             <div class="card-body">
                 <h5 class="card-title"><%= opportunity.title %></h5>
 

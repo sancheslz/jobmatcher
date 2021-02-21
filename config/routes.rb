@@ -11,8 +11,10 @@ Rails.application.routes.draw do
 
   resources :technologies, only: %i[index new create edit update]
 
-  resources :opportunities, only: %i[show new create edit update] do
+  resources :opportunities, only: %i[index show new create edit update] do
     get 'change_visibility', on: :member
+    get 'application_list', on: :member
+    get 'application_detail', on: :member
   end
 
   resources :submissions, only: %i[new create destroy] do 

@@ -1,0 +1,9 @@
+<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.opportunities.mine')%></h2>
+<ul class="list-group">
+<% @opportunities.each do |opportunity| %>
+    <li class="list-group-item d-flex justify-content-between align-items-center" id="opportunity_<%= opportunity.id %>">
+        <%= link_to opportunity.title, application_list_opportunity_path(opportunity) %>
+        <span class="candidates badge badge-primary badge-pill"><%= opportunity.submissions.count %></span>
+    </li>
+<% end %>
+</ul>

@@ -38,6 +38,7 @@
                 <%= link_to t('views.profiles.mine'), profile_path(current_user), { class: 'dropdown-item' } %>
                 <% if current_user.profile.role != 'regular' && !current_user.profile.company.first.nil? %>
                   <%= link_to t('views.companies.mine'), current_user.profile.company.first , { class: 'dropdown-item' } %>
+                  <%= link_to t('views.opportunities.mine'), opportunities_path , { class: 'dropdown-item' } %>
                   <%= link_to t('views.technologies.title'), technologies_path, { class: 'dropdown-item' } %>
                 <% end %>
                 <div class="dropdown-divider"></div>

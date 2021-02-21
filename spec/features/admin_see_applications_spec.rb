@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature('Admin see applications') do 
-    before(:all) do 
+    before(:each) do 
         @admin_user = User.create!(
             email: 'linton.araujos@moemasoft.com',
             password: 'crazybutterfly906'
@@ -81,7 +81,7 @@ feature('Admin see applications') do
 
     scenario('can access from home menu') do
         # Arrange
-        login_as admin_user
+        login_as @admin_user
 
         # Act
         visit root_path
@@ -97,7 +97,7 @@ feature('Admin see applications') do
 
     scenario('see the opportunities') do
         # Arrange
-        login_as admin_user
+        login_as @admin_user
 
         # Act
         visit root_path
@@ -113,7 +113,7 @@ feature('Admin see applications') do
 
     scenario('see how many candidates each opportunity have') do
         # Arrange
-        login_as admin_user
+        login_as @admin_user
 
         # Act
         visit root_path
@@ -124,14 +124,14 @@ feature('Admin see applications') do
 
         # Assert
         opportunity = Opportunity.last
-        within("div#opportunity_#{opportunity.id}") do 
-            expect(page).to have_css("div.candidates", text: opportunity.candidates.count)
+        within("li#opportunity_#{opportunity.id}") do 
+            expect(page).to have_css("span.candidates", text: opportunity.submissions.count)
         end
     end
 
     scenario('see the list of candidates') do
         # Arrange
-        login_as admin_user
+        login_as @admin_user
 
         # Act
         visit root_path
@@ -148,7 +148,7 @@ feature('Admin see applications') do
 
     scenario('and its details') do
         # Arrange
-        login_as admin_user
+        login_as @admin_user
 
         # Act
         visit root_path
@@ -161,10 +161,10 @@ feature('Admin see applications') do
         click_on @candidate_profile.name
 
         # Assert
+        submission = Submission.first
         expect(page).to have_content(@candidate_profile.name)
-        expect(page).to have_content(@candidate_profile.bio(opportunity))
-        expect(page).to have_content(@candidate_profile.presentation(opportunity))
-        expect(page).to have_content(@candidate_profile.wage_claim(opportunity))
-        expect(page).to have_content(@candidate_profile.note(opportunity))
+        expect(page).to have_content('-')
+        expect(page).to have_content(submission.presentation)
+        expect(page).to have_content(submission.note)
     end
 end 

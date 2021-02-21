@@ -7,6 +7,18 @@ class OpportunitiesController < ApplicationController
         redirect_to @opportunity.company
     end
 
+    def index 
+        @opportunities = get_company_opportunities
+    end
+
+    def application_list
+        @opportunity = Opportunity.find(params[:id])
+    end
+
+    def application_detail
+        @submission = Submission.find(params[:id])
+    end
+
     def show
         @opportunity = Opportunity.find(params[:id])
     end
@@ -51,6 +63,11 @@ class OpportunitiesController < ApplicationController
             :remote,
             :level,
         )
+    end
+
+    def get_company_opportunities
+        @company = CompanyProfile.find_by(profile: current_user.profile)
+        Opportunity.where(company: @company.company)
     end
 
 end
