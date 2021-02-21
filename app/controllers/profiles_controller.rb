@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-
+    before_action :authenticate_user!, only: %i[show new create edit update]
     def show
         @profile = Profile.find_by(user: current_user)
     end

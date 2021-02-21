@@ -53,6 +53,7 @@ pt-BR:
       level_mid: Pleno
       level_senior: Sênior
       hide: Ocultar
+      mine: Minhas Vagas
     submissions:
       remote: Remoto
       apply: Candidatar
@@ -60,3 +61,5 @@ pt-BR:
       title: Meus Dados
       applied: Você se candidatou para essa vaga
       warning: Você está prestes a excluir sua candidatura à esta vaga. Deseja continuar?
+      list: Candidatos
+      empty: Nenhum candidato encontrado

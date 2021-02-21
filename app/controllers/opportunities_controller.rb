@@ -1,10 +1,23 @@
 class OpportunitiesController < ApplicationController
+    before_action :authenticate_user!, only: %i[index new create edit update change_visibility application_list application_detail]
 
     def change_visibility
         @opportunity = Opportunity.find(params[:id])
         @opportunity.change_visibility!
         @opportunity.save
         redirect_to @opportunity.company
+    end
+
+    def index 
+        @opportunities = get_company_opportunities
+    end
+
+    def application_list
+        @opportunity = Opportunity.find(params[:id])
+    end
+
+    def application_detail
+        @submission = Submission.find(params[:id])
     end
 
     def show
@@ -51,6 +64,11 @@ class OpportunitiesController < ApplicationController
             :remote,
             :level,
         )
+    end
+
+    def get_company_opportunities
+        @company = CompanyProfile.find_by(profile: current_user.profile)
+        Opportunity.where(company: @company.company)
     end
 
 end

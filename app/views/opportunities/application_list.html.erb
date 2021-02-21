@@ -1,0 +1,37 @@
+<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.opportunities.mine')%></h2>
+
+<div class="card">
+<div class="card-header">
+<%= t('activerecord.attributes.opportunity.expiration_date') %>: <%= l(@opportunity.expiration_date) %>
+</div>
+<div class="card-body">
+    <h5 class="card-title"><%= @opportunity.title %></h5>
+    <p class="card-subtitle">
+        <%= t('activerecord.attributes.opportunity.salary') %>: <%= number_to_currency @opportunity.salary %> | 
+        <%= t('activerecord.attributes.opportunity.position_quantity') %>: <%= @opportunity.position_quantity %> | 
+        <%= t('activerecord.attributes.opportunity.level') %>: <%= t("views.opportunities.level_#{@opportunity.level}") %> | 
+        <%= t('activerecord.attributes.opportunity.remote') %>: <%= t("views.opportunities.remote_#{@opportunity.remote}") %>
+    </p>
+    <hr>
+    <p class="card-text">
+        <span class="badge badge-dark"><%= t('activerecord.attributes.opportunity.description') %></span> <%= @opportunity.description %>
+    </p>
+    <hr>
+    <p class="card-text">
+        <span class="badge badge-dark"><%= t('activerecord.attributes.opportunity.requirement') %></span> <%= @opportunity.requirement %>
+    </p>
+</div>
+</div>
+
+<h3 class="h3 m-3 text-center"><%= t('views.submissions.list') %></h3>
+<% if @opportunity.submissions.blank? %>
+    <%= t('views.submissions.empty') %>
+<% else %>
+    <ul class="list-group">
+        <% @opportunity.submissions.each_with_index do |candidate, index| %>
+            <li class="list-group-item">
+                <span class="badge badge-pill badge-secondary mr-1"><%= index+1 %></span> <%= link_to candidate.profile.name, application_detail_opportunity_path(candidate) %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>

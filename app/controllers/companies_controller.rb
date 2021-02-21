@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-
+    before_action :authenticate_user!, only: %i[new create edit update change_state]
     def show 
         @opportunities = Opportunity.where(
             company_id: params[:id],

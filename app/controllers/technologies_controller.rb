@@ -1,4 +1,5 @@
 class TechnologiesController < ApplicationController
+    before_action :authenticate_user!, only: %i[index new create edit update]
     def index
         @technologies = sorted_by_name
     end

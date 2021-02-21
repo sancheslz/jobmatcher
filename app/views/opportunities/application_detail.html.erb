@@ -1,0 +1,59 @@
+<h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.opportunities.mine')%></h2>
+
+<div class="card">
+<div class="card-header">
+<%= t('activerecord.attributes.opportunity.expiration_date') %>: <%= l(@submission.opportunity.expiration_date) %>
+</div>
+<div class="card-body">
+    <h5 class="card-title"><%= @submission.opportunity.title %></h5>
+    <p class="card-subtitle">
+        <%= t('activerecord.attributes.opportunity.salary') %>: <%= number_to_currency @submission.opportunity.salary %> | 
+        <%= t('activerecord.attributes.opportunity.position_quantity') %>: <%= @submission.opportunity.position_quantity %> | 
+        <%= t('activerecord.attributes.opportunity.level') %>: <%= t("views.opportunities.level_#{@submission.opportunity.level}") %> | 
+        <%= t('activerecord.attributes.opportunity.remote') %>: <%= t("views.opportunities.remote_#{@submission.opportunity.remote}") %>
+    </p>
+    <hr>
+    <p class="card-text">
+        <span class="badge badge-dark"><%= t('activerecord.attributes.opportunity.description') %></span> <%= @submission.opportunity.description %>
+    </p>
+    <hr>
+    <p class="card-text">
+        <span class="badge badge-dark"><%= t('activerecord.attributes.opportunity.requirement') %></span> <%= @submission.opportunity.requirement %>
+    </p>
+</div>
+</div>
+
+<h3 class="h3 m-3 text-center"><%= @submission.profile.name %></h3>
+
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.presentation') %></div>
+    </div>
+    <div class="col-10">
+        <%= @submission.presentation %>
+    </div>
+</div>
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.note') %></div>
+    </div>
+    <div class="col-10">
+        <%= @submission.note || '-' %>
+    </div>
+</div>
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.wage_claim') %></div>
+    </div>
+    <div class="col-10">
+        <%= number_to_currency @submission.wage_claim %>
+    </div>
+</div>
+<div class="row mb-1 border-bottom pb-2">
+    <div class="col-2">
+        <div class="badge badge-dark"><%= t('activerecord.attributes.profile.bio') %></div>
+    </div>
+    <div class="col-10">
+        <%= @submission.profile.bio || '-' %>
+    </div>
+</div>
