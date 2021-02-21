@@ -1,4 +1,5 @@
 class OpportunitiesController < ApplicationController
+    before_action :authenticate_user!, only: %i[index new create edit update change_visibility application_list application_detail]
 
     def change_visibility
         @opportunity = Opportunity.find(params[:id])

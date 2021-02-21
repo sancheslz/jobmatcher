@@ -1,4 +1,5 @@
 class SubmissionsController < ApplicationController
+    before_action :authenticate_user!, only: %i[new create remove destroy]
     def new
         opportunity_id = params[:opportunity_id]
         if opportunity_id.nil?
