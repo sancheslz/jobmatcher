@@ -1,5 +1,7 @@
 class OpportunitiesController < ApplicationController
     before_action :authenticate_user!, only: %i[index new create edit update change_visibility application_list application_detail]
+    before_action :limit_to_user_role!, only: %i[new create edit update change_visibility]
+    before_action :restrict_to_company_members!, only: %i[ change_visibility  application_list application_detail edit  update]
 
     def change_visibility
         @opportunity = Opportunity.find(params[:id])
@@ -18,6 +20,13 @@ class OpportunitiesController < ApplicationController
 
     def application_detail
         @submission = Submission.find(params[:id])
+        is_allowed = CompanyProfile.find_by(
+            profile: current_user.profile,
+            company: @submission.opportunity.company
+        )
+        unless is_allowed
+            redirect_to root_path
+        end
     end
 
     def show
@@ -69,6 +78,23 @@ class OpportunitiesController < ApplicationController
     def get_company_opportunities
         @company = CompanyProfile.find_by(profile: current_user.profile)
         Opportunity.where(company: @company.company)
+    end
+
+    def limit_to_user_role!
+        if current_user.profile.role == 'regular'
+            redirect_to root_path 
+        end
+    end
+
+    def restrict_to_company_members!
+        opportunity = Opportunity.find(params[:id])
+        is_member = CompanyProfile.find_by(
+            company: opportunity.company,
+            profile: current_user.profile
+        )
+        unless is_member
+            redirect_to root_path
+        end
     end
 
 end

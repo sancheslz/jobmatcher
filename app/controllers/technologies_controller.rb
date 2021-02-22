@@ -1,5 +1,7 @@
 class TechnologiesController < ApplicationController
     before_action :authenticate_user!, only: %i[index new create edit update]
+    before_action :limit_to_user_role!, only: %i[index new create edit update]
+
     def index
         @technologies = sorted_by_name
     end
@@ -46,6 +48,12 @@ class TechnologiesController < ApplicationController
         params.require(:technology).permit(
             :name
         )
+    end
+
+    def limit_to_user_role!
+        if current_user.profile.role == 'regular'
+            redirect_to root_path 
+        end
     end
 
 end
