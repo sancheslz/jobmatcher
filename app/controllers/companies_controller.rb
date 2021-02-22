@@ -1,5 +1,8 @@
 class CompaniesController < ApplicationController
     before_action :authenticate_user!, only: %i[new create edit update change_state]
+    before_action :limit_to_user_role!, only: %i[new create edit update change_state]
+    before_action :restrict_to_company_members!, only: %i[edit update change_state]
+
     def show 
         @opportunities = Opportunity.where(
             company_id: params[:id],
@@ -67,5 +70,21 @@ class CompaniesController < ApplicationController
             :founded,
             :logo
         )
+    end
+
+    def limit_to_user_role!
+        if current_user.profile.role == 'regular'
+            redirect_to root_path 
+        end
+    end
+
+    def restrict_to_company_members!
+        is_member = CompanyProfile.find_by(
+            company: params[:id],
+            profile: current_user.profile
+        )
+        if !is_member
+            redirect_to root_path
+        end
     end
 end

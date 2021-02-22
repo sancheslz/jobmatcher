@@ -1,5 +1,7 @@
 class SubmissionsController < ApplicationController
     before_action :authenticate_user!, only: %i[new create remove destroy]
+    before_action :restrict_to_owner!, only: %i[remove destroy]
+
     def new
         opportunity_id = params[:opportunity_id]
         if opportunity_id.nil?
@@ -44,5 +46,11 @@ class SubmissionsController < ApplicationController
     def get_opportunity
         opportunity_id = params.require(:submission).permit(:opportunity)
         Opportunity.find(opportunity_id[:opportunity])
+    end
+
+    def restrict_to_owner!
+        unless Submission.find(params[:id]).profile == current_user.profile
+            redirect_to root_path
+        end
     end
 end
