@@ -67,7 +67,11 @@ class OpportunitiesController < ApplicationController
 
     def get_company_opportunities
         @company = CompanyProfile.find_by(profile: current_user.profile)
-        Opportunity.where(company: @company.company)
+        Opportunity.where('company_id == ? AND expiration_date > ? AND is_visible == ?',
+            @company.company,
+            "#{0.day.from_now}",
+            true
+        )
     end
 
     def limit_to_user_role!
