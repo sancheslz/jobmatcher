@@ -111,6 +111,48 @@ feature('Admin see applications') do
         expect(page).to have_content(opportunity.title)
     end
 
+    scenario('but only valids and visibles') do
+        # Arrange
+        hidden_opportunity = Opportunity.create!(
+            title: "Programador(a) Web Front End Pleno",
+            description: %{Desenvolver melhorias e novas funcionalidades},
+            requirement: %{Experiência com ferramentas de versionamento de código (GIT,...) | Experiência prévia nas linguagens informadas},
+            position_quantity: 1,
+            expiration_date: 30.days.from_now,
+            salary: 5000,
+            remote: true,
+            level: :mid,
+            company: @company,
+            is_visible: false,
+        )
+        invalid_opportunity = Opportunity.create!(
+            title: "Desenvolvedor(a) Front-end Sênior",
+            description: %{A Vaga é para desenvolvedor Sênior, porém estamos contratando para todos os níveis. Havendo sinergia com as informações abaixo, sinta-se a vontade para entrar em contato. >> Desenvolvimento de aplicações web | Integrações entre sistemas. >> Diferenciais: Experiência com desenvolvimento no mercado de capitaisl; Experiência com desenvolvimento no mercado agro; Conhecimento em Flutter},
+            requirement: %{Mínimo de 5 anos de experiência com desenvolvimento de aplicações web | Conhecimentos sólidos em Estruturas de Dados e APIs | Orientação a objetos e atenção plena a qualidade de código | Boa comunicação e capacidade para trabalhar em equipe para assimilar problemas e discutir soluções | REST | SCRUM | VUEJS},
+            position_quantity: 1,
+            expiration_date: 1.days.ago,
+            salary: 12000,
+            remote: true,
+            level: :senior,
+            company: @company,
+            is_visible: true,
+        )
+        login_as @admin_user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.opportunities.mine')
+        end
+
+        # Assert
+        opportunity = Opportunity.last
+        expect(page).to have_content(@opportunity.title)
+        expect(page).not_to have_content(hidden_opportunity.title)
+        expect(page).not_to have_content(invalid_opportunity.title)
+    end
+
     scenario('see how many candidates each opportunity have') do
         # Arrange
         login_as @admin_user
