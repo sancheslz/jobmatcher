@@ -1,6 +1,10 @@
 class SubmissionsController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create remove destroy]
+    before_action :authenticate_user!, only: %i[index new create remove destroy]
     before_action :restrict_to_owner!, only: %i[remove destroy]
+
+    def index 
+        @submissions = Submission.where(profile: current_user.profile)
+    end
 
     def new
         opportunity_id = params[:opportunity_id]

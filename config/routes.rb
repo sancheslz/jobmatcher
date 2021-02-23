@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get 'application_detail', on: :member
   end
 
-  resources :submissions, only: %i[new create destroy] do 
+  resources :submissions, only: %i[index new create destroy] do 
     get 'remove', on: :member
   end
   
