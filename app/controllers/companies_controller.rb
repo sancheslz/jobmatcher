@@ -4,12 +4,24 @@ class CompaniesController < ApplicationController
     before_action :restrict_to_company_members!, only: %i[edit update change_state]
 
     def show 
-        @opportunities = Opportunity.where(
-            'company_id == ? AND expiration_date > ?',
-            "#{params[:id]}",
-            0.day.from_now
-        )
         @company = Company.find(params[:id])
+        if user_signed_in? && CompanyProfile.find_by(
+            company: @company,
+            profile: current_user.profile
+        )
+            @opportunities = Opportunity.where(
+                'company_id == ? AND expiration_date > ?',
+                "#{params[:id]}",
+                0.day.from_now
+            )
+        else 
+            @opportunities = Opportunity.where(
+                'company_id == ? AND expiration_date > ? AND is_visible == ?',
+                "#{params[:id]}",
+                0.day.from_now,
+                true
+            )
+        end
     end
 
     def new

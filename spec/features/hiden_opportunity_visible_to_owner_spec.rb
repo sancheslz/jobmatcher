@@ -137,9 +137,7 @@ feature('Hidden opportunities are visible to owner') do
         visit company_path(company)
 
         # Assert
-        within('div.card-body.border-danger') do 
-            expect(page).not_to have_content(opportunity.title) 
-        end
+        expect(page).not_to have_content(opportunity.title) 
     end
 
 end
