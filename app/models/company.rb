@@ -19,4 +19,13 @@ class Company < ApplicationRecord
             company: self
         )
     end
+
+    def active_opportunities
+        Opportunity.where(
+            'is_visible == ? AND company_id == ? AND expiration_date > ?',
+            true,
+            self,
+            0.days.from_now
+        ).count
+    end
 end

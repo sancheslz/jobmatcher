@@ -142,6 +142,10 @@
                         <%= link_to edit_opportunity_path(opportunity), :class => 'btn btn-sm btn-warning' do %>
                                 <i class="far fa-edit"></i> <%= t('views.main.edit') %>
                         <% end %>
+                    <% else %>
+                        <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
+                            <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
+                        <% end %>
                     <% end %>
             </div>
         </div>

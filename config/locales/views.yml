@@ -28,6 +28,8 @@ pt-BR:
       reactivate: Reativar Empresa
       inactive_message: Inativada
       active_opportunities: Oportunidades Abertas
+      list: Empresas Cadastradas
+      opportunities: Vagas Abertas
     profiles:
       mine: Meu Perfil
       new_title: Cadastrar Perfil

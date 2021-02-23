@@ -3,6 +3,10 @@ class CompaniesController < ApplicationController
     before_action :limit_to_user_role!, only: %i[new create edit update change_state]
     before_action :restrict_to_company_members!, only: %i[edit update change_state]
 
+    def index 
+        @companies = Company.where(is_active: true)
+    end
+
     def show 
         @company = Company.find(params[:id])
         if user_signed_in? && CompanyProfile.find_by(
