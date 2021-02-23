@@ -12,4 +12,11 @@ class Company < ApplicationRecord
     def active?
         self.is_active
     end
+
+    def is_mine?(current_user)
+        CompanyProfile.find_by(
+            profile: current_user.profile,
+            company: self
+        )
+    end
 end

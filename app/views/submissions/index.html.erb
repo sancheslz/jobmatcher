@@ -1,32 +1,36 @@
 <h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.submissions.mine')%></h2>
 <ul class="list-group">
-    <% @submissions.each do |submission| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center
-        <% if submission.status == 'removed' %>
-            list-group-item-danger
-        <% elsif submission.status == 'accepted' %>
-            list-group-item-info
-        <% elsif submission.status == 'denied' %>
-            list-group-item-warning
-        <% end %>
-        " id="submission_<%= submission.id %>">
-
-            <div>
-                <strong><%= submission.opportunity.company.name %></strong>
-                <br>
-                <%= submission.opportunity.title %>
-            </div>
-
-            <% if submission.status == 'applied' %>
-                <%= t('activerecord.attributes.submission.status_applied') %>
-            <% elsif submission.status == 'removed' %>
-                <%= t('activerecord.attributes.submission.status_removed') %>
+    <% if @submissions.blank? %>
+    <%= t('views.submissions.empty_apply') %>
+    <% else %>
+        <% @submissions.each do |submission| %>
+            <li class="list-group-item d-flex justify-content-between align-items-center
+            <% if submission.status == 'removed' %>
+                list-group-item-danger
             <% elsif submission.status == 'accepted' %>
-                <%= t('activerecord.attributes.submission.status_accepted') %>
+                list-group-item-info
             <% elsif submission.status == 'denied' %>
-                <%= t('activerecord.attributes.submission.status_denied') %>
+                list-group-item-warning
             <% end %>
+            " id="submission_<%= submission.id %>">
 
-        </li>
+                <div>
+                    <strong><%= submission.opportunity.company.name %></strong>
+                    <br>
+                    <%= submission.opportunity.title %>
+                </div>
+
+                <% if submission.status == 'applied' %>
+                    <%= t('activerecord.attributes.submission.status_applied') %>
+                <% elsif submission.status == 'removed' %>
+                    <%= t('activerecord.attributes.submission.status_removed') %>
+                <% elsif submission.status == 'accepted' %>
+                    <%= t('activerecord.attributes.submission.status_accepted') %>
+                <% elsif submission.status == 'denied' %>
+                    <%= t('activerecord.attributes.submission.status_denied') %>
+                <% end %>
+
+            </li>
+        <% end %>
     <% end %>
 </ul>

@@ -1,144 +1,118 @@
 <h2 class="h2 mb-4 mt-3"><%= t('views.home.title')%> | <%= t('views.companies.detail_title')%></h2>
-<div class="row mb-3">
-    <% if @company.active? %>
-        <div class="h3"><%= @company.name %></div> 
-    <% else %>
-        <div class="h3 text-danger"><i class="fas fa-times-circle"></i> <%= @company.name %> (<%= t('views.companies.inactive_message') %>) </div> 
-    <% end %>
-</div>
+<div class="row mb-3 mt-3">
+    <div class="col-3 mr-2 text-center">
+        <% if @company.logo.attached? %>
+            <%= image_tag(@company.logo, size: '150x150', style: 'border-radius: 100%') %>
+        <% else %>
+            <div class="d-flex flex-row justify-content-center">
+                <div class="h2 bg-light p-5" style="border-radius: 100%; width: 150px; height: 150px"><i class="far fa-building"></i></div>
+            </div>
+        <% end %>
 
+        <div class="h3 mt-3">
+            <% if @company.active? %>
+                <div class="h3"><%= @company.name %></div> 
+            <% else %>
+                <div class="h3 text-danger"><%= @company.name %> (<%= t('views.companies.inactive_message') %>) </div> 
+            <% end %>
+        </div> 
+        <div>
+            <%= t('activerecord.attributes.company.founded') %> <%= @company.founded || '-' %>
+        </div>
+        <div><%= link_to @company.website, "http://#{@company.website}", target: '_blank' %></div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.logo') %></div>
+        <div id="view_control" class="mt-3">
+            <% if user_signed_in? && @company.is_mine?(current_user) %>
+                <% if @company.active? %>
+                    <%= link_to edit_company_path(@company), :class => 'btn btn-warning btn-sm' do %>
+                        <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+                    <% end %>
+                    <%= link_to change_state_company_path(@company), :class => 'btn btn-danger btn-sm' do %>
+                        <i class="fas fa-skull-crossbones"></i> <%= t('views.companies.inactivate') %>
+                    <% end %>
+                <% else %>
+                    <%= link_to change_state_company_path(@company), :class => 'btn btn-success btn-sm' do %>
+                        <i class="fas fa-leaf"></i> <%= t('views.companies.reactivate') %>
+                    <% end %>
+                <% end %>
+            <% end %>
+        </div>
     </div>
-    <div class="col-10">
-    <% if @company.logo.attached? %>
-        <div><%= image_tag(@company.logo, size: '100x100') %></div>
-    <% end %>
-    </div>
-</div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.cnpj') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.cnpj %></div>
-    </div>
-</div>
+    <div class="col">
 
-
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.founded') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.founded %></div>
-    </div>
-</div>  
+        <div class="row mb-1 pb-2">
+            <div class="col">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.cnpj') %></div>
+                <div class="pl-2"><%= @company.cnpj %></div>
+            </div>
+        </div>
         
+        <hr>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.address') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.address %></div>
-    </div>
-</div>  
+        <div class="row mb-1 pb-2 mt-3">
+            <div class="col-8">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.address') %></div>
+                <div class="pl-2"><%= @company.address || '-'  %></div>
+            </div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.number') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.number %></div>
-    </div>
-</div>  
+            <div class="col-2">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.number') %></div>
+                <div class="pl-2"><%= @company.number || '-' %></div>
+            </div>
+            <div class="col-2">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.complement') %></div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.complement') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.complement %></div>
-    </div>
-</div>  
+                <div class="pl-2"><%= @company.complement || '-' %></div>    
+            </div>
+        </div>  
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.neighborhood') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.neighborhood %></div>
-    </div>
-</div>  
+        <div class="row mb-1 pb-2">
+            <div class="col-5">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.neighborhood') %></div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.city') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.city %></div>
-    </div>
-</div>  
+                <div class="pl-2"><%= @company.neighborhood || '-' %></div>
+            </div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.state') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.state %></div>
-    </div>
-</div>  
+            <div class="col-3">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.city') %></div>
 
-<div class="row mb-1 border-bottom pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.postal_code') %></div>
+                <div class="pl-2"><%= @company.city || '-' %></div>
+            </div>
+
+            <div class="col-2">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.state') %></div>
+
+                <div class="pl-2"><%= @company.state || '-' %></div>
+            </div>
+
+            <div class="col-2">
+                <div class="badge badge-dark"><%= t('activerecord.attributes.company.postal_code') %></div>
+
+                <div class="pl-2"><%= @company.postal_code || '-' %></div>
+            </div>
+        </div>  
+
     </div>
-    <div class="col-10">
-        <div><%= @company.postal_code %></div>
-    </div>
-</div>  
-
-<div class="row mb-1 pb-2">
-    <div class="col-2">
-        <div class="badge badge-dark"><%= t('activerecord.attributes.company.website') %></div>
-    </div>
-    <div class="col-10">
-        <div><%= @company.website %></div>
-    </div>
-</div>  
-
-<div id="view_control">
-
-
-<% if @company.active? %>
-    <%= link_to edit_company_path(@company), :class => 'btn btn-warning' do %>
-        <i class="far fa-edit"></i> <%= t('views.main.edit') %>
-    <% end %>
-    <%= link_to change_state_company_path(@company), :class => 'btn btn-danger' do %>
-        <i class="fas fa-skull-crossbones"></i> <%= t('views.companies.inactivate') %>
-    <% end %>
-<% else %>
-    <%= link_to change_state_company_path(@company), :class => 'btn btn-success' do %>
-        <i class="fas fa-leaf"></i> <%= t('views.companies.reactivate') %>
-    <% end %>
-<% end %>
-
 </div>
+
+<hr class="mt-5">
 
 <h1 class="h2 text-center m-3"><%= t('views.companies.active_opportunities') %></h1>
 <% if @opportunities.any? %>
     <div class="d-flex flex-wrap justify-content-between">
         <% @opportunities.each do |opportunity| %>
-            <div class="card m-2 " style="min-width: 20rem; max-width: 47%" id='opportunity_<%= opportunity.id %>'>
+            <div class="card m-2 " style="width: 47%" id='opportunity_<%= opportunity.id %>'>
             <div class="card-body">
                 <h5 class="card-title"><%= opportunity.title %></h5>
 
                 <%= link_to opportunity.company, :class => 'card-subtitle text-muted' do %>
-                        <i class="far fa-building"></i> <%= opportunity.company.name %>
+                    <% if opportunity.company.logo.attached? %>
+                        <%= image_tag(opportunity.company.logo, size: '30x30', style: 'border-radius: 100%') %>
+                    <% else %>
+                        <i class="far fa-building"></i> 
+                    <% end %>
+                    <%= opportunity.company.name %>
                 <% end %>
 
                 <div class="card-text mt-3 mb-3 text-wrap">
@@ -146,8 +120,9 @@
                     <%= opportunity.description %>
                     </div>
                     <div class="skills">
-                        <span class="badge badge-primary">Primary</span>
-                        <span class="badge badge-secondary">Secondary</span>
+                        <% opportunity.technologies.each do |tech| %>
+                            <span class="badge badge-secondary"><%= tech.name %></span>
+                        <% end %>
                     </div>
 
 
@@ -156,12 +131,14 @@
                 <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
                         <i class="fas fa-plus"></i> <%= t('views.home.more') %>
                 <% end %>
-                <%= link_to change_visibility_opportunity_path(opportunity), :class => 'btn btn-sm btn-danger' do %>
-                        <i class="far fa-eye-slash"></i> <%= t('views.opportunities.hide') %>
-                <% end %>
-                <%= link_to edit_opportunity_path(opportunity), :class => 'btn btn-sm btn-warning' do %>
-                        <i class="far fa-edit"></i> <%= t('views.main.edit') %>
-                <% end %>
+                    <% if user_signed_in? && @company.is_mine?(current_user) %>
+                        <%= link_to change_visibility_opportunity_path(opportunity), :class => 'btn btn-sm btn-danger' do %>
+                                <i class="far fa-eye-slash"></i> <%= t('views.opportunities.hide') %>
+                        <% end %>
+                        <%= link_to edit_opportunity_path(opportunity), :class => 'btn btn-sm btn-warning' do %>
+                                <i class="far fa-edit"></i> <%= t('views.main.edit') %>
+                        <% end %>
+                    <% end %>
             </div>
         </div>
     <% end %>

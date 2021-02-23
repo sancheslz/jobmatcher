@@ -18,17 +18,6 @@ class OpportunitiesController < ApplicationController
         @opportunity = Opportunity.find(params[:id])
     end
 
-    def application_detail
-        @submission = Submission.find(params[:id])
-        is_allowed = CompanyProfile.find_by(
-            profile: current_user.profile,
-            company: @submission.opportunity.company
-        )
-        unless is_allowed
-            redirect_to root_path
-        end
-    end
-
     def show
         @opportunity = Opportunity.find(params[:id])
     end
@@ -72,6 +61,7 @@ class OpportunitiesController < ApplicationController
             :salary,
             :remote,
             :level,
+            technology_ids: []
         )
     end
 

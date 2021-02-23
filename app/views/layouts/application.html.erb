@@ -36,13 +36,13 @@
               </button>
               <div class="dropdown-menu">
                 <%= link_to t('views.profiles.mine'), profile_path(current_user), { class: 'dropdown-item' } %>
+                <%= link_to t('views.submissions.mine'), submissions_path, { class: 'dropdown-item' } %>
 
                 <% if current_user.profile.role != 'regular' && !current_user.profile.company.first.nil? %>
+                  <div class="dropdown-divider"></div>
                   <%= link_to t('views.companies.mine'), current_user.profile.company.first , { class: 'dropdown-item' } %>
                   <%= link_to t('views.opportunities.mine'), opportunities_path , { class: 'dropdown-item' } %>
                   <%= link_to t('views.technologies.title'), technologies_path, { class: 'dropdown-item' } %>
-                <% else %>
-                  <%= link_to t('views.submissions.mine'), submissions_path, { class: 'dropdown-item' } %>
                 <% end %>
 
                 <div class="dropdown-divider"></div>

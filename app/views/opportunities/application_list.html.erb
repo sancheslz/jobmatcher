@@ -24,14 +24,80 @@
 </div>
 
 <h3 class="h3 m-3 text-center"><%= t('views.submissions.list') %></h3>
+
+
 <% if @opportunity.submissions.blank? %>
     <%= t('views.submissions.empty') %>
 <% else %>
-    <ul class="list-group">
+    <div id="accordion">
         <% @opportunity.submissions.each_with_index do |candidate, index| %>
-            <li class="list-group-item">
-                <span class="badge badge-pill badge-secondary mr-1"><%= index+1 %></span> <%= link_to candidate.profile.name, application_detail_opportunity_path(candidate) %>
-            </li>
+            <div class="card">
+                <div class="card-header" id="heading_<%= candidate.id %>">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_<%= candidate.id %>" aria-expanded="true" aria-controls="collapse_<%= candidate.id %>">
+                            <span class="badge badge-pill badge-secondary mr-1"><%= index+1 %></span> <%= candidate.profile.name %>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapse_<%= candidate.id %>" class="collapse " aria-labelledby="heading_<%= candidate.id %>" data-parent="#accordion">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-2">
+                                <% if candidate.profile.photo.attached? %>
+                                    <%= image_tag(candidate.profile.photo, size: '150x150', style: 'border-radius: 100%') %>
+                                <% else %>
+                                    <div class="d-flex flex-row justify-content-center">
+                                        <div class="h2 bg-light p-5" style="border-radius: 100%; width: 150px; height: 150px"><i class="fas fa-user"></i></div>
+                                    </div>
+                                <% end %>
+                            </div>
+                        <div class="col-10">
+                            <h4><%= candidate.profile.name %></h4>
+                            <div>
+
+                                <div class="row mb-1 pb-2 mt-4">
+                                    <div class='col'>
+                                        <div class="badge badge-dark"><%= t('activerecord.attributes.profile.bio') %></div>
+                                        <div class="pl-2"><%= candidate.profile.bio %></div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-1 pb-2 mt-4">
+                                    <div class='col'>
+                                        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.presentation') %></div>
+                                        <div class="pl-2"><%= candidate.presentation %></div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-1 pb-2 mt-4">
+                                    <div class='col'>
+                                        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.wage_claim') %></div>
+                                        <div class="pl-2"><%= candidate.wage_claim %></div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-1 pb-2 mt-4">
+                                    <div class='col'>
+                                        <div class="badge badge-dark"><%= t('activerecord.attributes.submission.note') %></div>
+                                        <div class="pl-2"><%= candidate.note|| '-' %></div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <%= link_to nil, :class => 'btn btn-sm btn-danger' do %>
+                                        <i class="far fa-eye-slash"></i> <%= t('views.opportunities.hide') %>
+                                <% end %>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
         <% end %>
-    </ul>
+
+    </div> 
 <% end %>
+
+

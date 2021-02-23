@@ -16,52 +16,59 @@
     <div class="d-flex flex-wrap justify-content-between">
         <% @opportunities.each do |opportunity| %>
             <div class="card m-2 " style="width: 47%" id='opportunity_<%= opportunity.id %>'>
-            <div class="card-body">
-                <h5 class="card-title"><%= opportunity.title %></h5>
+                <div class="card-body">
+                    <h5 class="card-title"><%= opportunity.title %></h5>
 
-                <%= link_to opportunity.company, :class => 'card-subtitle text-muted' do %>
-                        <i class="far fa-building"></i> <%= opportunity.company.name %>
-                <% end %>
+                    <%= link_to opportunity.company, :class => 'card-subtitle text-muted' do %>
+                        <% if opportunity.company.logo.attached? %>
+                            <%= image_tag(opportunity.company.logo, size: '30x30', style: 'border-radius: 100%') %>
+                        <% else %>
+                            <i class="far fa-building"></i> 
+                        <% end %>
+                        <%= opportunity.company.name %>
+                    <% end %>
 
-                <div class="card-text mt-3 mb-3 text-wrap">
-                    <% if user_signed_in? && opportunity.applied?(current_user) %>
-                        <div class="badge badge-success p-1">
-                            <i class="fas fa-check-circle"></i> <%= t('views.submissions.applied') %>
+                    <div class="card-text mt-3 mb-3 text-wrap">
+                        <% if user_signed_in? && opportunity.applied?(current_user) %>
+                            <div class="badge badge-success p-1">
+                                <i class="fas fa-check-circle"></i> <%= t('views.submissions.applied') %>
+                            </div>
+
+                        <% end %>
+                        <div class="text">
+                            <%= opportunity.description %>
+                        </div>
+                        <div class="skills">
+                            <% opportunity.technologies.each do |tech| %>
+                                <span class="badge badge-secondary"><%= tech.name %></span>
+                            <% end %>
                         </div>
 
-                    <% end %>
-                    <div class="text">
-                    <%= opportunity.description %>
-                    </div>
-                    <div class="skills">
-                    <% opportunity.technologies.each do |tech| %>
-                        <span class="badge badge-secondary"><%= tech.name %></span>
-                    <% end %>
                     </div>
 
-                </div>
+                    <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
+                            <i class="fas fa-plus"></i> <%= t('views.home.more') %>
+                    <% end %>
 
-                <%= link_to opportunity, :class => 'btn btn-sm btn-info' do %>
-                        <i class="fas fa-plus"></i> <%= t('views.home.more') %>
-                <% end %>
-                <% if user_signed_in? && opportunity.applied?(current_user) %>
-                    <% if opportunity.get_status(current_user).status == 'applied' %>
-                        <%= link_to remove_submission_path(opportunity.get_submission(current_user)), :class => 'btn btn-sm btn-outline-danger' do %>
-                                <i class="fas fa-times-circle"></i> <%= t('views.submissions.unapply') %>
+                    <% if user_signed_in? && opportunity.applied?(current_user) %>
+                        <% if opportunity.get_status(current_user).status == 'applied' %>
+                            <%= link_to remove_submission_path(opportunity.get_submission(current_user)), :class => 'btn btn-sm btn-outline-danger' do %>
+                                    <i class="fas fa-times-circle"></i> <%= t('views.submissions.unapply') %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
+                                <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
                         <% end %>
                     <% end %>
-                <% else %>
-                    <%= link_to new_submission_path(opportunity_id: opportunity), :class => 'btn btn-sm btn-outline-success' do %>
-                            <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
-                    <% end %>
-                <% end %>
+                    
+                </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
+    </div>
 <% else %>
     <div class="d-flex flex-column align-items-center">
         <div class="display-3 m-3 text-secondary"><i class="fas fa-hand-holding"></i></div>
         <div class="lead"><%= t('views.home.empty') %></div>
     </div> 
 <% end %>
-</div>
