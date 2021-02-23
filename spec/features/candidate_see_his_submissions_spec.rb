@@ -126,4 +126,36 @@ feature('Candidte see his submissions') do
             expect(page).to have_content(I18n.t("activerecord.attributes.submission.status_#{@submission.status}"))
         end
     end
+
+    scenario('see a message if none') do
+        # Arrange
+        candidate_user = User.create!(
+            email: 'genoveva.cunha@salemo.com.br',
+            password: 'smallwolf378'
+        )
+
+        candidate_profile = Profile.create!(
+            name: 'Genoveva da Cunha',
+            cpf: '898.791.029-74',
+            address: 'Rua Dois',
+            number: '983',
+            complement: 'Court',
+            city: 'Mauá',
+            state: 'Paraná',
+            postal_code: '54368',
+            role: 'regular',
+            user: candidate_user
+        )
+        login_as candidate_user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.submissions.mine')
+        end
+        
+        # Assert
+        expect(page).to have_content(I18n.t("views.submissions.empty_apply"))
+    end
 end
