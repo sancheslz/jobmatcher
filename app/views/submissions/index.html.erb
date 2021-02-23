@@ -17,7 +17,7 @@
                 <div>
                     <strong><%= submission.opportunity.company.name %></strong>
                     <br>
-                    <%= submission.opportunity.title %>
+                    <%= link_to submission.opportunity.title, submission.opportunity %>
                 </div>
 
                 <% if submission.status == 'applied' %>

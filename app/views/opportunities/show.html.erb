@@ -83,6 +83,14 @@
     </div>
 </div>  
 
-<%= link_to new_submission_path(opportunity_id: @opportunity), :class => 'btn btn-outline-success' do %>
-    <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
+<% if user_signed_in? && @opportunity.applied?(current_user) %>
+    <% if @opportunity.get_status(current_user).status == 'applied' %>
+        <%= link_to remove_submission_path(@opportunity.get_submission(current_user)), :class => 'btn btn-outline-danger' do %>
+                <i class="fas fa-times-circle"></i> <%= t('views.submissions.unapply') %>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= link_to new_submission_path(opportunity_id: @opportunity), :class => 'btn btn-outline-success' do %>
+            <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
+    <% end %>
 <% end %>
