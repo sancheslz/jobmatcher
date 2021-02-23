@@ -5,8 +5,9 @@ class CompaniesController < ApplicationController
 
     def show 
         @opportunities = Opportunity.where(
-            company_id: params[:id],
-            is_visible: true
+            'company_id == ? AND expiration_date > ?',
+            "#{params[:id]}",
+            0.day.from_now
         )
         @company = Company.find(params[:id])
     end
