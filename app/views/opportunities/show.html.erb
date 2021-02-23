@@ -82,3 +82,7 @@
         <div><%= l @opportunity.expiration_date, :format => :default %></div>
     </div>
 </div>  
+
+<%= link_to new_submission_path(opportunity_id: @opportunity), :class => 'btn btn-outline-success' do %>
+    <i class="fas fa-check-circle"></i> <%= t('views.submissions.apply') %>
+<% end %>
