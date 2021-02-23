@@ -7,7 +7,7 @@
         <div class="badge badge-dark">Empresa</div>
     </div>
     <div class="col-10">
-        <div><%= @opportunity.company.name %></div>
+        <div><%= link_to @opportunity.company.name, @opportunity.company %></div>
     </div>
 </div>  
 
