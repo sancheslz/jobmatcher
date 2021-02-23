@@ -1,7 +1,7 @@
 class OpportunitiesController < ApplicationController
     before_action :authenticate_user!, only: %i[index new create edit update change_visibility application_list application_detail]
     before_action :limit_to_user_role!, only: %i[new create edit update change_visibility]
-    before_action :restrict_to_company_members!, only: %i[ change_visibility  application_list application_detail edit  update]
+    before_action :restrict_to_company_members!, only: %i[ change_visibility  application_list edit  update]
 
     def change_visibility
         @opportunity = Opportunity.find(params[:id])
