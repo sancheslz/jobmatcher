@@ -26,162 +26,377 @@ feature('Candidate remove application') do
     
     end
 
-    scenario('see the button on the home') do
-        # Arrange
-        @opportunity = Opportunity.create!(
-            title: "Desenvolvedor(a) Front End",
-            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
-            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
-            position_quantity: 1,
-            expiration_date: 30.days.from_now,
-            salary: 8000,
-            remote: true,
-            level: :mid,
-            company: @company,
-            is_visible: true,
-        )
-    
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
-
-        profile = Profile.create!(
-            name: 'Felismino da Conceição',
-            cpf: '175.113.263-01',
-            address: 'Rua Treze de Maio',
-            number: '7971',
-            complement: 'C12', 
-            city: 'Nossa Senhora do Socorro',
-            state: 'Espírito Santo', 
-            postal_code: '84373',
-            role: 'regular',
-            user: @user
-        )
+    context('from home_page') do
+        scenario('see the button on the home') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
         
-        @submission = Submission.create!(
-            opportunity: @opportunity,
-            profile: profile,
-            wage_claim: 7000,
-            presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
-            status: :applied
-        )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+
+            # Act
+            visit root_path
+
+            # Assert
+            within("div#opportunity_#{@opportunity.id}") do
+                expect(page).to have_link(I18n.t('views.submissions.unapply'))
+                expect(page).not_to have_link(I18n.t('views.submissions.apply'))
+            end
+        end
+
+        scenario('see a warning message') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
         
-        login_as @user
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
 
-        # Act
-        visit root_path
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+            
+            # Act
+            visit root_path
+            within("div#opportunity_#{@opportunity.id}") do
+                click_on I18n.t('views.submissions.unapply')
+            end
 
-        # Assert
-        within("div#opportunity_#{@opportunity.id}") do
-            expect(page).to have_link(I18n.t('views.submissions.unapply'))
-            expect(page).not_to have_link(I18n.t('views.submissions.apply'))
+            # Assert
+            expect(current_path).to eq(remove_submission_path(@submission))
+            expect(page).to have_content(I18n.t('views.submissions.warning'))
+        end
+
+        scenario('remove with success') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
+        
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+            
+            # Act
+            visit root_path
+            within("div#opportunity_#{@opportunity.id}") do
+                click_on I18n.t('views.submissions.unapply')
+            end
+            click_on I18n.t('views.main.confirm')
+
+            # Assert
+            within("div#opportunity_#{@opportunity.id}") do
+                expect(page).not_to have_link(I18n.t('views.submissions.unapply'))
+                expect(current_path).to eq(root_path)
+            end
         end
     end
 
-    scenario('see a warning message') do
-        # Arrange
-        @opportunity = Opportunity.create!(
-            title: "Desenvolvedor(a) Front End",
-            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
-            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
-            position_quantity: 1,
-            expiration_date: 30.days.from_now,
-            salary: 8000,
-            remote: true,
-            level: :mid,
-            company: @company,
-            is_visible: true,
-        )
-    
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+    context('from my submissions') do
 
-        profile = Profile.create!(
-            name: 'Felismino da Conceição',
-            cpf: '175.113.263-01',
-            address: 'Rua Treze de Maio',
-            number: '7971',
-            complement: 'C12', 
-            city: 'Nossa Senhora do Socorro',
-            state: 'Espírito Santo', 
-            postal_code: '84373',
-            role: 'regular',
-            user: @user
-        )
+
+        scenario('see the button on the home') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
         
-        @submission = Submission.create!(
-            opportunity: @opportunity,
-            profile: profile,
-            wage_claim: 7000,
-            presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
-            status: :applied
-        )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+
+            # Act
+            visit root_path
+            click_on 'Menu'
+
+            # Assert
+            within('nav') do
+                expect(page).to have_link(I18n.t('views.submissions.mine'))
+            end
+        end
+
+        scenario('see the button on opportunity details') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
         
-        login_as @user
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+            
+            # Act
+            visit root_path
+            click_on 'Menu'
+            I18n.t('views.submissions.mine')
+
+            # Assert
+            expect(page).to have_content(I18n.t('views.submissions.unapply'))
+        end
+
+        scenario('see warning message') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
         
-        # Act
-        visit root_path
-        within("div#opportunity_#{@opportunity.id}") do
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+            
+            # Act
+            visit root_path
+            click_on 'Menu'
+            I18n.t('views.submissions.mine')
             click_on I18n.t('views.submissions.unapply')
+
+            # Assert
+            expect(current_path).to eq(remove_submission_path(@submission))
+            expect(page).to have_content(I18n.t('views.submissions.warning'))
         end
 
-        # Assert
-        expect(current_path).to eq(remove_submission_path(@submission))
-        expect(page).to have_content(I18n.t('views.submissions.warning'))
-    end
+        scenario('remove with success') do
+            # Arrange
+            @opportunity = Opportunity.create!(
+                title: "Desenvolvedor(a) Front End",
+                description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
+                requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
+                position_quantity: 1,
+                expiration_date: 30.days.from_now,
+                salary: 8000,
+                remote: true,
+                level: :mid,
+                company: @company,
+                is_visible: true,
+            )
+        
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
+            @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
 
-    scenario('remove with success') do
-        # Arrange
-        @opportunity = Opportunity.create!(
-            title: "Desenvolvedor(a) Front End",
-            description: %{Você será responsável por desenvolver interfaces web a partir de especificações realizadas pelo time de design primariamente utilizando ReactJs mas também atendendo demandas de desenvolvimento e manutenção em sistemas desenvolvidos com React Native.},
-            requirement: %{Grande conhecimento em desenvolvimento ReactJs | Habilidade para desenvolver em Typescript | Experiência em desenvolvimento React Native | Capacidade de escrever código limpo e bem documentado | Conhecimento em Hooks, TDD, Clean Architecture, SOLID},
-            position_quantity: 1,
-            expiration_date: 30.days.from_now,
-            salary: 8000,
-            remote: true,
-            level: :mid,
-            company: @company,
-            is_visible: true,
-        )
-    
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_first, opportunity: @opportunity )
-        @tech_opportunity = TechnologyOpportunity.create!( technology: @technology_second, opportunity: @opportunity )
-
-        profile = Profile.create!(
-            name: 'Felismino da Conceição',
-            cpf: '175.113.263-01',
-            address: 'Rua Treze de Maio',
-            number: '7971',
-            complement: 'C12', 
-            city: 'Nossa Senhora do Socorro',
-            state: 'Espírito Santo', 
-            postal_code: '84373',
-            role: 'regular',
-            user: @user
-        )
-        
-        @submission = Submission.create!(
-            opportunity: @opportunity,
-            profile: profile,
-            wage_claim: 7000,
-            presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
-            status: :applied
-        )
-        
-        login_as @user
-        
-        # Act
-        visit root_path
-        within("div#opportunity_#{@opportunity.id}") do
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: @user
+            )
+            
+            @submission = Submission.create!(
+                opportunity: @opportunity,
+                profile: profile,
+                wage_claim: 7000,
+                presentation: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP},
+                status: :applied
+            )
+            
+            login_as @user
+            
+            # Act
+            visit root_path
+            click_on 'Menu'
+            I18n.t('views.submissions.mine')
             click_on I18n.t('views.submissions.unapply')
-        end
-        click_on I18n.t('views.main.confirm')
+            click_on I18n.t('views.main.confirm')
 
-        # Assert
-        within("div#opportunity_#{@opportunity.id}") do
-            expect(page).not_to have_link(I18n.t('views.submissions.unapply'))
-            expect(current_path).to eq(root_path)
+            # Assert
+            within("div#opportunity_#{@opportunity.id}") do
+                expect(page).not_to have_link(I18n.t('views.submissions.unapply'))
+                expect(current_path).to eq(root_path)
+            end
         end
+        
     end
-
+    
 end
