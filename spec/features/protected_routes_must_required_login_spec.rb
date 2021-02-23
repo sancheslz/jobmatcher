@@ -428,6 +428,15 @@ feature('Protected routes must require login') do
     end
     
     context("Submission") do
+        scenario("#index") do
+            # Arrange
+            # Act
+            visit submissions_path
+
+            # Assert
+            expect(current_path).to eq(new_user_session_path)
+        end
+
         scenario("#new") do
             # Arrange
             # Act
