@@ -45,7 +45,7 @@ feature('Admin hide a job opportunity') do
             remote: true,
             level: :mid,
             company: company,
-            is_visible: true,
+            is_visible: false,
         )
 
         CompanyProfile.create!( profile: profile, company: company )
@@ -107,7 +107,7 @@ feature('Admin hide a job opportunity') do
             remote: true,
             level: :mid,
             company: company,
-            is_visible: true,
+            is_visible: false,
         )
 
         other_company = Company.create!(
@@ -133,7 +133,7 @@ feature('Admin hide a job opportunity') do
             remote: false,
             level: :entry,
             company: other_company,
-            is_visible: true,
+            is_visible: false,
         )
 
         CompanyProfile.create!( profile: profile, company: company )
@@ -152,7 +152,7 @@ feature('Admin hide a job opportunity') do
         expect(page).not_to have_content(other_opportunity.title)
     end 
 
-    scenario('active are have normal border') do
+    scenario('active are have danger border') do
         # Arrange 
         user = User.create!(
             email: 'graciliana.novaes@cdev.com',
@@ -231,7 +231,7 @@ feature('Admin hide a job opportunity') do
         end
     end 
 
-    scenario('can hide') do
+    scenario('can show') do
         # Arrange 
         user = User.create!(
             email: 'graciliana.novaes@cdev.com',
@@ -274,7 +274,7 @@ feature('Admin hide a job opportunity') do
             remote: true,
             level: :mid,
             company: company,
-            is_visible: true,
+            is_visible: false,
         )
 
         CompanyProfile.create!( profile: profile, company: company )
@@ -290,11 +290,11 @@ feature('Admin hide a job opportunity') do
         
         # Assert
         within("div#opportunity_#{opportunity.reload.id}") do
-            expect(page).to have_link(I18n.t('views.opportunities.hide'))
+            expect(page).to have_link(I18n.t('views.opportunities.show'))
         end
     end 
 
-    scenario('hide with success') do
+    scenario('show with success') do
         # Arrange 
         user = User.create!(
             email: 'graciliana.novaes@cdev.com',
@@ -337,7 +337,7 @@ feature('Admin hide a job opportunity') do
             remote: true,
             level: :mid,
             company: company,
-            is_visible: true,
+            is_visible: false,
         )
 
         CompanyProfile.create!( profile: profile, company: company )
@@ -352,11 +352,11 @@ feature('Admin hide a job opportunity') do
         end
 
         within("div#opportunity_#{opportunity.reload.id}") do
-            click_on I18n.t('views.opportunities.hide')
+            click_on I18n.t('views.opportunities.show')
         end
 
         # Assert
-        within('div.card-body.border-danger') do
+        within('div.card-body.border-light') do
             expect(page).to have_content(opportunity.title)
         end
     end 
