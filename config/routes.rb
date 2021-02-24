@@ -20,5 +20,12 @@ Rails.application.routes.draw do
   resources :submissions, only: %i[index new create destroy] do 
     get 'remove', on: :member
   end
+
+  resources :offers, only: %i[] do
+    get 'accept', on: :collection
+    post 'accept_create', on: :collection
+    get 'deny', on: :collection
+    post 'deny_create', on: :collection
+  end
   
 end

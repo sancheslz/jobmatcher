@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_19_221555) do
+ActiveRecord::Schema.define(version: 2021_02_24_013857) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 2021_02_19_221555) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_company_profiles_on_company_id"
     t.index ["profile_id"], name: "index_company_profiles_on_profile_id"
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer "submission_id", null: false
+    t.integer "profile_id", null: false
+    t.text "comment"
+    t.date "start_at"
+    t.decimal "salary"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_offers_on_profile_id"
+    t.index ["submission_id"], name: "index_offers_on_submission_id"
   end
 
   create_table "opportunities", force: :cascade do |t|
@@ -137,6 +149,8 @@ ActiveRecord::Schema.define(version: 2021_02_19_221555) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "company_profiles", "profiles"
+  add_foreign_key "offers", "profiles"
+  add_foreign_key "offers", "submissions"
   add_foreign_key "opportunities", "companies"
   add_foreign_key "profiles", "users"
   add_foreign_key "submissions", "opportunities"

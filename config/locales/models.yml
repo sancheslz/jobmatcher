@@ -49,3 +49,7 @@ pt-BR:
         status_accepted: Candidatura Aceita 
         status_denied: Candidatura Rejeitada
         status_removed: Candidatura Cancelada
+      offer:
+        comment: Comentário
+        salary: Salário
+        start_at: Data de Início

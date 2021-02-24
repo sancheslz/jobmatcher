@@ -5,6 +5,7 @@ pt-BR:
       edit: Editar
       confirm: Confirmar
       cancel: Cancelar
+      send: Enviar
     forms:
       warning: 'Por favor, verifique os erros abaixo'
     home:
@@ -68,3 +69,10 @@ pt-BR:
       empty: Nenhum candidato encontrado
       mine: Minhas Candidaturas
       empty_apply: Nenhum candidatura encontrada
+    offers:
+      accept: Aceitar
+      deny: Negar
+      accept_title: Realizar Proposta
+      detail: Detalhes da Proposta
+      deny_title: Recusar Candidatura
+      reason: Justificativa
