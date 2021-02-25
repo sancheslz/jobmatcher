@@ -20,6 +20,31 @@
             <%= t('activerecord.attributes.company.founded') %> <%= @company.founded || '-' %>
         </div>
         <div><%= link_to @company.website, "http://#{@company.website}", target: '_blank' %></div>
+        <div>
+            <% unless @company.facebook.blank? %>
+                <%= link_to "http://#{@company.facebook}", target: '_blank', class: 'p-2' do %>
+                    <i class="fab fa-facebook-square"></i>
+                <% end %>
+            <% end %>
+        
+            <% unless @company.instagram.blank? %>
+                <%= link_to "http://#{@company.instagram}", target: '_blank', class: 'p-2' do %>
+                    <i class="fab fa-instagram"></i>
+                <% end %>
+            <% end %>
+        
+            <% unless @company.linkedin.blank? %>
+                <%= link_to "http://#{@company.linkedin}", target: '_blank', class: 'p-2' do %>
+                    <i class="fab fa-linkedin-in"></i>
+                <% end %>
+            <% end %>
+        
+            <% unless @company.youtube.blank? %>
+                <%= link_to "http://#{@company.youtube}", target: '_blank', class: 'p-2' do %>
+                    <i class="fab fa-youtube-square"></i>
+                <% end %>
+            <% end %>
+        </div>
 
         <div id="view_control" class="mt-3">
             <% if user_signed_in? && @company.is_mine?(current_user) %>

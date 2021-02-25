@@ -85,6 +85,10 @@ class CompaniesController < ApplicationController
             :postal_code,
             :website,
             :founded,
+            :facebook,
+            :instagram,
+            :linkedin,
+            :youtube,
             :logo
         )
     end
