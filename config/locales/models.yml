@@ -49,6 +49,8 @@ pt-BR:
         status_accepted: Candidatura Aceita 
         status_denied: Candidatura Rejeitada
         status_removed: Candidatura Cancelada
+        status_hired: Contratado
+        status_refused: Oferta Recusada
       offer:
         comment: Comentário
         salary: Salário

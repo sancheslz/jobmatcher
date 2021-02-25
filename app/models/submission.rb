@@ -4,6 +4,8 @@ class Submission < ApplicationRecord
     applied: 0,
     accepted: 10,
     denied: 20,
+    hired: 50,
+    refused: 70,
     removed: 90,
   }
   

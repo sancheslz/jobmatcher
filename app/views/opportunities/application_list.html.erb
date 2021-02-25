@@ -41,6 +41,10 @@
                             <span class="text-success mr-1"><i class="fas fa-check-circle"></i></span>
                         <% elsif submission.status == 'denied' %>
                             <span class="text-danger mr-1"><i class="fas fa-times-circle"></i></span>
+                        <% elsif submission.status == 'refused' %>
+                            <span class="text-secondary mr-1"><i class="fas fa-heart-broken"></i></span>
+                        <% elsif submission.status == 'hired' %>
+                            <span class="text-primary mr-1"><i class="fas fa-trophy"></i></span>
                         <% end %>
                             <%= submission.profile.name %> (<%= t("activerecord.attributes.submission.status_#{submission.status}") %>)
                         </button>

@@ -55,4 +55,20 @@ class OffersController < ApplicationController
         @offer = Offer.new
     end
 
+    def candidate_accept
+        @offer = Offer.find(params[:id])
+        submission = @offer.submission
+        submission.update(status: :hired)
+        submission.save
+        redirect_to submissions_path
+    end
+
+    def candidate_deny
+        @offer = Offer.find(params[:id])
+        submission = @offer.submission
+        submission.update(status: :refused)
+        submission.save
+        redirect_to submissions_path
+    end
+
 end

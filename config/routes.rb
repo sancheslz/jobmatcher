@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     post 'accept_create', on: :collection
     get 'deny', on: :collection
     post 'deny_create', on: :collection
+    post 'candidate_accept', on: :member
+    post 'candidate_deny', on: :member
   end
   
 end
