@@ -38,6 +38,14 @@ class Opportunity < ApplicationRecord
         )
     end
 
+    def count_valid 
+        Submission.where(
+            'opportunity_id = ? AND status <> ?',
+            self,
+            90 # Submission => :removed = 90
+        ).count
+    end
+
     private 
     def add_date_if_empty
         if self.expiration_date.nil?

@@ -26,11 +26,11 @@
 <h3 class="h3 m-3 text-center"><%= t('views.submissions.list') %></h3>
 
 
-<% if @opportunity.submissions.blank? %>
+<% if @submissions.blank? %>
     <%= t('views.submissions.empty') %>
 <% else %>
     <div id="accordion">
-        <% @opportunity.submissions.each_with_index do |submission, index| %>
+        <% @submissions.each do |submission| %>
             <div class="card" id="submission_<%= submission.id %>">
                 <div class="card-header" id="heading_<%= submission.id %>">
                     <h5 class="mb-0">

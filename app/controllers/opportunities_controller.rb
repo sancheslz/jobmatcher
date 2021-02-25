@@ -16,6 +16,10 @@ class OpportunitiesController < ApplicationController
 
     def application_list
         @opportunity = Opportunity.find(params[:id])
+        @submissions = @opportunity.submissions.where(
+            'status <> ?',
+            90 # Submission => :removed = 90
+        )
     end
 
     def show
