@@ -17,6 +17,10 @@ pt-BR:
         postal_code: 'CEP'
         website: Website
         founded: Fundada em
+        facebook: Facebook
+        linkedin: Linkedin
+        instagram: Instagram
+        youtube: YouTube
         logo: Logotipo
       profile:
         name: Nome

@@ -65,6 +65,10 @@ feature('Admin create a new company') do
             expect(page).to have_content(I18n.t('activerecord.attributes.company.state')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.postal_code')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.website')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.facebook')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.linkedin')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.instagram')) 
+            expect(page).to have_content(I18n.t('activerecord.attributes.company.youtube')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.founded')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.logo')) 
         end
