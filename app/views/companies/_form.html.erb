@@ -68,6 +68,30 @@
 </div>
 <div class="row mb-2">
     <div class="col">
+        <%= f.label      :facebook  %>
+        <%= f.text_field :facebook , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:facebook].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :instagram  %>
+        <%= f.text_field :instagram , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:instagram].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <%= f.label      :linkedin  %>
+        <%= f.text_field :linkedin , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:linkedin].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :youtube  %>
+        <%= f.text_field :youtube , { class: 'form-control' } %>
+        <div class="text-danger"><%= @company.errors[:youtube].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
         <%= f.label      :logo  %>
         <%= f.file_field :logo , { class: 'form-control' } %>
         <div class="text-danger"><%= @company.errors[:logo].join(' | ') %></div>
