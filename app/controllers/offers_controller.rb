@@ -8,9 +8,9 @@ class OffersController < ApplicationController
         @offer.submission = @submission
         @offer.profile = current_user.profile
 
-        if @offer.save 
-            @submission.status = :denied
-            @submission.save(context: :deny)
+        if @offer.save
+            @submission.update(status: :denied)
+            @submission.save
             redirect_to application_list_opportunity_path(@submission.opportunity.id) 
         else 
             render :deny, submission: @submission
@@ -30,6 +30,8 @@ class OffersController < ApplicationController
         @offer.profile = current_user.profile
         
         if @offer.save(context: :accept)
+            @submission.update(status: :accepted)
+            @submission.save
             redirect_to application_list_opportunity_path(@submission.opportunity.id) 
         else 
             render :accept, submission: @submission
