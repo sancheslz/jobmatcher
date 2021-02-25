@@ -3,7 +3,8 @@ class SubmissionsController < ApplicationController
     before_action :restrict_to_owner!, only: %i[remove destroy]
 
     def index 
-        @submissions = Submission.where(profile: current_user.profile)
+        submissions = Submission.where(profile: current_user.profile)
+        @submissions = submissions.order(:updated_at).reverse
     end
 
     def new

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     get 'remove', on: :member
   end
 
-  resources :offers, only: %i[] do
+  resources :offers, only: %i[show] do
     get 'accept', on: :collection
     post 'accept_create', on: :collection
     get 'deny', on: :collection

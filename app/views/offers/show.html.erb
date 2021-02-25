@@ -1,0 +1,38 @@
+<%= render :template => 'opportunities/show', locals: { :@opportunity => @offer.submission.opportunity }%>
+
+<h4 class="h4 mt-3"><%= t('views.offers.response') %></h4>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-2">
+            <strong><%= t('activerecord.attributes.offer.comment') %>: </strong>
+        </div>
+
+        <div class="col-10">
+            <%= @offer.comment %>
+        </div>
+    </div>
+        
+    <% if @offer.submission.status == 'accepted' %>
+        <div class="row mt-3">
+            <div class="col-2">
+                <strong><%= t('activerecord.attributes.offer.salary') %>: </strong>
+            </div>
+
+            <div class="col-10">
+                <%= number_to_currency @offer.salary %>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-2">
+                <strong><%= t('activerecord.attributes.offer.start_at') %>: </strong>
+            </div>
+
+            <div class="col-10">
+                <%= l @offer.start_at, :format => :default %>
+            </div>
+        </div>
+    <% end %>
+
+</div>

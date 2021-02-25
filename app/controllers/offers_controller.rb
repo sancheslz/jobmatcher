@@ -1,5 +1,12 @@
 class OffersController < ApplicationController
 
+    def show 
+        @offer = Offer.find(params[:id])
+        if current_user != @offer.submission.profile.user
+            redirect_to submissions_path
+        end
+    end
+
     def deny_create
         allowed_params = params.require(:offer).permit( :comment )
         

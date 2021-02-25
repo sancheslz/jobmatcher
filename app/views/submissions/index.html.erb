@@ -17,7 +17,11 @@
                 <div>
                     <strong><%= submission.opportunity.company.name %></strong>
                     <br>
-                    <%= link_to submission.opportunity.title, submission.opportunity %>
+                    <% if submission.status == 'accepted' || submission.status == 'denied' %>
+                        <%= link_to submission.opportunity.title, submission.get_offer!  %>
+                    <% else %>
+                        <%= link_to submission.opportunity.title, submission.opportunity %>
+                    <% end %>
                 </div>
 
                 <% if submission.status == 'applied' %>
@@ -25,9 +29,9 @@
                 <% elsif submission.status == 'removed' %>
                     <%= t('activerecord.attributes.submission.status_removed') %>
                 <% elsif submission.status == 'accepted' %>
-                    <%= t('activerecord.attributes.submission.status_accepted') %>
+                    <div class="text-right"><%= l submission.updated_at, :format => :short_date %> <br> <%= t('activerecord.attributes.submission.status_accepted') %></div>
                 <% elsif submission.status == 'denied' %>
-                    <%= t('activerecord.attributes.submission.status_denied') %>
+                    <div class="text-right"><%= l submission.updated_at, :format => :short_date %> <br> <%= t('activerecord.attributes.submission.status_denied') %></div>
                 <% end %>
 
             </li>

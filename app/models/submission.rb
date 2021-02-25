@@ -9,4 +9,9 @@ class Submission < ApplicationRecord
   
   belongs_to :opportunity
   belongs_to :profile
+
+  def get_offer!
+    Offer.find_by(submission: self)
+  end
+
 end
