@@ -173,6 +173,63 @@ feature('Admin appreciate a submission') do
             expect(current_path).to eq(application_list_opportunity_path(@submission.opportunity.id))
         end
 
+        scenario('the candidate status is updated') do
+            # Arrange
+            login_as @admin_user 
+
+            # Act
+            visit root_path 
+            within('nav') do
+                click_on 'Menu'
+                click_on I18n.t('views.opportunities.mine')
+            end
+
+            click_on @opportunity.title
+            click_on @candidate_profile.name
+            within("div#submission_#{@submission.id}") do
+                click_on I18n.t('views.offers.accept')
+            end
+
+            fill_in I18n.t('activerecord.attributes.offer.salary'), with: 2200
+            fill_in I18n.t('activerecord.attributes.offer.comment'), with: 'Enviaremos um e-mail com o contrato e demais informações'
+            fill_in I18n.t('activerecord.attributes.offer.start_at'), with: 10.days.from_now.strftime('%d/%m/%Y')
+            click_on I18n.t('views.main.send')
+
+            # Assert
+            within("div#submission_#{@submission.id}") do
+                expect(page).to have_content(I18n.t('activerecord.attributes.submission.status_accepted'))
+            end
+        end
+
+        scenario('can\'t appreciate again') do
+            # Arrange
+            login_as @admin_user 
+
+            # Act
+            visit root_path 
+            within('nav') do
+                click_on 'Menu'
+                click_on I18n.t('views.opportunities.mine')
+            end
+
+            click_on @opportunity.title
+            click_on @candidate_profile.name
+            within("div#submission_#{@submission.id}") do
+                click_on I18n.t('views.offers.accept')
+            end
+
+            fill_in I18n.t('activerecord.attributes.offer.salary'), with: 2200
+            fill_in I18n.t('activerecord.attributes.offer.comment'), with: 'Enviaremos um e-mail com o contrato e demais informações'
+            fill_in I18n.t('activerecord.attributes.offer.start_at'), with: 10.days.from_now.strftime('%d/%m/%Y')
+            click_on I18n.t('views.main.send')
+
+            # Assert
+            within("div#submission_#{@submission.id}") do
+                expect(page).not_to have_link(I18n.t('views.offers.accept'))
+                expect(page).not_to have_link(I18n.t('views.offers.deny'))
+            end
+        end
+
     end
 
     context("deny") do
@@ -263,6 +320,59 @@ feature('Admin appreciate a submission') do
 
             # Assert
             expect(current_path).to eq(application_list_opportunity_path(@submission.opportunity.id))
+        end
+
+        scenario('the candidate status is updated') do
+            # Arrange
+            login_as @admin_user 
+
+            # Act
+            visit root_path 
+            within('nav') do
+                click_on 'Menu'
+                click_on I18n.t('views.opportunities.mine')
+            end
+
+            click_on @opportunity.title
+            click_on @candidate_profile.name
+            within("div#submission_#{@submission.id}") do
+                click_on I18n.t('views.offers.deny')
+            end
+
+            fill_in I18n.t('activerecord.attributes.offer.comment'), with: 'Valor pedido pelo candidato está acima do mercado'
+            click_on I18n.t('views.main.send')
+
+            # Assert
+            within("div#submission_#{@submission.id}") do
+                expect(page).to have_content(I18n.t('activerecord.attributes.submission.status_denied'))
+            end
+        end
+
+        scenario('can\'t appreciate again') do
+            # Arrange
+            login_as @admin_user 
+
+            # Act
+            visit root_path 
+            within('nav') do
+                click_on 'Menu'
+                click_on I18n.t('views.opportunities.mine')
+            end
+
+            click_on @opportunity.title
+            click_on @candidate_profile.name
+            within("div#submission_#{@submission.id}") do
+                click_on I18n.t('views.offers.deny')
+            end
+
+            fill_in I18n.t('activerecord.attributes.offer.comment'), with: 'Valor pedido pelo candidato está acima do mercado'
+            click_on I18n.t('views.main.send')
+
+            # Assert
+            within("div#submission_#{@submission.id}") do
+                expect(page).not_to have_link(I18n.t('views.offers.accept'))
+                expect(page).not_to have_link(I18n.t('views.offers.deny'))
+            end
         end
 
     end
