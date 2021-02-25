@@ -63,6 +63,18 @@
 </div>
 <div class="row mb-2">
     <div class="col">
+        <%= f.label      :linkedin  %>
+        <%= f.text_field :linkedin , { class: 'form-control' } %>
+        <div class="text-danger"><%= @profile.errors[:linkedin].join(' | ') %></div>
+    </div>
+    <div class="col">
+        <%= f.label      :github  %>
+        <%= f.text_field :github , { class: 'form-control' } %>
+        <div class="text-danger"><%= @profile.errors[:photo].join(' | ') %></div>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
         <%= f.label      :photo  %>
         <%= f.file_field :photo , { class: 'form-control' } %>
         <div class="text-danger"><%= @profile.errors[:photo].join(' | ') %></div>
