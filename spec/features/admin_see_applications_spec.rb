@@ -171,6 +171,29 @@ feature('Admin see applications') do
         end
     end
 
+    scenario('but don\'t see removed applications') do
+        # Arrange
+        submission = Submission.first
+        submission.update(status: :removed)
+        submission.save
+
+        login_as @admin_user
+
+        # Act
+        visit root_path
+        within('nav') do
+            click_on 'Menu'
+            click_on I18n.t('views.opportunities.mine')
+        end
+
+        # Assert
+        opportunity = Opportunity.last
+        within("li#opportunity_#{opportunity.id}") do 
+            expect(page).to have_css("span.candidates", text: opportunity.count_valid)
+            expect(page).not_to have_css("span.candidates", text: opportunity.submissions.count)
+        end
+    end
+
     scenario('see the list of candidates') do
         # Arrange
         login_as @admin_user
