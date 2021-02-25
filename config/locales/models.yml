@@ -34,6 +34,8 @@ pt-BR:
         state: Estado
         postal_code: 'CEP'
         photo: Foto
+        linkedin: LinkedIn
+        github: GitHub
       technology:
         name: Nome
       opportunity:

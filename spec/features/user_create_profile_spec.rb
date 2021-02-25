@@ -48,6 +48,8 @@ feature('User create a profile') do
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.state')) 
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.postal_code')) 
         expect(page).to have_content(I18n.t('activerecord.attributes.profile.photo')) 
+        expect(page).to have_content(I18n.t('activerecord.attributes.profile.linkedin')) 
+        expect(page).to have_content(I18n.t('activerecord.attributes.profile.github')) 
     end
 
     scenario('some are required') do
