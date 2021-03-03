@@ -40,13 +40,13 @@ git clone https://github.com/sancheslz/jobmatcher.git
 Open the project directory on Terminal
 
 ```bash
-cd  jobmatcher
+cd jobmatcher
 ```
 
-Install all gems using Bundle on Terminal
+Install all gems using this command on Terminal
 
 ```bash
-bundle install
+bin/setup
 ```
 
 ### How to Create Databases
@@ -109,6 +109,7 @@ Behavior | Visitor | New User | Company Member | Company Admin
 Goal | Know the website | Find a new job opportunity | Have a helpful platform to hire people | Get best talents
 Quote | _I like to surf on the internet and discover new websites_ | _I've studied a lot, now it's time to get a new job_ | _I'd love to have an easy-to-use platform to find new employees_ | _The remote job changed the world. Now I can hire professionals around the world_
 About | Wade is 69. He is single and has a little dog. He is retired now, but during the night, he likes to visit job websites to see how the economy is going on. | Felismino is 34. He is married and has a son. He is in a career transition and wants to find a new job. | Miriã is 43. She is married and has 2 children. She works in the human resources of a big technology company. She wants to do the hiring process faster and easier. | Graciliana is 70. She is a widow. She is the CTO of a big technology company. The company is expanding its activity and need to hire new professionals quickly
+
 ### Actions and Permissions
 
 &nbsp;| Wade Caldwell <br> (Visitor) | Felismino da Conceição <br> (New User) | Miriã das Neves <br> (Company Member) | Graciliana Novaes <br> (Company Admin)
@@ -133,3 +134,13 @@ deny application | - | - | x | x
 do proposal | - | - | x | x
 accept proposal | - | x | - | -
 deny proposal | - | x | - | -
+
+### Try It Out
+
+Once the seeds are loaded in the development environment, you can access it and try the system. You can try it out using one of these accounts:
+
+user | email | password
+--- | --- | ---
+Felismino da Conceição | felismino.daconceicao@gmail.com | yellowtiger502
+Graciliana Novaes | graciliana.novaes@cdev.com | brownbird755
+Miriã das Neves | miria.dasneves@cdev.com | smallwolf333
