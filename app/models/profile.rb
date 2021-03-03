@@ -1,14 +1,14 @@
 class Profile < ApplicationRecord
-    validates :name, :cpf, presence: true
-    validates :cpf, uniqueness: true
+    validates :name, :cpf, :presence => true
+    validates :cpf, :uniqueness => true
     belongs_to :user
     has_many :company_profiles
-    has_many :company, through: :company_profiles
+    has_many :company, :through => :company_profiles
     has_one_attached :photo
     has_many :submissions
-    has_many :opportunities, through: :submissions
+    has_many :opportunities, :through => :submissions
     
-    enum role: { regular: 10, business: 20, admin: 30 }
+    enum :role => { :regular => 10, :business => 20, :admin => 30 }
     
     def active?
         self.is_active
