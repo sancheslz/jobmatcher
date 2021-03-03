@@ -8,7 +8,7 @@ class OffersController < ApplicationController
     end
 
     def deny_create
-        allowed_params = params.require(:offer).permit( :comment )
+        allowed_params = params.require(:offer).permit(:comment)
         
         @offer = Offer.new(allowed_params)
         @submission = Submission.find(params[:submission])
@@ -16,11 +16,13 @@ class OffersController < ApplicationController
         @offer.profile = current_user.profile
 
         if @offer.save
-            @submission.update(status: :denied)
+            @submission.update(:status => :denied)
             @submission.save
-            redirect_to application_list_opportunity_path(@submission.opportunity.id) 
+            redirect_to application_list_opportunity_path(
+                @submission.opportunity.id
+            ) 
         else 
-            render :deny, submission: @submission
+            render :deny, :submission => @submission
         end
     end
     
@@ -36,12 +38,14 @@ class OffersController < ApplicationController
         @offer.submission = @submission
         @offer.profile = current_user.profile
         
-        if @offer.save(context: :accept)
-            @submission.update(status: :accepted)
+        if @offer.save(:context => :accept)
+            @submission.update(:status => :accepted)
             @submission.save
-            redirect_to application_list_opportunity_path(@submission.opportunity.id) 
+            redirect_to application_list_opportunity_path(
+                @submission.opportunity.id
+            ) 
         else 
-            render :accept, submission: @submission
+            render :accept, :submission => @submission
         end
     end
 
@@ -58,7 +62,7 @@ class OffersController < ApplicationController
     def candidate_accept
         @offer = Offer.find(params[:id])
         submission = @offer.submission
-        submission.update(status: :hired)
+        submission.update(:status => :hired)
         submission.save
         redirect_to submissions_path
     end
@@ -66,7 +70,7 @@ class OffersController < ApplicationController
     def candidate_deny
         @offer = Offer.find(params[:id])
         submission = @offer.submission
-        submission.update(status: :refused)
+        submission.update(:status => :refused)
         submission.save
         redirect_to submissions_path
     end

@@ -1,17 +1,22 @@
 class CompaniesController < ApplicationController
-    before_action :authenticate_user!, only: %i[new create edit update change_state]
-    before_action :limit_to_user_role!, only: %i[new create edit update change_state]
-    before_action :restrict_to_company_members!, only: %i[edit update change_state]
+    before_action :authenticate_user!, :only => %i[new create edit update 
+                                                   change_state]
+
+    before_action :limit_to_user_role!, :only => %i[new create edit update
+                                                    change_state]
+
+    before_action :restrict_to_company_members!, :only => %i[edit update 
+                                                             change_state]
 
     def index 
-        @companies = Company.where(is_active: true)
+        @companies = Company.where(:is_active => true)
     end
 
     def show 
         @company = Company.find(params[:id])
         if user_signed_in? && CompanyProfile.find_by(
-            company: @company,
-            profile: current_user.profile
+            :company => @company,
+            :profile => current_user.profile
         )
             @opportunities = Opportunity.where(
                 'company_id == ? AND expiration_date > ?',
@@ -36,8 +41,8 @@ class CompaniesController < ApplicationController
         @company = Company.new(allowed_params)
         if @company.save
             CompanyProfile.create!(
-                profile: current_user.profile,
-                company: @company
+                :profile => current_user.profile,
+                :company => @company
             )
             redirect_to @company
         else
@@ -101,11 +106,9 @@ class CompaniesController < ApplicationController
 
     def restrict_to_company_members!
         is_member = CompanyProfile.find_by(
-            company: params[:id],
-            profile: current_user.profile
+            :company => params[:id],
+            :profile => current_user.profile
         )
-        if !is_member
-            redirect_to root_path
-        end
+        redirect_to root_path if !is_member
     end
 end

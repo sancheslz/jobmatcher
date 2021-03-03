@@ -1,9 +1,10 @@
 class SubmissionsController < ApplicationController
-    before_action :authenticate_user!, only: %i[index new create remove destroy]
-    before_action :restrict_to_owner!, only: %i[remove destroy]
+    before_action :authenticate_user!, :only => %i[index new create remove 
+                                                   destroy]
+    before_action :restrict_to_owner!, :only => %i[remove destroy]
 
     def index 
-        submissions = Submission.where(profile: current_user.profile)
+        submissions = Submission.where(:profile => current_user.profile)
         @submissions = submissions.order(:updated_at).reverse
     end
 
@@ -24,7 +25,7 @@ class SubmissionsController < ApplicationController
         if @submission.save
             redirect_to @submission.opportunity
         else
-            render :new, opportunity_id: @submission.opportunity
+            render :new, :opportunity_id => @submission.opportunity
         end
     end
 

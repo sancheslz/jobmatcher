@@ -1,7 +1,13 @@
 class OpportunitiesController < ApplicationController
-    before_action :authenticate_user!, only: %i[index new create edit update change_visibility application_list application_detail]
-    before_action :limit_to_user_role!, only: %i[new create edit update change_visibility]
-    before_action :restrict_to_company_members!, only: %i[ change_visibility  application_list edit  update]
+    before_action :authenticate_user!, :only => %i[index new create edit update
+                                                   change_visibility 
+                                                   application_list 
+                                                   application_detail]
+    before_action :limit_to_user_role!, :only => %i[new create edit update 
+                                                    change_visibility]
+    before_action :restrict_to_company_members!, :only => %i[change_visibility 
+                                                             application_list 
+                                                             edit update]
 
     def change_visibility
         @opportunity = Opportunity.find(params[:id])
@@ -65,13 +71,14 @@ class OpportunitiesController < ApplicationController
             :salary,
             :remote,
             :level,
-            technology_ids: []
+            :technology_ids => []
         )
     end
 
     def get_company_opportunities
-        @company = CompanyProfile.find_by(profile: current_user.profile)
-        Opportunity.where('company_id == ? AND expiration_date > ? AND is_visible == ?',
+        @company = CompanyProfile.find_by(:profile => current_user.profile)
+        Opportunity.where(
+            'company_id == ? AND expiration_date > ? AND is_visible == ?',
             @company.company,
             "#{0.day.from_now}",
             true
@@ -87,8 +94,8 @@ class OpportunitiesController < ApplicationController
     def restrict_to_company_members!
         opportunity = Opportunity.find(params[:id])
         is_member = CompanyProfile.find_by(
-            company: opportunity.company,
-            profile: current_user.profile
+            :company => opportunity.company,
+            :profile => current_user.profile
         )
         unless is_member
             redirect_to root_path
