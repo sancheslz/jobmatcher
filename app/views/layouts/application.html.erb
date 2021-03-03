@@ -22,8 +22,13 @@
         <% end %>
       </div>
       <div id="search" class="form-inline col-8">
-        <%= text_field_tag :q, nil, { placeholder: t('views.home.search'), class: 'form-control mr-2', style: 'width: 40rem' }%>
-        <button class="btn btn-primary" ><i class="fas fa-search"></i> <%= t('views.home.search_btn') %></button>
+        <%= form_with url: search_path, method: :get, local: true do %>
+          <% label_tag :q %>
+          <%= text_field_tag :q, '', { placeholder: t('views.home.search'), class: 'form-control mr-2', style: 'width: 30rem' } %>
+          <% label_tag :search_option %>
+          <%= select_tag :search_option, options_for_select({ "#{t('views.home.company')}": :company, "#{t('views.home.opportunity')}": :opportunity}), {class: 'form-control', style: 'width: 10rem'}%>
+          <%= submit_tag t('views.home.search_btn'), { class: "btn btn-primary" } %>
+        <% end %>
       </div>
       <div id="access" class="col-2">
 

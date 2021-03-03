@@ -1,0 +1,24 @@
+<% if @layout == 'company' %>
+    <h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.home.search_company')%></h2>
+    <% if @data.blank? %>
+        <div class="lead"><%= t('views.home.search_company_empty') %></div>
+    <% end %>
+
+    <ul class="list-group">
+        <% @data.each do |company| %>
+            <%= link_to company.name, company, {class: "list-group-item"} %>
+        <% end %>
+    </ul>
+
+<% elsif @layout == 'opportunity' %>
+    <h2 class="h2 mb-5 mt-3"><%= t('views.home.title')%> | <%= t('views.home.search_opportunity')%></h2>
+    <% if @data.blank? %>
+        <div class="lead"><%= t('views.home.search_opportunity_empty') %></div>
+    <% end %>
+
+    <ul class="list-group">
+        <% @data.each do |opportunity| %>
+            <%= link_to opportunity.title, opportunity, {class: "list-group-item"} %>
+        <% end %>
+    </ul>
+<% end %>

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#index'
+  get 'search', to: 'home#search'
   
   resources :companies, only: %i[index show new create edit update] do
     get 'change_state', on: :member

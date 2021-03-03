@@ -13,6 +13,12 @@ pt-BR:
       description: 'Conectando pessoas e oportunidades'
       search: 'Buscar por vagas e empresas'
       search_btn: 'Buscar'
+      search_company: Busca por Empresas
+      search_company_empty: Nenhuma empresa encontrada
+      search_opportunity: Busca por Oportunidades
+      search_opportunity_empty: Nenhuma oportunidade encontrada
+      company: Empresa
+      opportunity: Oportunidade
       sign_in: 'Entrar'
       sign_up: 'Cadastrar'
       logout: 'Sair'
