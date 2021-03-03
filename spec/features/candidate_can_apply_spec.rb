@@ -340,6 +340,35 @@ feature('Candidate can apply to an opportunity') do
             expect(current_path).to eq(opportunity_path(@opportunity))
             expect(page).to have_content(I18n.t('views.submissions.applied'))
         end
+
+        scenario('must access a valid opportuity') do
+            # Arrange
+            user = User.create!(
+                email: 'felismino.daconceicao@gmail.com',
+                password: 'yellowtiger502'
+            )
+
+            profile = Profile.create!(
+                name: 'Felismino da Conceição',
+                cpf: '175.113.263-01',
+                address: 'Rua Treze de Maio',
+                number: '7971',
+                complement: 'C12', 
+                city: 'Nossa Senhora do Socorro',
+                state: 'Espírito Santo', 
+                postal_code: '84373',
+                role: 'regular',
+                user: user
+            )
+
+            login_as user
+
+            # Act
+            visit new_submission_path
+
+            # Assert
+            expect(current_path).to eq(root_path)
+        end
     end
 
 end

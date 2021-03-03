@@ -166,4 +166,26 @@ feature('Candidate appreciate offers') do
         expect(current_path).to eq(submissions_path)
     end
 
+    scenario('see only own offers') do
+        # Arrange
+        @user_offer = Offer.create!(
+            submission: @submission,
+            profile: @admin_user.profile,
+            comment: 'Muito bom',
+            salary: 3000,
+            start_at: 10.days.from_now
+        )
+
+
+        @submission.update(status: :accepted)
+        @submission.save
+
+        login_as @admin_user
+
+        # Act
+        visit offer_path(@user_offer) 
+        
+        # Assert
+        expect(current_path).to eq(submissions_path)
+    end
 end

@@ -11,8 +11,9 @@ class SubmissionsController < ApplicationController
     def new
         opportunity_id = params[:opportunity_id]
         if opportunity_id.nil?
-            redirect_to root_path
+            return redirect_to root_path
         end
+
         @submission = Submission.new()
         @submission.opportunity = Opportunity.find(params[:opportunity_id])
         @submission.profile = current_user.profile
