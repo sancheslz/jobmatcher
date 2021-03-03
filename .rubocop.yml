@@ -1,0 +1,32 @@
+require:
+  - rubocop-rails
+
+# Alguns projetos podem ter .rubocop_todo.yml, então herdamos deste arquivo.
+# Se ele não existir, remova essas linhas
+inherit_from:
+  - .rubocop_todo.yml
+
+AllCops:
+ TargetRubyVersion: 2.7.1
+ Exclude:
+   - 'bin/**/*'
+   - 'vendor/**/*'
+   - 'db/**/*'
+   - 'config/**/*'
+   - 'script/**/*'
+   - 'spec/rails_helper.rb'
+
+Documentation:
+ Enabled: false
+
+Style/FrozenStringLiteralComment:
+ Enabled: false
+
+Metrics/BlockLength:
+ ExcludedMethods: ['describe', 'context', 'feature', 'scenario', 'let']
+
+Metrics/LineLength:
+  Max: 80
+
+AsciiComments:
+  Enabled: false
