@@ -144,7 +144,7 @@ feature('Admin edit company') do
         end
         click_on I18n.t('views.main.edit')
 
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.company.name'), with: ''
             fill_in I18n.t('activerecord.attributes.company.cnpj'), with: ''
             fill_in I18n.t('activerecord.attributes.company.website'), with: ''
@@ -213,7 +213,7 @@ feature('Admin edit company') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.company.cnpj'), with: '815.916.474/1594-96'
             click_on I18n.t('views.companies.edit_submit')
         end
@@ -400,7 +400,7 @@ feature('Admin edit company') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             attach_file I18n.t('activerecord.attributes.company.logo'), Rails.root.join('spec', 'support', 'cd_logo.png')
             click_on I18n.t('views.companies.edit_submit')
         end
@@ -467,7 +467,7 @@ feature('Admin edit company') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.company.founded'), with: '2010'
             click_on I18n.t('views.companies.edit_submit')
         end

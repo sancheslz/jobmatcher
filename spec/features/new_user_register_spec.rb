@@ -35,7 +35,7 @@ feature('New user can register') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             click_on I18n.t('views.home.sign_up')
         end
 
@@ -51,7 +51,7 @@ feature('New user can register') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brown'
             click_on I18n.t('views.home.sign_up')
@@ -69,7 +69,7 @@ feature('New user can register') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'vrownbird755'
@@ -92,7 +92,7 @@ feature('New user can register') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
@@ -111,7 +111,7 @@ feature('New user can register') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'

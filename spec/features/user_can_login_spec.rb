@@ -43,7 +43,7 @@ feature('User can login') do
         within('nav') do
             click_on I18n.t('views.home.sign_in')
         end
-        within('form') do
+        within('div.container form') do
             click_button I18n.t('views.home.sign_in')
         end
 
@@ -63,7 +63,7 @@ feature('User can login') do
         within('nav') do
             click_on I18n.t('views.home.sign_in')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'felismino.daconceicao@gmail.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'yellowtiger502'
             click_button I18n.t('views.home.sign_in')
@@ -100,7 +100,7 @@ feature('User can login') do
         within('nav') do
             click_on I18n.t('views.home.sign_in')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'felismino.daconceicao@gmail.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'yellowtiger502'
             click_button I18n.t('views.home.sign_in')

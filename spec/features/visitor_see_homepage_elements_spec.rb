@@ -223,7 +223,7 @@ feature('Visitor sees on home') do
 
         # Assert
         within('nav') do
-            expect(page).to have_content(I18n.t('views.home.search_btn'))
+            expect(page).to have_button(I18n.t('views.home.search_btn'))
         end
     end
 

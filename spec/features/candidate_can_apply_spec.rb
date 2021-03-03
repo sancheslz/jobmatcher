@@ -176,7 +176,7 @@ feature('Candidate can apply to an opportunity') do
             end
 
             # Assert
-            within('form') do
+            within('div.container form') do
                 expect(page).to have_field(I18n.t('activerecord.attributes.submission.presentation')) 
                 expect(page).to have_field(I18n.t('activerecord.attributes.submission.wage_claim')) 
                 expect(page).to have_field(I18n.t('activerecord.attributes.submission.note')) 
@@ -213,7 +213,7 @@ feature('Candidate can apply to an opportunity') do
                 click_on I18n.t('views.submissions.apply')
             end
             
-            within('form') do
+            within('div.container form') do
                 click_on I18n.t('views.submissions.apply')
             end
 
@@ -251,7 +251,7 @@ feature('Candidate can apply to an opportunity') do
                 click_on I18n.t('views.submissions.apply')
             end
             
-            within('form') do
+            within('div.container form') do
                 fill_in I18n.t('activerecord.attributes.submission.presentation'), with: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP}
                 fill_in I18n.t('activerecord.attributes.submission.wage_claim'), with: 7000
                 click_on I18n.t('views.submissions.apply')
@@ -330,7 +330,7 @@ feature('Candidate can apply to an opportunity') do
             end
             click_on I18n.t('views.submissions.apply')
             
-            within('form') do
+            within('div.container form') do
                 fill_in I18n.t('activerecord.attributes.submission.presentation'), with: %{Tenho 10 anos de experiência como Engenheiro de Produção em uma empresa de grande porte, atuei no controle logístico, de produção e gerência. Estou em transição de carreira para a área de desenvolvimento de software. Tenho experiência com JavaScript, React, Angular, Vue e PHP}
                 fill_in I18n.t('activerecord.attributes.submission.wage_claim'), with: 7000
                 click_on I18n.t('views.submissions.apply')

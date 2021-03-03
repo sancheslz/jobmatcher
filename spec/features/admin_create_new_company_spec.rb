@@ -55,7 +55,7 @@ feature('Admin create a new company') do
         visit root_path
 
         # Assert
-        within('form') do
+        within('div.container form') do
             expect(page).to have_content(I18n.t('activerecord.attributes.company.name')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.address')) 
             expect(page).to have_content(I18n.t('activerecord.attributes.company.number')) 

@@ -98,7 +98,7 @@ feature('User edit profile') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.profile.name'), with: ''
             fill_in I18n.t('activerecord.attributes.profile.cpf'), with: ''
             click_on I18n.t('views.profiles.edit_submit')
@@ -155,7 +155,7 @@ feature('User edit profile') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.profile.cpf'), with: '388.586.242-26'
             click_on I18n.t('views.profiles.edit_submit')
         end
@@ -194,7 +194,7 @@ feature('User edit profile') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             attach_file I18n.t('activerecord.attributes.profile.photo'), Rails.root.join('spec', 'support', 'felismino_conceicao.jpg')
             click_on I18n.t('views.profiles.edit_submit')
         end
@@ -234,7 +234,7 @@ feature('User edit profile') do
         end
         click_on I18n.t('views.main.edit')
         
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.profile.number'), with: '7971B'
             click_on I18n.t('views.profiles.edit_submit')
         end

@@ -10,7 +10,7 @@ feature('New user must fill a profile') do
         within('nav') do
             click_on I18n.t('views.home.sign_up')
         end
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
@@ -30,7 +30,7 @@ feature('New user must fill a profile') do
             click_on I18n.t('views.home.sign_up')
         end
 
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
@@ -55,7 +55,7 @@ feature('New user must fill a profile') do
             click_on I18n.t('views.home.sign_up')
         end
 
-        within('form') do
+        within('div.container form') do
             fill_in I18n.t('activerecord.attributes.user.email'), with: 'graciliana.novaes@cdev.com'
             fill_in I18n.t('activerecord.attributes.user.password'), with: 'brownbird755'
             fill_in I18n.t('activerecord.attributes.user.password_confirmation'), with: 'brownbird755'
