@@ -34,22 +34,24 @@ describe "a specification" do
       company.valid?
 
       # Assert
-      expect(company.errors[:website]).to include(I18n.t('errors.messages.blank'))
+      expect(company.errors[:website]).to include(
+        I18n.t('errors.messages.blank')
+      )
     end
 
     it "cnpj is unique" do
       # Arrange
       Company.create!(
-        name: 'Campus Code',
-        cnpj: '1234',
-        website: 'www.campuscode.com.br'
+        :name => 'Campus Code',
+        :cnpj => '1234',
+        :website => 'www.campuscode.com.br'
       )
 
       # Act
       company = Company.new(
-        name: 'Rebase',
-        cnpj: '1234',
-        website: 'www.rebase.com.br'
+        :name => 'Rebase',
+        :cnpj => '1234',
+        :website => 'www.rebase.com.br'
       )
       company.valid?
 
@@ -66,9 +68,9 @@ describe "a specification" do
       
       # Act
       company = Company.new(
-        name: 'Rebase',
-        cnpj: '1234',
-        website: 'www.rebase.com.br'
+        :name => 'Rebase',
+        :cnpj => '1234',
+        :website => 'www.rebase.com.br'
       )
 
       # Assert
@@ -84,9 +86,9 @@ describe "a specification" do
       
       # Arrange
       company = Company.new(
-        name: 'Rebase',
-        cnpj: '1234',
-        website: 'www.rebase.com.br'
+        :name => 'Rebase',
+        :cnpj => '1234',
+        :website => 'www.rebase.com.br'
       )
   
       # Act

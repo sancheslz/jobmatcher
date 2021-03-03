@@ -11,39 +11,45 @@ describe "Technology" do
       technology.valid?
 
       # Assert
-      expect(technology.errors[:name]).to include(I18n.t('errors.messages.blank'))
+      expect(technology.errors[:name]).to include(
+        I18n.t('errors.messages.blank')
+      )
     end
 
     it "name is unique" do
       # Arrange
       Technology.create!(
-        name: 'Ruby'
+        :name => 'Ruby'
       )
 
       # Act
       technology = Technology.new(
-        name: 'Ruby'
+        :name => 'Ruby'
       )
       technology.valid?
 
       # Assert
-      expect(technology.errors[:name]).to include(I18n.t('errors.messages.taken'))
+      expect(technology.errors[:name]).to include(
+        I18n.t('errors.messages.taken')
+      )
     end
 
     it "name is unique and case insensitive" do
       # Arrange
       Technology.create!(
-        name: 'Ruby'
+        :name => 'Ruby'
       )
 
       # Act
       technology = Technology.new(
-        name: 'ruby'
+        :name => 'ruby'
       )
       technology.valid?
 
       # Assert
-      expect(technology.errors[:name]).to include(I18n.t('errors.messages.taken'))
+      expect(technology.errors[:name]).to include(
+        I18n.t('errors.messages.taken')
+      )
     end
     
   end
