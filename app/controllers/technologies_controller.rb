@@ -52,10 +52,4 @@ class TechnologiesController < ApplicationController
         )
     end
 
-    def limit_to_user_role!
-        if current_user.profile.role == 'regular'
-            redirect_to root_path 
-        end
-    end
-
 end

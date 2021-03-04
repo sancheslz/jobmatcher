@@ -85,21 +85,4 @@ class OpportunitiesController < ApplicationController
         )
     end
 
-    def limit_to_user_role!
-        if current_user.profile.role == 'regular'
-            redirect_to root_path 
-        end
-    end
-
-    def restrict_to_company_members!
-        opportunity = Opportunity.find(params[:id])
-        is_member = CompanyProfile.find_by(
-            :company => opportunity.company,
-            :profile => current_user.profile
-        )
-        unless is_member
-            redirect_to root_path
-        end
-    end
-
 end

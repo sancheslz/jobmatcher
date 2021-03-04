@@ -27,4 +27,22 @@ class ApplicationController < ActionController::Base
             end
         end
     end
+    
+    def limit_to_user_role!
+        redirect_to root_path if current_user.profile.role == 'regular'
+    end
+
+    def restrict_to_company_members!
+        if request.original_fullpath.include?('opportunit')
+            opportunity = Opportunity.find(params[:id])
+            query = opportunity.company 
+        elsif request.original_fullpath.include?('compan')
+            query = params[:id]
+        end
+        is_member = CompanyProfile.find_by(
+            :company => query,
+            :profile => current_user.profile
+        )
+        redirect_to root_path unless is_member
+    end
 end

@@ -97,18 +97,4 @@ class CompaniesController < ApplicationController
             :logo
         )
     end
-
-    def limit_to_user_role!
-        if current_user.profile.role == 'regular'
-            redirect_to root_path 
-        end
-    end
-
-    def restrict_to_company_members!
-        is_member = CompanyProfile.find_by(
-            :company => params[:id],
-            :profile => current_user.profile
-        )
-        redirect_to root_path if !is_member
-    end
 end
